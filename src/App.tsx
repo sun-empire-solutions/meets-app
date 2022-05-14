@@ -15,13 +15,15 @@ const App = () => {
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      id="localVideo"
-      src=""
-      width={400}
-      height={200}
-    ></video>
+    <div className="container">
+      <video
+        ref={videoRef}
+        id="localVideo"
+        src=""
+        width={400}
+        height={200}
+      ></video>
+    </div>
   );
 };
 export { App };
