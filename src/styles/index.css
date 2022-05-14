@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0px;
+  font-family: "Roboto", sans-serif;
+}
+
+.react-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #20232a;
+}
+
+.react-logo img {
+  height: 200px;
+  width: 200px;
+  animation: logo-spin infinite 10s linear;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.react-container__content {
+  margin-top: 3rem;
+  color: white;
+}
+
+.react-container__footer {
+  margin-top: 1.5rem;
+}
+
+.react-container__footer a {
+  text-decoration: none;
+  color: hsl(199, 98%, 61%);
+}
