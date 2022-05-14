@@ -1,19 +1,27 @@
-// @ts-ignore
-import logo from "./assets/images/logo-react.png";
+import { useEffect, useRef } from "react";
+import { createLocalVideoTrack } from "twilio-video";
 
 const App = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const addLocalVideo = async () => {
+    const track = await createLocalVideoTrack();
+    const video = videoRef.current;
+    track.attach(video);
+  };
+
+  useEffect(() => {
+    addLocalVideo();
+  }, []);
+
   return (
-    <div className="react-container">
-      <div className="react-logo">
-        <img className="rotate" src={logo} alt="" />
-      </div>
-      <div className="react-container__content">
-        <h3>Edit src/App.tsx and save to reload</h3>
-      </div>
-      <div className="react-container__footer">
-        <a href="https://reactjs.org/docs/getting-started.html">Learn React</a>
-      </div>
-    </div>
+    <video
+      ref={videoRef}
+      id="localVideo"
+      src=""
+      width={400}
+      height={200}
+    ></video>
   );
 };
 export { App };
