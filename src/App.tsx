@@ -1,29 +1,18 @@
-import { useEffect, useRef } from "react";
-import { createLocalVideoTrack } from "twilio-video";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { LobbyPage } from "./pages/LobbyPage";
+import { MeetingPage } from "./pages/MeetingPage";
+import { StartPage } from "./pages/StartPage";
 
 const App = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const addLocalVideo = async () => {
-    const track = await createLocalVideoTrack();
-    const video = videoRef.current;
-    track.attach(video);
-  };
-
-  useEffect(() => {
-    addLocalVideo();
-  }, []);
-
   return (
-    <div className="container">
-      <video
-        ref={videoRef}
-        id="localVideo"
-        src=""
-        width={400}
-        height={200}
-      ></video>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/lobby" element={<LobbyPage />} />
+        <Route path="/metting" element={<MeetingPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 export { App };
