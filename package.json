@@ -1,12 +1,14 @@
 {
-  "name": "react-skeleton",
-  "version": "1.0.0",
+  "name": "twilio-video-chat-app",
+  "version": "1.0.1",
   "description": "basic react skeleton",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=development",
     "build:prod": "webpack --mode=production",
-    "start": "webpack serve --mode=development"
+    "start": "webpack serve --mode=development",
+    "twilio-start": "twilio-run",
+    "twilio-deploy": "twilio-run deploy"
   },
   "repository": {
     "type": "git",
@@ -37,15 +39,18 @@
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.2.8",
+    "twilio-run": "^3.4.2",
     "typescript": "^4.6.3",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "@twilio/runtime-handler": "1.2.3",
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "twilio": "^3.77.0",
     "twilio-video": "^2.21.1"
   }
 }

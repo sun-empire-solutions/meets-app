@@ -6,7 +6,6 @@ const webpack = require("webpack");
 module.exports = (_, argv) => {
   let envKeys = {};
   if (argv.mode === "development") {
-    config.devtool = "source-map";
     // call dotenv and it will return an Object with a parsed key
     const env = dotenv.config().parsed;
 
