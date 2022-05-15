@@ -6,7 +6,7 @@ const StartPage = () => {
   const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const connectButtonHandler = async (event) => {
+  const connectButtonHandler = async () => {
     if (!username) {
       alert("Enter your name before connecting");
       return;

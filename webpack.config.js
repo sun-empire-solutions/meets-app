@@ -1,20 +1,21 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const dotenv = require("dotenv");
+const fs = require("fs");
 const webpack = require("webpack");
 
 module.exports = (_, argv) => {
-  let envKeys = {};
-  if (argv.mode === "development") {
-    // call dotenv and it will return an Object with a parsed key
-    const env = dotenv.config().parsed;
+  const currentPath = path.join(__dirname);
+  const basePath = currentPath + "/.env";
+  const envPath = basePath + "." + argv.mode;
+  const finalPath = fs.existsSync(envPath) ? envPath : basePath;
 
-    // reduce it to a nice object, the same as before
-    envKeys = Object.keys(env).reduce((prev, next) => {
-      prev[`process.env.${next}`] = JSON.stringify(env[next]);
-      return prev;
-    }, {});
-  }
+  const fileEnv = dotenv.config({ path: finalPath }).parsed;
+
+  const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
+    return prev;
+  }, {});
 
   return {
     entry: {
