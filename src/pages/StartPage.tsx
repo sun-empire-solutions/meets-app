@@ -43,14 +43,17 @@ const StartPage = () => {
 };
 
 const connect = async (username) => {
-  const response = await fetch(`${process.env.API_URL}/functions/get_token`, {
-    mode: "cors",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username: username }),
-  });
+  const response = await fetch(
+    `https://twilio-video-chat-app-7815-dev.twil.io/functions/get_token`,
+    {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username }),
+    }
+  );
   const data = await response.json();
   const room = await twilioConnect(data.token);
   room.participants.forEach(participantConnected);
