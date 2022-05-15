@@ -27,6 +27,7 @@ module.exports = (_, argv) => {
     output: {
       filename: "[name].js",
       path: path.resolve(__dirname, "build"),
+      publicPath: "/",
       clean: true,
     },
     module: {
@@ -52,6 +53,7 @@ module.exports = (_, argv) => {
     devServer: {
       port: 4200,
       open: true,
+      historyApiFallback: true,
     },
   };
 };
