@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack serve --mode=development",
-    "build:prod": "webpack --mode=production",
+    "build:prod": "node ./scripts/create-env.js webpack --mode=production",
     "start": "concurrently twilio-run npm:build",
     "twilio-start": "twilio-run",
     "twilio-deploy": "twilio-run deploy"
