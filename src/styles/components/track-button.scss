@@ -1,25 +1,40 @@
+$button-size: 3rem;
+
+.button-size {
+  height: $button-size;
+  width: $button-size;
+}
+
 .button {
-  height: 3rem;
-  width: 3rem;
+  @extend .button-size;
   border-radius: 50%;
   border: none;
   outline: none;
   color: #fff;
-  background-color: rgb(70, 70, 70);
-  box-shadow: 2px 3px 5px 1px #0000007d;
+  background-color: transparent !important;
+  box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 35%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  transition: background-color 200ms linear;
 
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  svg {
+    z-index: 2;
+  }
+
+  .button-background {
+    @extend .button-size;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(70, 70, 70, 0.695);
+    transition: background-color 200ms linear;
   }
 
   &.inactive {
     cursor: pointer;
-    background-color: rgb(214, 51, 51);
+
+    .button-background {
+      background-color: rgb(214, 51, 51, 0.85);
+    }
   }
 }

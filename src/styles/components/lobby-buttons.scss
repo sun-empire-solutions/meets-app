@@ -1,0 +1,25 @@
+.lobby-buttons {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  bottom: 2rem;
+  column-gap: 1rem;
+
+  .join-button {
+    display: flex;
+    height: 3rem;
+    width: 8rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background-color: rgb(12, 148, 238);
+    color: #fff;
+    font-size: 1rem;
+    opacity: 0.85;
+    box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 35%);
+  }
+}

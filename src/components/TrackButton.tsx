@@ -9,6 +9,7 @@ const TrackButton = ({ type, isActive, classNames = "", onClick }: IProps) => (
     onClick={onClick}
   >
     {renderButtonIconByType(type, isActive)}
+    <div className="button-background"></div>
   </button>
 );
 
