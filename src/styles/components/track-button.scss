@@ -1,25 +1,35 @@
-.button {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-  color: #fff;
-  background-color: rgb(70, 70, 70);
-  box-shadow: 2px 3px 5px 1px #0000007d;
+.button-bar {
+  position: absolute;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  transition: background-color 200ms linear;
+  bottom: 2rem;
+  gap: 1rem;
 
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
+  .button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: rgb(70, 70, 70);
+    box-shadow: 2px 3px 5px 1px #0000007d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 200ms linear;
 
-  &.inactive {
-    cursor: pointer;
-    background-color: rgb(214, 51, 51);
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    &.inactive {
+      cursor: pointer;
+      background-color: rgb(214, 51, 51);
+    }
   }
 }
