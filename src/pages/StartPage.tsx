@@ -25,7 +25,7 @@ const StartPage = () => {
   };
 
   return (
-    <div>
+    <div className="start-page">
       <h1>StartPage</h1>
       <input
         type="text"
@@ -35,7 +35,11 @@ const StartPage = () => {
           setUsername(event.target.value);
         }}
       />
-      <button disabled={isButtonDisabled} onClick={connectButtonHandler}>
+      <button
+        className="button"
+        disabled={isButtonDisabled}
+        onClick={connectButtonHandler}
+      >
         {buttonText}
       </button>
     </div>
