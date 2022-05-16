@@ -1,33 +1,37 @@
-import { BsCameraVideoOff } from "react-icons/bs";
-import { BsCameraVideo } from "react-icons/bs";
-import { BsMic } from "react-icons/bs";
-import { BsMicMute } from "react-icons/bs";
+import { BsCameraVideoOffFill } from "react-icons/bs";
+import { BsCameraVideoFill } from "react-icons/bs";
+import { BsMicFill } from "react-icons/bs";
+import { BsMicMuteFill } from "react-icons/bs";
 
-const TrackButton = ({ type, isActive, handlerClick }: IProps) => {
-  if (type == "camara") {
-    return (
-      <button className="button" onClick={handlerClick}>
-        {isActive ? (
-          <BsCameraVideo size={18} />
-        ) : (
-          <BsCameraVideoOff size={18} />
-        )}
-      </button>
-    );
-  }
-  return (
-    <button className="button" onClick={handlerClick}>
-      {isActive ? <BsMic size={18} /> : <BsMicMute size={18} />}
-    </button>
-  );
+const TrackButton = ({ type, isActive, classNames, onClick }: IProps) => (
+  <button
+    className={`button ${!isActive ? "inactive" : ""} ${classNames}`}
+    onClick={onClick}
+  >
+    {renderButtonIconByType(type, isActive)}
+  </button>
+);
+
+const renderButtonIconByType = (type: IType, isActive: boolean) => {
+  const buttonsMap = {
+    camera: isActive ? (
+      <BsCameraVideoFill size={18} />
+    ) : (
+      <BsCameraVideoOffFill size={18} />
+    ),
+    mic: isActive ? <BsMicFill size={18} /> : <BsMicMuteFill size={18} />,
+  };
+
+  return buttonsMap[type];
 };
 
 type IProps = {
   type: IType;
   isActive: boolean;
-  handlerClick: () => void;
+  classNames?: string;
+  onClick: () => void;
 };
 
-export type IType = "microfono" | "camara";
+export type IType = "mic" | "camera";
 
 export { TrackButton };
