@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppLayout } from "./layouts/AppLayout";
 
 import { LobbyPage } from "./pages/LobbyPage";
 import { MeetingPage } from "./pages/MeetingPage";
@@ -8,9 +9,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<StartPage />} />
-        <Route path="/lobby" element={<LobbyPage />} />
-        <Route path="/metting" element={<MeetingPage />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<StartPage />} />
+          <Route path="/lobby" element={<LobbyPage />} />
+          <Route path="/metting" element={<MeetingPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
