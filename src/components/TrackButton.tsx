@@ -3,7 +3,7 @@ import { BsCameraVideoFill } from "react-icons/bs";
 import { BsMicFill } from "react-icons/bs";
 import { BsMicMuteFill } from "react-icons/bs";
 
-const TrackButton = ({ type, isActive, classNames, onClick }: IProps) => (
+const TrackButton = ({ type, isActive, classNames = "", onClick }: IProps) => (
   <button
     className={`button ${!isActive ? "inactive" : ""} ${classNames}`}
     onClick={onClick}

@@ -19,7 +19,6 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      <h1>LobbyPage</h1>
       <video
         ref={videoRef}
         id="localVideo"
