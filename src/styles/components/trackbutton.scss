@@ -1,0 +1,21 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  .button {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    color: black;
+    background-color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

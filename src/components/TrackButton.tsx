@@ -1,8 +1,24 @@
-import { MouseEventHandler, useState } from "react";
+import { BsCameraVideoOff } from "react-icons/bs";
+import { BsCameraVideo } from "react-icons/bs";
+import { BsMic } from "react-icons/bs";
+import { BsMicMute } from "react-icons/bs";
 
 const TrackButton = ({ type, isActive, handlerClick }: IProps) => {
+  if (type == "camara") {
+    return (
+      <button className="button" onClick={handlerClick}>
+        {isActive ? (
+          <BsCameraVideo size={18} />
+        ) : (
+          <BsCameraVideoOff size={18} />
+        )}
+      </button>
+    );
+  }
   return (
-    <button type="submit" className="buttons" onClick={handlerClick}></button>
+    <button className="button" onClick={handlerClick}>
+      {isActive ? <BsMic size={18} /> : <BsMicMute size={18} />}
+    </button>
   );
 };
 
@@ -12,6 +28,6 @@ type IProps = {
   handlerClick: () => void;
 };
 
-export type IType = "micro" | "camara";
+export type IType = "microfono" | "camara";
 
 export { TrackButton };
