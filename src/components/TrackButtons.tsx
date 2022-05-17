@@ -1,21 +1,31 @@
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
+import { TwilioContext } from "../context/TwilioContext";
 
 import { TrackButton } from "./TrackButton";
 
 const TrackButtons = () => {
-  const [isVideoEnabled, setIsVideoEnabled] = useState(false);
   const [isMicEnabled, setIsMicEnabled] = useState(false);
+  const { localTracksPublication, toggleVideoTrack } =
+    useContext(TwilioContext);
+  const videoTrack = useMemo(
+    () => localTracksPublication.find((track) => track?.kind === "video"),
+    [localTracksPublication]
+  );
+  const audioTrack = useMemo(
+    () => localTracksPublication.find((track) => track?.kind === "audio"),
+    [localTracksPublication]
+  );
 
   return (
     <div className="track-buttons">
       <TrackButton
         type="camera"
-        isActive={isVideoEnabled}
-        onClick={() => setIsVideoEnabled((video) => !video)}
+        isActive={videoTrack?.isTrackEnabled}
+        onClick={toggleVideoTrack}
       />
       <TrackButton
         type="mic"
-        isActive={isMicEnabled}
+        isActive={audioTrack?.isTrackEnabled}
         onClick={() => setIsMicEnabled((mic) => !mic)}
       />
     </div>

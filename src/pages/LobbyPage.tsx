@@ -1,22 +1,24 @@
-import { useEffect, useRef, useState } from "react";
-import { createLocalVideoTrack } from "twilio-video";
-import { LobbyButtons } from "../components/LobbyButtons";
+import { useContext, useEffect, useMemo, useRef } from "react";
+import { createLocalVideoTrack, LocalVideoTrack } from "twilio-video";
 
-import { TrackButton } from "../components/TrackButton";
-import { TrackButtons } from "../components/TrackButtons";
+import { LobbyButtons } from "../components/LobbyButtons";
+import { TwilioContext } from "../context/TwilioContext";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const addLocalVideo = async () => {
-    const track = await createLocalVideoTrack();
-    const video = videoRef.current;
-    track.attach(video);
-  };
+  const { localTracksPublication } = useContext(TwilioContext);
+  const videoTrack = useMemo(
+    () => localTracksPublication.find((track) => track?.kind === "video"),
+    [localTracksPublication]
+  );
 
   useEffect(() => {
-    addLocalVideo();
-  }, []);
+    if (videoTrack) {
+      (videoTrack?.track as LocalVideoTrack)?.attach(videoRef.current);
+      return;
+    }
+    (videoTrack?.track as LocalVideoTrack)?.detach(videoRef.current);
+  }, [videoTrack]);
 
   return (
     <div className="container">

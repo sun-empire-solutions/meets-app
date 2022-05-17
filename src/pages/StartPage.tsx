@@ -1,10 +1,15 @@
-import { useState } from "react";
-import { connect as twilioConnect, Participant } from "twilio-video";
+import { useContext, useState } from "react";
+import { Participant } from "twilio-video";
+import { useNavigate } from "react-router-dom";
+
+import { TwilioContext } from "../context/TwilioContext";
 
 const StartPage = () => {
   const [buttonText, setButtonText] = useState("Join call");
   const [username, setUsername] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { connect } = useContext(TwilioContext);
+  const navigate = useNavigate();
 
   const connectButtonHandler = async () => {
     if (!username) {
@@ -17,6 +22,7 @@ const StartPage = () => {
       await connect(username);
       setButtonText("Leave call");
       setIsButtonDisabled(false);
+      navigate("/lobby");
     } catch {
       alert("Connection failed. Is the backend running?");
       setButtonText("Join call");
@@ -44,27 +50,6 @@ const StartPage = () => {
       </button>
     </div>
   );
-};
-
-const connect = async (username) => {
-  const response = await fetch(
-    `https://twilio-video-chat-app-7815-dev.twil.io/functions/get_token`,
-    {
-      mode: "cors",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username }),
-    }
-  );
-  const data = await response.json();
-  const room = await twilioConnect(data.token);
-  room.participants.forEach(participantConnected);
-  room.on("participantConnected", participantConnected);
-  room.on("participantDisconnected", participantDisconnected);
-  //   connected = true;
-  //   updateParticipantCount();
 };
 
 const participantConnected = (participant: Participant) => {
