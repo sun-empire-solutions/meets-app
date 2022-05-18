@@ -1,4 +1,4 @@
-const JoinButton = ({ text, classNames = "", onClick }: IProps) => {
+const Button = ({ text, classNames, onClick }: IProps) => {
   return (
     <button className={`join-button ${classNames}`} onClick={onClick}>
       {text}
@@ -12,4 +12,4 @@ type IProps = {
   onClick: () => void;
 };
 
-export { JoinButton };
+export { Button };

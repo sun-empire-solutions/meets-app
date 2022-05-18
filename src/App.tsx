@@ -1,9 +1,11 @@
+import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import { AppLayout } from "./layouts/AppLayout";
 import { LobbyPage } from "./pages/LobbyPage";
 import { MeetingPage } from "./pages/MeetingPage";
 import { StartPage } from "./pages/StartPage";
+import { Login } from "./pages/Login";
+import firebase from "./FirebaseConfig/firebase";
 
 const App = () => {
   return (

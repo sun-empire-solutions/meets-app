@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { TrackButtons } from "./TrackButtons";
-import { JoinButton } from "./JoinButton";
+import { Button } from "./Button";
 
 const LobbyButtons = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const LobbyButtons = () => {
   return (
     <div className="lobby-buttons">
       <TrackButtons />
-      <JoinButton text="Join" onClick={handleJoinClick} />
+      <Button text="Join" onClick={handleJoinClick} />
     </div>
   );
 };
