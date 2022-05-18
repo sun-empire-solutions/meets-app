@@ -1,6 +1,6 @@
-const JoinButton = ({ text, classNames, onClick }: IProps) => {
+const JoinButton = ({ text, classNames = "", onClick }: IProps) => {
   return (
-    <button className={` join-button ${classNames}`} onClick={onClick}>
+    <button className={`join-button ${classNames}`} onClick={onClick}>
       {text}
     </button>
   );
