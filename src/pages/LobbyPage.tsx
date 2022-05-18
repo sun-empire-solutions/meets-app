@@ -1,24 +1,24 @@
-import { useContext, useEffect, useMemo, useRef } from "react";
-import { createLocalVideoTrack, LocalVideoTrack } from "twilio-video";
+import { useContext, useEffect, useRef } from "react";
+import { LocalVideoTrack } from "twilio-video";
 
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { localTracksPublication } = useContext(TwilioContext);
-  const videoTrack = useMemo(
-    () => localTracksPublication.find((track) => track?.kind === "video"),
-    [localTracksPublication]
-  );
+  const { localVideoTrackPublication } = useContext(TwilioContext);
 
   useEffect(() => {
-    if (videoTrack) {
-      (videoTrack?.track as LocalVideoTrack)?.attach(videoRef.current);
+    if (localVideoTrackPublication) {
+      (localVideoTrackPublication?.track as LocalVideoTrack)?.attach(
+        videoRef.current
+      );
       return;
     }
-    (videoTrack?.track as LocalVideoTrack)?.detach(videoRef.current);
-  }, [videoTrack]);
+    (localVideoTrackPublication?.track as LocalVideoTrack)?.detach(
+      videoRef.current
+    );
+  }, [localVideoTrackPublication]);
 
   return (
     <div className="container">

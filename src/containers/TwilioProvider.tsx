@@ -4,11 +4,23 @@ import { useRoom } from "../hooks/useRoom";
 
 const TwilioProvider = ({ children }: IProps) => {
   const { room, connect } = useRoom();
-  const { localTracksPublication, toggleVideoTrack } = useLocalTracks(room);
+  const {
+    localAudioTrackPublication,
+    localVideoTrackPublication,
+    toggleVideoTrack,
+    toggleAudioTrack,
+  } = useLocalTracks(room);
 
   return (
     <TwilioContext.Provider
-      value={{ room, connect, localTracksPublication, toggleVideoTrack }}
+      value={{
+        room,
+        connect,
+        localVideoTrackPublication,
+        localAudioTrackPublication,
+        toggleVideoTrack,
+        toggleAudioTrack,
+      }}
     >
       {children}
     </TwilioContext.Provider>
