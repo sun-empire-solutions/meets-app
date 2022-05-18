@@ -18,6 +18,10 @@ $button-size: 3rem;
   justify-content: center;
   font-weight: bold;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   svg {
     z-index: 2;
   }
@@ -31,8 +35,6 @@ $button-size: 3rem;
   }
 
   &.inactive {
-    cursor: pointer;
-
     .button-background {
       background-color: rgb(214, 51, 51, 0.85);
     }
