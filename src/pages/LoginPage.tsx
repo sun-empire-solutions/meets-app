@@ -5,11 +5,11 @@ const LoginPage = () => {
   const { login, signup } = useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isregister, setRegister] = useState(true);
+  const [isSignInShowing, setIsSignInShowing] = useState(true);
 
   const handelClick = useCallback(
-    () => (isregister ? handleLogin : handleSignUp),
-    [isregister]
+    () => (isSignInShowing ? handleLogin : handleSignUp),
+    [isSignInShowing]
   );
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,28 +22,22 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     login(email, password);
-    console.log("loggIn");
   };
 
   const handleSignUp = () => {
     signup(email, password);
-    console.log("signUp");
-  };
-
-  const handelClickLink = () => {
-    if (isregister) {
-      return setRegister(false);
-    }
-    return setRegister(true);
   };
 
   return (
-    <div className="form-login">
-      <h1>{isregister ? "Login" : "Register"}</h1>
-      <form action="">
-        <div className="InputEmail">
-          <label htmlFor="InputEmail">Email</label>
+    <div className="login-page">
+      <h1 className="login-page_title">
+        {isSignInShowing ? "Login" : "Register"}
+      </h1>
+      <form className="login-page_form">
+        <div className="form-field">
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             name="email"
             className="email"
@@ -52,9 +46,10 @@ const LoginPage = () => {
             placeholder="Type your email"
           />
         </div>
-        <div className="InputPassword">
-          <label htmlFor="InputPassword">Password</label>
+        <div className="form-field">
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             name="password"
             className="password"
@@ -64,10 +59,11 @@ const LoginPage = () => {
           />
         </div>
 
-        {!isregister && (
-          <div className="InputPassword">
-            <label htmlFor="InputPassword">Repeat Password</label>
+        {!isSignInShowing && (
+          <div className="form-field">
+            <label htmlFor="repeatPassword">Confirm Password</label>
             <input
+              id="repeatPassword"
               type="password"
               name="repeat-password"
               className="password"
@@ -78,16 +74,26 @@ const LoginPage = () => {
           </div>
         )}
 
-        <div className="buttons">
+        <div className="form-buttons">
           <button type="submit" onClick={handelClick}>
-            {isregister ? "Sign in" : "Sign up"}
+            {isSignInShowing ? "Sign in" : "Sign up"}
           </button>
         </div>
       </form>
-      <div className="link-signup">
-        <h3>Or {isregister ? "Sign Up" : "Sign In"} Using</h3>
-        <a href="#" onClick={handelClickLink}>
-          {isregister ? "SIGN UP" : "SIGN IN"}
+      <div className="form-bottom">
+        <h3>
+          {isSignInShowing
+            ? "Don't you have an account?"
+            : "Already have an account?"}
+        </h3>
+        <a
+          href="#"
+          role="button"
+          onClick={() => {
+            setIsSignInShowing((isSignInShowing) => !isSignInShowing);
+          }}
+        >
+          {isSignInShowing ? "SIGN UP" : "SIGN IN"}
         </a>
       </div>
     </div>
