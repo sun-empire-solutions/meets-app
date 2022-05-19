@@ -25,6 +25,7 @@ const LoginPage = () => {
 
   return (
     <div className="form-login">
+      <h1>Login</h1>
       <form action="">
         <div className="InputEmail">
           <label htmlFor="InputEmail">Email</label>
@@ -34,6 +35,7 @@ const LoginPage = () => {
             className="email"
             value={email}
             onChange={handleEmailChange}
+            placeholder="Type your email"
           />
         </div>
         <div className="InputPassword">
@@ -44,12 +46,15 @@ const LoginPage = () => {
             className="password"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Type your password"
           />
         </div>
-        <button type="submit" onClick={handleLogin}>
-          Login
-        </button>
-        <button onClick={handleSignUp}>Registrarse</button>
+        <div className="buttons">
+          <button type="submit" onClick={handleLogin}>
+            Sign in
+          </button>
+          <button onClick={handleSignUp}>Sign up</button>
+        </div>
       </form>
     </div>
   );
