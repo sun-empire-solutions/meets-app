@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { Participant } from "twilio-video";
 import { useNavigate } from "react-router-dom";
-
 import { TwilioContext } from "../context/TwilioContext";
 
 const StartPage = () => {
