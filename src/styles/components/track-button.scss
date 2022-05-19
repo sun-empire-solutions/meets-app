@@ -5,7 +5,7 @@ $button-size: 3rem;
   width: $button-size;
 }
 
-.button {
+.track-button {
   @extend .button-size;
   border-radius: 50%;
   border: none;

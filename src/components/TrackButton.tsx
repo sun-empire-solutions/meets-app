@@ -5,7 +5,7 @@ import { BsMicMuteFill } from "react-icons/bs";
 
 const TrackButton = ({ type, isActive, classNames = "", onClick }: IProps) => (
   <button
-    className={`button ${!isActive ? "inactive" : ""} ${classNames}`}
+    className={`track-button ${!isActive ? "inactive" : ""} ${classNames}`}
     onClick={onClick}
   >
     {renderButtonIconByType(type, isActive)}

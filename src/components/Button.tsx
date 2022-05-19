@@ -1,6 +1,6 @@
 const Button = ({ text, classNames, onClick }: IProps) => {
   return (
-    <button className={`join-button ${classNames}`} onClick={onClick}>
+    <button className={`button ${classNames}`} onClick={onClick}>
       {text}
     </button>
   );

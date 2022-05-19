@@ -13,7 +13,7 @@ const LobbyButtons = () => {
   return (
     <div className="lobby-buttons">
       <TrackButtons />
-      <Button text="Join" onClick={handleJoinClick} />
+      <Button classNames="join-button" text="Join" onClick={handleJoinClick} />
     </div>
   );
 };
