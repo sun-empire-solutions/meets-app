@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import {
   onAuthStateChanged,
-  User,
-  Auth,
   signInWithEmailAndPassword,
   getAuth,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+
+import { useAuthUser } from "./useAuthUser";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -21,7 +21,7 @@ const firebaseConfig = {
 };
 
 const useFirebaseAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, saveUser } = useAuthUser();
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null);
   const auth = useMemo(
@@ -30,16 +30,11 @@ const useFirebaseAuth = () => {
   );
 
   const login = useCallback(
-    () => (enail, password) => {
-      console.log("AUTH", auth);
-
+    () => (email, password) => {
       if (auth) {
-        signInWithEmailAndPassword(auth, enail, password)
+        signInWithEmailAndPassword(auth, email, password)
           .then((u) => {
-            console.log("login success", u);
-            console.log("login success", u.user);
-
-            setUser(u.user);
+            saveUser(u.user);
           })
           .catch(function (error) {
             console.log(error);
@@ -49,11 +44,11 @@ const useFirebaseAuth = () => {
     [auth]
   );
 
-  const signup = (enail, password) => {
+  const signup = (email, password) => {
     if (auth) {
-      createUserWithEmailAndPassword(auth, enail, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((u) => {
-          setUser(u.user);
+          saveUser(u.user);
         })
         .catch(function (error) {
           console.log(error);
@@ -69,7 +64,7 @@ const useFirebaseAuth = () => {
   useEffect(() => {
     if (auth) {
       onAuthStateChanged(auth, (newUser) => {
-        setUser(newUser);
+        saveUser(newUser);
         setIsAuthReady(true);
       });
     }
