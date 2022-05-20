@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { withLoginGuard } from "./guards/login-guard";
 
 import { AppLayout } from "./layouts/AppLayout";
 import { LobbyPage, LoginPage, MeetingPage, StartPage } from "./pages";
@@ -8,7 +9,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<LoginPage />} />
+          <Route index element={withLoginGuard(<LoginPage />)} />
           <Route path="/start" element={<StartPage />} />
           <Route path="/lobby" element={<LobbyPage />} />
           <Route path="/meeting" element={<MeetingPage />} />
