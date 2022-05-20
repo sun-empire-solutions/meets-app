@@ -7,11 +7,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [isSignInShowing, setIsSignInShowing] = useState(true);
 
-  const handelClick = useCallback(
-    () => (isSignInShowing ? handleLogin : handleSignUp),
-    [isSignInShowing]
-  );
-
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -33,7 +28,7 @@ const LoginPage = () => {
       <h1 className="login-page_title">
         {isSignInShowing ? "Login" : "Register"}
       </h1>
-      <form className="login-page_form">
+      <div className="login-page_form">
         <div className="form-field">
           <label htmlFor="email">Email</label>
           <input
@@ -75,11 +70,11 @@ const LoginPage = () => {
         )}
 
         <div className="form-buttons">
-          <button type="submit" onClick={handelClick}>
+          <button onClick={isSignInShowing ? handleLogin : handleSignUp}>
             {isSignInShowing ? "Sign in" : "Sign up"}
           </button>
         </div>
-      </form>
+      </div>
       <div className="form-bottom">
         <h3>
           {isSignInShowing

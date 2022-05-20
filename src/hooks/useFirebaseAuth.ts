@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import {
   onAuthStateChanged,
@@ -24,22 +24,31 @@ const useFirebaseAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null);
-  const [auth, setAuth] = useState<Auth>(null);
+  const auth = useMemo(
+    () => (firebaseApp ? getAuth(firebaseApp) : null),
+    [firebaseApp]
+  );
 
-  const login = (enail, password) => {
-    if (auth) {
-      signInWithEmailAndPassword(auth, enail, password)
-        .then((u) => {
-          console.log("login success", u);
-          console.log("login success", u.user);
+  const login = useCallback(
+    () => (enail, password) => {
+      console.log("AUTH", auth);
 
-          setUser(u.user);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  };
+      if (auth) {
+        signInWithEmailAndPassword(auth, enail, password)
+          .then((u) => {
+            console.log("login success", u);
+            console.log("login success", u.user);
+
+            setUser(u.user);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    },
+    [auth]
+  );
+
   const signup = (enail, password) => {
     if (auth) {
       createUserWithEmailAndPassword(auth, enail, password)
@@ -58,12 +67,6 @@ const useFirebaseAuth = () => {
   }, []);
 
   useEffect(() => {
-    if (firebaseApp) {
-      setAuth(getAuth(firebaseApp));
-    }
-  }, [firebaseApp]);
-
-  useEffect(() => {
     if (auth) {
       onAuthStateChanged(auth, (newUser) => {
         setUser(newUser);
@@ -72,7 +75,7 @@ const useFirebaseAuth = () => {
     }
   }, [auth]);
 
-  return { user, isAuthReady, login, signup };
+  return { user, isAuthReady, login: login(), signup };
 };
 
 export { useFirebaseAuth };
