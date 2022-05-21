@@ -1,5 +1,7 @@
 import { useState, useCallback } from "react";
 import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple } from "react-icons/fa";
 
 const LoginPage = () => {
   const { login, signup } = useFirebaseAuth();
@@ -26,7 +28,7 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <h1 className="login-page_title">
-        {isSignInShowing ? "Login" : "Register"}
+        {isSignInShowing ? "Sign in" : "Sign up"}
       </h1>
       <div className="login-page_form">
         <div className="form-field">
@@ -75,6 +77,19 @@ const LoginPage = () => {
           </button>
         </div>
       </div>
+      {isSignInShowing && (
+        <div className="form-buttons">
+          <h3>Or Sign in Using</h3>
+          <div className="buttons">
+            <div className="icon icon-google">
+              <FcGoogle size={45} />
+            </div>
+            <div className="icon icon-apple">
+              <FaApple size={45} />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="form-bottom">
         <h3>
           {isSignInShowing
