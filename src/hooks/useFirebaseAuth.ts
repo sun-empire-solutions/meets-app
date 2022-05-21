@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   getAuth,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 import { useAuthUser } from "./useAuthUser";

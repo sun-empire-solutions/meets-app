@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Participant } from "twilio-video";
 import { useNavigate } from "react-router-dom";
 import { TwilioContext } from "../context/TwilioContext";
+import { NavBar } from "../components/NavBar";
 
 const StartPage = () => {
   const [buttonText, setButtonText] = useState("Join call");
@@ -31,22 +32,25 @@ const StartPage = () => {
 
   return (
     <div className="start-page">
-      <h1>StartPage</h1>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={(event) => {
-          setUsername(event.target.value);
-        }}
-      />
-      <button
-        className="button"
-        disabled={isButtonDisabled}
-        onClick={connectButtonHandler}
-      >
-        {buttonText}
-      </button>
+      <NavBar />
+      <div className="star-page-container">
+        <h1>StartPage</h1>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+        />
+        <button
+          className="button"
+          disabled={isButtonDisabled}
+          onClick={connectButtonHandler}
+        >
+          {buttonText}
+        </button>
+      </div>
     </div>
   );
 };
