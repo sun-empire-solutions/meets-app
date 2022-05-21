@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   getAuth,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 import { useAuthUser } from "./useAuthUser";
@@ -30,7 +31,7 @@ const useFirebaseAuth = () => {
   );
 
   const login = useCallback(
-    () => (email, password) => {
+    (email, password) => {
       if (auth) {
         signInWithEmailAndPassword(auth, email, password)
           .then((u) => {
@@ -56,6 +57,19 @@ const useFirebaseAuth = () => {
     }
   };
 
+  const logout = () => {
+    if (auth) {
+      signOut(auth)
+        .then(() => {
+          saveUser(null);
+          console.log("Logged out");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
     setFirebaseApp(app);
@@ -70,7 +84,7 @@ const useFirebaseAuth = () => {
     }
   }, [auth]);
 
-  return { user, isAuthReady, login: login(), signup };
+  return { user, isAuthReady, login, signup, logout };
 };
 
 export { useFirebaseAuth };

@@ -1,0 +1,53 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 3.5rem;
+  padding-right: 1rem;
+  z-index: 5;
+
+  .menu-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.4rem;
+    width: 2.4rem;
+    border-radius: 50%;
+    background-color: rgb(12, 148, 238);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .menu-body {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 7vh;
+    right: 1rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 5px;
+
+    .menu-body_email {
+      align-items: center;
+      padding: 0.5rem;
+    }
+
+    .logout-button {
+      border: none;
+      width: 100%;
+      padding: 0.1rem;
+      border-radius: 5px;
+      outline: none;
+      background-color: transparent;
+      font-size: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
