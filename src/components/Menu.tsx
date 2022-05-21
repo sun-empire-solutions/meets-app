@@ -4,11 +4,11 @@ import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
 
 const Menu = () => {
   const [visibleMenu, setVisibleMenu] = useState(false);
-  const { user } = useFirebaseAuth();
+  const { user, logout } = useFirebaseAuth();
   const userInitials = useMemo(() => user?.email.substring(0, 2), [user]);
 
   const handleClick = () => {
-    console.log("DESLOGGIN");
+    logout();
   };
 
   return (
