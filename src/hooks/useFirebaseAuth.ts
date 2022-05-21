@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   getAuth,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 
@@ -25,6 +27,7 @@ const useFirebaseAuth = () => {
   const { user, saveUser } = useAuthUser();
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null);
+  const provider= new GoogleAuthProvider();
   const auth = useMemo(
     () => (firebaseApp ? getAuth(firebaseApp) : null),
     [firebaseApp]
@@ -45,6 +48,29 @@ const useFirebaseAuth = () => {
     [auth]
   );
 
+  const loginGoogle=()=>{
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    //console.log(result.user);
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+  }  
+
+
   const signup = (email, password) => {
     if (auth) {
       createUserWithEmailAndPassword(auth, email, password)
@@ -61,8 +87,7 @@ const useFirebaseAuth = () => {
     if (auth) {
       signOut(auth)
         .then(() => {
-          saveUser(null);
-          console.log("Logged out");
+          saveUser(null); //Logged out
         })
         .catch(function (error) {
           console.log(error);
@@ -84,7 +109,7 @@ const useFirebaseAuth = () => {
     }
   }, [auth]);
 
-  return { user, isAuthReady, login, signup, logout };
+  return { user, isAuthReady, login, signup,loginGoogle, logout };
 };
 
 export { useFirebaseAuth };

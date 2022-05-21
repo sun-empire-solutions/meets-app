@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 
 const LoginPage = () => {
-  const { login, signup } = useFirebaseAuth();
+  const { login, signup, loginGoogle } = useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignInShowing, setIsSignInShowing] = useState(true);
@@ -23,6 +23,10 @@ const LoginPage = () => {
 
   const handleSignUp = () => {
     signup(email, password);
+  };
+
+  const handleGoogle = () => {
+    loginGoogle();
   };
 
   return (
@@ -82,7 +86,7 @@ const LoginPage = () => {
           <h3>Or Sign in Using</h3>
           <div className="buttons">
             <div className="icon icon-google">
-              <FcGoogle size={45} />
+              <FcGoogle size={45} onClick={handleGoogle} />
             </div>
             <div className="icon icon-apple">
               <FaApple size={45} />
