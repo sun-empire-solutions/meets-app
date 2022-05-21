@@ -2,7 +2,7 @@ import { Menu } from "./../components/Menu";
 
 const NavBar = () => {
   return (
-    <div className="NavBar">
+    <div className="navbar">
       <Menu />
     </div>
   );

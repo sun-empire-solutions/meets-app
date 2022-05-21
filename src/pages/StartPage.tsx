@@ -32,7 +32,6 @@ const StartPage = () => {
 
   return (
     <div className="start-page">
-      <NavBar />
       <div className="star-page-container">
         <h1>StartPage</h1>
         <input

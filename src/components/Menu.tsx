@@ -1,34 +1,32 @@
+import { useMemo, useState } from "react";
+
 import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
-import { useState, useEffect } from "react";
 
 const Menu = () => {
   const [visibleMenu, setVisibleMenu] = useState(false);
-
   const { user } = useFirebaseAuth();
-  const Email = (user?.email.charAt(0) + user?.email.charAt(1)).toString();
+  const userInitials = useMemo(() => user?.email.substring(0, 2), [user]);
 
-  const HandleClick = () => {
+  const handleClick = () => {
     console.log("DESLOGGIN");
   };
 
   return (
     <div className="menu">
       <div
-        className="container-correo"
+        className="menu-trigger"
         onClick={() => {
           setVisibleMenu((visibleMenu) => !visibleMenu);
         }}
       >
-        {Email.toUpperCase()}
+        {userInitials?.toUpperCase()}
       </div>
       {visibleMenu && (
-        <div className="menu-correo">
-          <div className="correo">{user?.email}</div>
-          <div className="logout">
-            <button type="button" onClick={HandleClick}>
-              Logout
-            </button>
-          </div>
+        <div className="menu-body">
+          <div className="menu-body_email">{user?.email}</div>
+          <button className="logout-button" type="button" onClick={handleClick}>
+            Logout
+          </button>
         </div>
       )}
     </div>
