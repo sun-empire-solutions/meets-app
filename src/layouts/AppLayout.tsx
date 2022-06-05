@@ -2,10 +2,11 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import { TwilioProvider } from "../containers/TwilioProvider";
 import { NavBar } from "../components/NavBar";
+import { useMemo } from "react";
 
 const AppLayout = () => {
   const location = useLocation();
-  const isSignInView = location.pathname === "/";
+  const isSignInView = useMemo(() => location.pathname === "/", [location]);
 
   return (
     <TwilioProvider>
