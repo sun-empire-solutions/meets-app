@@ -12,6 +12,7 @@ const TwilioContext = createContext<IContext>({
   localAudioTrackPublication: null,
   toggleVideoTrack: null,
   toggleAudioTrack: null,
+  clearTracks: null,
 });
 
 type IContext = {
@@ -20,6 +21,7 @@ type IContext = {
   localVideoTrackPublication: LocalVideoTrackPublication;
   toggleVideoTrack: () => void;
   toggleAudioTrack: () => void;
+  clearTracks: () => void;
   connect: (token: string) => Promise<void> | null;
 };
 

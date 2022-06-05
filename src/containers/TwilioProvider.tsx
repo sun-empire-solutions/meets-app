@@ -9,6 +9,7 @@ const TwilioProvider = ({ children }: IProps) => {
     localVideoTrackPublication,
     toggleVideoTrack,
     toggleAudioTrack,
+    clearTracks,
   } = useLocalTracks(room);
 
   return (
@@ -20,6 +21,7 @@ const TwilioProvider = ({ children }: IProps) => {
         localAudioTrackPublication,
         toggleVideoTrack,
         toggleAudioTrack,
+        clearTracks,
       }}
     >
       {children}

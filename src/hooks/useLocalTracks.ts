@@ -48,6 +48,14 @@ const useLocalTracks = (room: Room) => {
     );
   };
 
+  const clearTracks = () => {
+    localVideoTrackPublication?.track.stop();
+    localVideoTrackPublication?.unpublish();
+    setLocalVideoTrackPublication(null);
+    localAudioTrackPublication?.track.disable();
+    setLocalAudioTrackPublication(null);
+  };
+
   useEffect(() => {
     setLocalVideoTrackPublication(
       Array.from(room?.localParticipant?.tracks?.values?.() ?? []).find(
@@ -66,6 +74,7 @@ const useLocalTracks = (room: Room) => {
     localAudioTrackPublication,
     toggleVideoTrack,
     toggleAudioTrack,
+    clearTracks,
   };
 };
 

@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { Participant } from "twilio-video";
 import { useNavigate } from "react-router-dom";
 import { TwilioContext } from "../context/TwilioContext";
-import { NavBar } from "../components/NavBar";
 
 const StartPage = () => {
   const [buttonText, setButtonText] = useState("Join call");
