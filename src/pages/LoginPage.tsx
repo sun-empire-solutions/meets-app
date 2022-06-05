@@ -1,10 +1,14 @@
 import { useState, useCallback } from "react";
 import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 const LoginPage = () => {
-  const { login, signup } = useFirebaseAuth();
+  const { login, signup, loginWithGoogle, loginWithFacebook } =
+    useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [isSignInShowing, setIsSignInShowing] = useState(true);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,19 +18,36 @@ const LoginPage = () => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+  const handlePasswordConfirmationChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPasswordConfirmation(event.target.value);
+  };
 
   const handleLogin = () => {
     login(email, password);
   };
 
   const handleSignUp = () => {
+    if (password !== passwordConfirmation) {
+      alert("Password must match!");
+      return;
+    }
     signup(email, password);
+  };
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle();
+  };
+
+  const handleFacebookLogin = () => {
+    loginWithFacebook();
   };
 
   return (
     <div className="login-page">
       <h1 className="login-page_title">
-        {isSignInShowing ? "Login" : "Register"}
+        {isSignInShowing ? "Sign in" : "Sign up"}
       </h1>
       <div className="login-page_form">
         <div className="form-field">
@@ -62,8 +83,8 @@ const LoginPage = () => {
               type="password"
               name="repeat-password"
               className="password"
-              value={password}
-              onChange={handlePasswordChange}
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
               placeholder="Type your password"
             />
           </div>
@@ -75,6 +96,23 @@ const LoginPage = () => {
           </button>
         </div>
       </div>
+      {isSignInShowing && (
+        <div className="form-buttons">
+          <h3>Or Sign in Using</h3>
+          <div className="buttons">
+            <div className="icon google-icon">
+              <FcGoogle size={45} onClick={handleGoogleLogin} />
+            </div>
+            <div className="icon facebook-icon">
+              <FaFacebook
+                size={45}
+                onClick={handleFacebookLogin}
+                color="#2244bb"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="form-bottom">
         <h3>
           {isSignInShowing
