@@ -41,7 +41,8 @@ const useFirebaseAuth = () => {
             saveUser(u.user);
           })
           .catch(function (error) {
-            console.log(error);
+            alert("User or Password wrong")
+            //console.log(error);
           });
       }
     },
