@@ -7,6 +7,7 @@ const LoginPage = () => {
   const { login, signup, loginGoogle } = useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [isSignInShowing, setIsSignInShowing] = useState(true);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,12 +17,21 @@ const LoginPage = () => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+  const handlePasswordConfirmationChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPasswordConfirmation(event.target.value);
+  };
 
   const handleLogin = () => {
     login(email, password);
   };
 
   const handleSignUp = () => {
+    if (password !== passwordConfirmation) {
+      alert("Password must match!");
+      return;
+    }
     signup(email, password);
   };
 
@@ -68,8 +78,8 @@ const LoginPage = () => {
               type="password"
               name="repeat-password"
               className="password"
-              value={password}
-              onChange={handlePasswordChange}
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
               placeholder="Type your password"
             />
           </div>
