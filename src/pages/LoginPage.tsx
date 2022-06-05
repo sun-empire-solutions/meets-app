@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
 import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
 const LoginPage = () => {
-  const { login, signup, loginGoogle } = useFirebaseAuth();
+  const { login, signup, loginWithGoogle, loginWithFacebook } =
+    useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -35,8 +36,12 @@ const LoginPage = () => {
     signup(email, password);
   };
 
-  const handleGoogle = () => {
-    loginGoogle();
+  const handleGoogleLogin = () => {
+    loginWithGoogle();
+  };
+
+  const handleFacebookLogin = () => {
+    loginWithFacebook();
   };
 
   return (
@@ -95,11 +100,15 @@ const LoginPage = () => {
         <div className="form-buttons">
           <h3>Or Sign in Using</h3>
           <div className="buttons">
-            <div className="icon icon-google">
-              <FcGoogle size={45} onClick={handleGoogle} />
+            <div className="icon google-icon">
+              <FcGoogle size={45} onClick={handleGoogleLogin} />
             </div>
-            <div className="icon icon-apple">
-              <FaApple size={45} />
+            <div className="icon facebook-icon">
+              <FaFacebook
+                size={45}
+                onClick={handleFacebookLogin}
+                color="#2244bb"
+              />
             </div>
           </div>
         </div>

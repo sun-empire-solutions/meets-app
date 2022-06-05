@@ -87,8 +87,16 @@
       width: 100%;
       column-gap: 1rem;
 
-      .icon:hover {
-        cursor: pointer;
+      .icon {
+        display: flex;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .facebook-icon {
+        width: 42px;
       }
     }
   }

@@ -6,6 +6,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -27,7 +28,8 @@ const useFirebaseAuth = () => {
   const { user, saveUser } = useAuthUser();
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null);
-  const provider= new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
   const auth = useMemo(
     () => (firebaseApp ? getAuth(firebaseApp) : null),
     [firebaseApp]
@@ -41,7 +43,7 @@ const useFirebaseAuth = () => {
             saveUser(u.user);
           })
           .catch(function (error) {
-            alert("User or Password wrong")
+            alert("User or Password wrong");
             //console.log(error);
           });
       }
@@ -49,28 +51,53 @@ const useFirebaseAuth = () => {
     [auth]
   );
 
-  const loginGoogle=()=>{
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    //console.log(result.user);
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-  }  
+  const loginWithGoogle = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        //console.log(result.user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
 
+  const loginWithFacebook = () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error);
+
+        // ...
+      });
+  };
 
   const signup = (email, password) => {
     if (auth) {
@@ -110,7 +137,15 @@ const useFirebaseAuth = () => {
     }
   }, [auth]);
 
-  return { user, isAuthReady, login, signup,loginGoogle, logout };
+  return {
+    user,
+    isAuthReady,
+    login,
+    signup,
+    loginWithGoogle,
+    loginWithFacebook,
+    logout,
+  };
 };
 
 export { useFirebaseAuth };
