@@ -1,10 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createLocalVideoTrack,
   LocalAudioTrack,
   LocalAudioTrackPublication,
-  LocalTrackPublication,
-  LocalVideoTrack,
   LocalVideoTrackPublication,
   Room,
 } from "twilio-video";
