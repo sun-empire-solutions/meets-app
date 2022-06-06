@@ -1,27 +1,20 @@
 import { TwilioContext } from "../context/TwilioContext";
 import { useLocalTracks } from "../hooks/useLocalTracks";
 import { useRoom } from "../hooks/useRoom";
+import { useTracksSettings } from "../hooks/useTracksSettings";
 
 const TwilioProvider = ({ children }: IProps) => {
   const { room, connect } = useRoom();
-  const {
-    localAudioTrackPublication,
-    localVideoTrackPublication,
-    toggleVideoTrack,
-    toggleAudioTrack,
-    clearTracks,
-  } = useLocalTracks(room);
+  const trackSettings = useTracksSettings();
+  const localTracks = useLocalTracks(room, trackSettings);
 
   return (
     <TwilioContext.Provider
       value={{
         room,
         connect,
-        localVideoTrackPublication,
-        localAudioTrackPublication,
-        toggleVideoTrack,
-        toggleAudioTrack,
-        clearTracks,
+        ...localTracks,
+        ...trackSettings,
       }}
     >
       {children}

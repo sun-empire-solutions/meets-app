@@ -7,20 +7,24 @@ const TrackButtons = () => {
   const {
     localVideoTrackPublication,
     localAudioTrackPublication,
-    toggleVideoTrack,
+    isAudioEnabled,
+    isVideoEnabled,
     toggleAudioTrack,
+    toggleVideoTrack,
   } = useContext(TwilioContext);
 
   return (
     <div className="track-buttons">
       <TrackButton
         type="camera"
-        isActive={localVideoTrackPublication?.isTrackEnabled}
+        isActive={localVideoTrackPublication?.isTrackEnabled || isVideoEnabled}
         onClick={toggleVideoTrack}
       />
       <TrackButton
         type="mic"
-        isActive={localAudioTrackPublication?.track.isEnabled}
+        isActive={
+          localAudioTrackPublication?.track?.isEnabled || isAudioEnabled
+        }
         onClick={toggleAudioTrack}
       />
     </div>

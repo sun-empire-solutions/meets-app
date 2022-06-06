@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
-import { saveToStorage } from "../services/storage";
+import { getFromStorage, saveToStorage } from "../services/storage";
 
 const VIDEO_STREAM_KEY = "TWILIO:VS";
 const AUDIO_STREAM_KEY = "TWILIO:AS";
 
-const useTracksSettings = () => {
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
-  const [isVideoEnabled, setIsVideoEnabled] = useState(true);
+const useTracksSettings = (): TrackSettings => {
+  const [isAudioEnabled, setIsAudioEnabled] = useState<boolean>(null);
+  const [isVideoEnabled, setIsVideoEnabled] = useState<boolean>(null);
 
   const saveAudioSettings = (isEnabled: boolean) => {
+    setIsAudioEnabled(isEnabled);
     saveToStorage(AUDIO_STREAM_KEY, isEnabled);
   };
 
   const saveVideoSettings = (isEnabled: boolean) => {
+    setIsVideoEnabled(isEnabled);
     saveToStorage(VIDEO_STREAM_KEY, isEnabled);
+  };
+
+  const getAudioSettings = () => {
+    return getFromStorage(AUDIO_STREAM_KEY) ?? true;
+  };
+
+  const getVideoSettings = () => {
+    return getFromStorage(VIDEO_STREAM_KEY) ?? true;
   };
 
   useEffect(() => {
@@ -32,7 +42,18 @@ const useTracksSettings = () => {
     isVideoEnabled,
     saveAudioSettings,
     saveVideoSettings,
+    getAudioSettings,
+    getVideoSettings,
   };
+};
+
+export type TrackSettings = {
+  isAudioEnabled: boolean;
+  isVideoEnabled: boolean;
+  saveAudioSettings: (isEnabled: boolean) => void;
+  saveVideoSettings: (isEnabled: boolean) => void;
+  getAudioSettings: () => boolean;
+  getVideoSettings: () => boolean;
 };
 
 export { useTracksSettings };
