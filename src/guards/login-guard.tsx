@@ -10,7 +10,7 @@ const withLoginGuard = (component: JSX.Element) => {
   }
 
   if (user) {
-    return <Navigate to="/start" />;
+    return <Navigate to="/lobby" />;
   }
 
   return component;
