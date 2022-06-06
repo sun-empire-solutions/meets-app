@@ -34,15 +34,38 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 7vh;
-    right: 1rem;
+    top: 4rem;
+    right: 1.3rem;
     padding: 0.5rem;
     background-color: white;
     border-radius: 5px;
 
-    .menu-body_email {
+    .menu-body_user {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 0.5rem;
+      //justify-content: center;
+      width: 100%;
+      gap: 0.2rem;
+      padding: 1rem 0rem;
+
+      .menu-body_photo_user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 5rem;
+        border-radius: 50%;
+        background-size: cover;
+      }
+
+      .menu-body_email {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(8, 8, 8, 0.479);
+      }
+      border-bottom: 1px solid rgba(8, 8, 8, 0.479);
     }
 
     .logout-button {
