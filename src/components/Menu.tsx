@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
 
@@ -17,13 +18,20 @@ const Menu = () => {
     return user?.email.substring(0, 2);
   }, [user]);
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
+  const menuRef = useRef();
 
-  const handleClick = () => {
+  const handleLogout = () => {
     logout();
   };
 
+  const hideMenu = () => {
+    setVisibleMenu(false);
+  };
+
+  useOutsideClick(menuRef, hideMenu);
+
   return (
-    <div className="menu">
+    <div ref={menuRef} className="menu">
       <div
         className="menu-trigger"
         style={
@@ -40,7 +48,11 @@ const Menu = () => {
       {visibleMenu && (
         <div className="menu-body">
           <div className="menu-body_email">{user?.email}</div>
-          <button className="logout-button" type="button" onClick={handleClick}>
+          <button
+            className="logout-button"
+            type="button"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </div>
