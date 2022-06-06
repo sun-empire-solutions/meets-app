@@ -1,5 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { createLocalTracks, LocalVideoTrack } from "twilio-video";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import {
+  createLocalTracks,
+  createLocalVideoTrack,
+  LocalAudioTrack,
+  LocalVideoTrack,
+} from "twilio-video";
 
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
@@ -12,34 +17,28 @@ const LobbyPage = () => {
     saveVideoSettings,
     getAudioSettings,
     getVideoSettings,
-    clearTracks,
   } = useContext(TwilioContext);
   const [videoTrack, setVideoTrack] = useState<LocalVideoTrack | null>(null);
+
+  const saveVideoTrack = (vTrack) => {
+    setVideoTrack((prev) => {
+      cleanPrevVideoTrack(prev, videoRef);
+      return vTrack;
+    });
+  };
 
   useEffect(() => {
     const videoSettings = getVideoSettings();
     const audioSettings = getAudioSettings();
 
-    console.log("LobbyPage: useEffect");
-
     createLocalTracks({
       audio: audioSettings,
       video: videoSettings ? { facingMode: "user" } : false,
     }).then((tracks) => {
-      const vTrack = tracks.find(
-        (track) => track.kind === "video"
-      ) as LocalVideoTrack;
-      const aTrack = tracks.find(
-        (track) => track.kind === "audio"
-      ) as LocalVideoTrack;
+      const vTrack = tracks.find(findVideoTrack) as LocalVideoTrack;
+      const aTrack = tracks.find(findAudioTrack) as LocalAudioTrack;
       vTrack?.attach(videoRef.current);
-      setVideoTrack((prev) => {
-        if (prev) {
-          prev?.stop();
-          prev?.detach(videoRef.current);
-        }
-        return vTrack;
-      });
+      saveVideoTrack(vTrack);
       saveVideoSettings(vTrack?.isEnabled ?? false);
       saveAudioSettings(aTrack?.isEnabled ?? false);
     });
@@ -47,29 +46,13 @@ const LobbyPage = () => {
 
   useEffect(() => {
     if (isVideoEnabled) {
-      videoTrack?.stop();
-      videoTrack?.detach(videoRef.current);
-      setVideoTrack(null);
-      console.log("Video enabled");
-
-      const audioSettings = getAudioSettings();
-
-      createLocalTracks({
-        audio: audioSettings,
-        video: { facingMode: "user" },
-      }).then((tracks) => {
-        const vTrack = tracks.find(
-          (track) => track.kind === "video"
-        ) as LocalVideoTrack;
-        vTrack?.attach(videoRef.current);
-        setVideoTrack((prev) => {
-          if (prev) {
-            prev?.stop();
-            prev?.detach(videoRef.current);
-          }
-          return vTrack;
-        });
+      createLocalVideoTrack({
+        facingMode: "user",
+      }).then((track) => {
+        track?.attach(videoRef.current);
+        saveVideoTrack(track);
       });
+      return;
     }
     videoTrack?.stop();
     videoTrack?.detach(videoRef.current);
@@ -90,4 +73,17 @@ const LobbyPage = () => {
   );
 };
 
+const findAudioTrack = (track) => track.kind === "audio";
+
+const findVideoTrack = (track) => track.kind === "video";
+
+const cleanPrevVideoTrack = (
+  prev: LocalVideoTrack | null,
+  videoRef: React.MutableRefObject<HTMLVideoElement>
+) => {
+  if (prev) {
+    prev?.stop();
+    prev?.detach(videoRef.current);
+  }
+};
 export { LobbyPage };

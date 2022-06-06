@@ -27,13 +27,13 @@ const useTracksSettings = (): TrackSettings => {
   };
 
   useEffect(() => {
-    const videoStream = localStorage.getItem(VIDEO_STREAM_KEY);
-    const audioStream = localStorage.getItem(AUDIO_STREAM_KEY);
+    const videoStream = getFromStorage(VIDEO_STREAM_KEY);
+    const audioStream = getFromStorage(AUDIO_STREAM_KEY);
     if (videoStream) {
-      setIsVideoEnabled(JSON.parse(videoStream));
+      setIsVideoEnabled(videoStream);
     }
     if (audioStream) {
-      setIsAudioEnabled(JSON.parse(audioStream));
+      setIsAudioEnabled(audioStream);
     }
   }, []);
 
