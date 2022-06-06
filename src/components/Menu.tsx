@@ -1,10 +1,11 @@
 import { useMemo, useRef, useState } from "react";
+import { useClassNames } from "../hooks/useClassNames";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 
 import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
 
 const Menu = () => {
-  const [visibleMenu, setVisibleMenu] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const { user, logout } = useFirebaseAuth();
   const userInitials = useMemo(() => {
     const displayName = user?.providerData?.[0]?.displayName;
@@ -19,19 +20,23 @@ const Menu = () => {
   }, [user]);
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const menuRef = useRef();
+  const classNames = useClassNames();
 
   const handleLogout = () => {
     logout();
   };
 
   const hideMenu = () => {
-    setVisibleMenu(false);
+    setIsMenuVisible(false);
   };
 
   useOutsideClick(menuRef, hideMenu);
 
   return (
-    <div ref={menuRef} className="menu">
+    <div
+      ref={menuRef}
+      className={classNames("menu", { active: isMenuVisible })}
+    >
       <div
         className="menu-trigger"
         style={
@@ -40,12 +45,12 @@ const Menu = () => {
             : { backgroundColor: "rgb(12, 148, 238)" }
         }
         onClick={() => {
-          setVisibleMenu((visibleMenu) => !visibleMenu);
+          setIsMenuVisible((visibleMenu) => !visibleMenu);
         }}
       >
         {userPhotoUrl ? "" : userInitials?.toUpperCase()}
       </div>
-      {visibleMenu && (
+      {isMenuVisible && (
         <div className="menu-body">
           <div className="menu-body_email">{user?.email}</div>
           <button
