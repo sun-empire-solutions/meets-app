@@ -8,6 +8,7 @@ import {
 
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
+import { useClassNames } from "../hooks/useClassNames";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,6 +20,7 @@ const LobbyPage = () => {
     getVideoSettings,
   } = useContext(TwilioContext);
   const [videoTrack, setVideoTrack] = useState<LocalVideoTrack | null>(null);
+  const classNames = useClassNames();
 
   const saveVideoTrack = (vTrack) => {
     setVideoTrack((prev) => {
@@ -56,15 +58,15 @@ const LobbyPage = () => {
     }
     videoTrack?.stop();
     videoTrack?.detach(videoRef.current);
-    setVideoTrack(null);
+    saveVideoTrack(null);
   }, [isVideoEnabled]);
 
   return (
     <div className="container">
       <video
+        className={classNames({ hidden: !videoTrack })}
         ref={videoRef}
         id="localVideo"
-        src=""
         width={400}
         height={200}
       ></video>
