@@ -40,32 +40,35 @@
     background-color: white;
     border-radius: 5px;
 
+    @media screen and (max-width: $mobile-breakpoint) {
+      max-width: 80vh;
+    }
+
     .menu-body_user {
       display: flex;
       flex-direction: column;
       align-items: center;
-      //justify-content: center;
       width: 100%;
       gap: 0.2rem;
-      padding: 1rem 0rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(8, 8, 8, 0.479);
 
-      .menu-body_photo_user {
+      .menu-body_user-photo {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50%;
+        width: 5rem;
         height: 5rem;
         border-radius: 50%;
         background-size: cover;
       }
 
-      .menu-body_email {
+      .menu-body_user-email {
         display: flex;
         align-items: center;
         justify-content: center;
         color: rgba(8, 8, 8, 0.479);
       }
-      border-bottom: 1px solid rgba(8, 8, 8, 0.479);
     }
 
     .logout-button {
