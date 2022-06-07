@@ -61,7 +61,7 @@ const Menu = () => {
                   : { backgroundColor: "rgb(12, 148, 238)" }
               }
             ></div>
-            <div className="menu-body_user-name">{user.displayName}</div>
+            <div className="menu-body_user-name">{user?.displayName}</div>
             <div className="menu-body_user-email">{user?.email}</div>
           </div>
 
