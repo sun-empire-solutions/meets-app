@@ -42,9 +42,9 @@
     background-color: white;
     border-radius: 5px;
 
-    //@media screen and (max-width: $mobile-breakpoint) {
-    //max-width: 80vh;
-    //}
+    @media screen and (max-width: $mobile-breakpoint) {
+      max-width: 80vh;
+    }
 
     .menu-body_user {
       display: flex;
