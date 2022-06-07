@@ -52,7 +52,19 @@ const Menu = () => {
       </div>
       {isMenuVisible && (
         <div className="menu-body">
-          <div className="menu-body_email">{user?.email}</div>
+          <div className="menu-body_user">
+            <div
+              className="menu-body_user-photo"
+              style={
+                userPhotoUrl
+                  ? { backgroundImage: `url(${userPhotoUrl})` }
+                  : { backgroundColor: "rgb(12, 148, 238)" }
+              }
+            ></div>
+            <div className="menu-body_user-name">{user?.displayName}</div>
+            <div className="menu-body_user-email">{user?.email}</div>
+          </div>
+
           <button
             className="logout-button"
             type="button"

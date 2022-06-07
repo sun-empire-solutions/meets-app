@@ -1,3 +1,4 @@
+@import "./utilities/all";
 @import "./base/all";
 @import "./components/all";
 @import "./layouts/all";
@@ -12,9 +13,10 @@
   justify-content: center;
 
   video {
+    object-fit: cover;
     transform: scaleX(-1);
     width: 60vw;
-    height: auto;
+    height: 100vh;
 
     @media (max-width: 768px) {
       position: relative;

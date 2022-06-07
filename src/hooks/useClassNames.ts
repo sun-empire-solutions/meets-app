@@ -2,10 +2,10 @@ const useClassNames = () => {
   return (...args: Arguments) => {
     const [firstArg, secondArg] = args;
 
-    const haveMultipleArgs = args.length > 1;
+    const hasMultipleArgs = args.length > 1;
 
-    const first = haveMultipleArgs ? firstArg : "";
-    const second = haveMultipleArgs ? secondArg : firstArg;
+    const first = hasMultipleArgs ? firstArg : "";
+    const second = hasMultipleArgs ? secondArg : firstArg;
     return `${first} ${Object.keys(second)
       .filter((key) => second[key])
       .join(" ")}`;
