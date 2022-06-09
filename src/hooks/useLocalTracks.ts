@@ -63,10 +63,10 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
   };
 
   const clearTracks = () => {
-    localVideoTrackPublication?.track.stop();
+    localVideoTrackPublication?.track?.stop();
     localVideoTrackPublication?.unpublish();
     setLocalVideoTrackPublication(null);
-    localAudioTrackPublication?.track.disable();
+    localAudioTrackPublication?.track?.disable();
     setLocalAudioTrackPublication(null);
   };
 
