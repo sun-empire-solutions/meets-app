@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 
 import { useAuthUser } from "./useAuthUser";
+import { clearStorage } from "../services/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCkKVKdomv-qAWMGcJq07mW75HG_TTnY_g",
@@ -112,6 +113,7 @@ const useFirebaseAuth = () => {
     if (auth) {
       signOut(auth)
         .then(() => {
+          clearStorage();
           saveUser(null); //Logged out
         })
         .catch(function (error) {
