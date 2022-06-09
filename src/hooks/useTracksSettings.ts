@@ -26,6 +26,10 @@ const useTracksSettings = (): TrackSettings => {
     return getFromStorage(VIDEO_STREAM_KEY) ?? true;
   };
 
+  const cleanStorage = () => {
+    localStorage.clear();
+  }
+
   useEffect(() => {
     const videoStream = getFromStorage(VIDEO_STREAM_KEY);
     const audioStream = getFromStorage(AUDIO_STREAM_KEY);
@@ -44,6 +48,7 @@ const useTracksSettings = (): TrackSettings => {
     saveVideoSettings,
     getAudioSettings,
     getVideoSettings,
+    cleanStorage,
   };
 };
 
@@ -54,6 +59,7 @@ export type TrackSettings = {
   saveVideoSettings: (isEnabled: boolean) => void;
   getAudioSettings: () => boolean;
   getVideoSettings: () => boolean;
+  cleanStorage: () => void;
 };
 
 export { useTracksSettings };

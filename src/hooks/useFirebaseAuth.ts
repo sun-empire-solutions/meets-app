@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import {useTracksSettings} from './useTracksSettings';
 import { FirebaseApp, initializeApp } from "firebase/app";
 import {
   onAuthStateChanged,
@@ -22,6 +23,7 @@ const firebaseConfig = {
 };
 
 const useFirebaseAuth = () => {
+  const { cleanStorage}= useTracksSettings();
   const { user, saveUser } = useAuthUser();
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null);
@@ -112,6 +114,7 @@ const useFirebaseAuth = () => {
     if (auth) {
       signOut(auth)
         .then(() => {
+          cleanStorage();
           saveUser(null); //Logged out
         })
         .catch(function (error) {
