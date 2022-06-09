@@ -14,14 +14,11 @@ import {
 import { useAuthUser } from "./useAuthUser";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCkKVKdomv-qAWMGcJq07mW75HG_TTnY_g",
+  authDomain: "meets-app-2022.firebaseapp.com",
+  databaseURL: "https://meets-app-2022-default-rtdb.firebaseio.com/",
+  storageBucket: "meets-app-2022.appspot.com",
+  messagingSenderId: "351805840815",
 };
 
 const useFirebaseAuth = () => {
