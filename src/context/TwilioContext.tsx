@@ -19,7 +19,6 @@ const TwilioContext = createContext<IContext>({
   getVideoSettings: null,
   toggleVideoTrack: null,
   toggleAudioTrack: null,
-  cleanStorage: null,
   clearTracks: null,
 });
 
