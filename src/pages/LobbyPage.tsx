@@ -29,6 +29,11 @@ const LobbyPage = () => {
     });
   };
 
+  const clearVideoTrack = () => {
+    videoTrack?.stop();
+    videoTrack?.detach(videoRef.current);
+  };
+
   useEffect(() => {
     const videoSettings = getVideoSettings();
     const audioSettings = getAudioSettings();
@@ -56,10 +61,15 @@ const LobbyPage = () => {
       });
       return;
     }
-    videoTrack?.stop();
-    videoTrack?.detach(videoRef.current);
+    clearVideoTrack();
     saveVideoTrack(null);
   }, [isVideoEnabled]);
+
+  useEffect(() => {
+    return () => {
+      clearVideoTrack();
+    };
+  }, [videoTrack]);
 
   return (
     <div className="container">
