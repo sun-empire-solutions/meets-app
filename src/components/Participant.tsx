@@ -3,7 +3,6 @@ import { Participant as IParticipant, RemoteParticipant } from "twilio-video";
 
 const Participant = ({ participant, index }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  console.log("Participant", participant);
 
   useEffect(() => {
     const videoTrackPublications = Array.from(
