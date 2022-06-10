@@ -1,17 +1,24 @@
+import { useMemo } from "react";
+import { Participant } from "../components/Participant";
+
 import { useParticipants } from "../hooks/useParticipants";
 
 const MeetingPage = () => {
   const { participants } = useParticipants();
+  const size = useMemo(() => participants.length, [participants]);
 
   return (
-    <div>
-      <h1>MeetingPage</h1>
-      <ul>
+    <>
+      <ul className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
-          <li key={participant.sid ?? index}>{participant.identity}</li>
+          <Participant
+            key={participant.sid ?? index}
+            participant={participant}
+            index={index}
+          />
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 
