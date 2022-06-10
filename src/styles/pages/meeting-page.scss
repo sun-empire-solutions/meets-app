@@ -1,0 +1,145 @@
+:root {
+  --one-row: 100vh;
+  --two-rows: repeat(2, calc(100vh / 2));
+  --three-rows: repeat(3, calc(100vh / 3));
+  --four-rows: repeat(4, calc(100vh / 4));
+}
+
+$videos: (
+  "1": "A",
+  "2": "B",
+  "3": "C",
+  "4": "D",
+  "5": "E",
+  "6": "F",
+  "7": "G",
+  "8": "H",
+);
+
+@each $num, $letter in $videos {
+  .participant-#{$num} {
+    grid-area: unquote($letter);
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+.grid--1 {
+  grid-template-rows: var(--one-row);
+  grid-template-areas: "A";
+
+  @media (orientation: portrait) {
+    grid-template-areas: "A";
+  }
+}
+
+.grid--2 {
+  grid-template-rows: var(--one-row);
+  grid-template-areas: "A B";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--two-rows);
+    grid-template-areas:
+      "A"
+      "B";
+  }
+}
+
+.grid--3 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A B"
+    "C C";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--three-rows);
+    grid-template-areas:
+      "A"
+      "B"
+      "C";
+  }
+}
+
+.grid--4 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A B"
+    "C D";
+}
+
+.grid--5 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A A B B C C"
+    "D D D E E E";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--three-rows);
+    grid-template-areas:
+      "A A B B"
+      "C C D D"
+      "E E E E";
+  }
+}
+
+.grid--6 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A B C"
+    "D E F";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--three-rows);
+    grid-template-areas:
+      "A B"
+      "C D"
+      "E F";
+  }
+}
+
+.grid--7 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A A A B B B C C C D D D"
+    "E E E E F F F F G G G G";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--three-rows);
+    grid-template-areas:
+      "A A A B B B"
+      "C C C D D D"
+      "E E F F G G";
+  }
+}
+
+.grid--8 {
+  grid-template-rows: var(--two-rows);
+  grid-template-areas:
+    "A B C D"
+    "E F G H";
+
+  @media (orientation: portrait) {
+    grid-template-rows: var(--four-rows);
+    grid-template-areas:
+      "A B"
+      "C D"
+      "E F"
+      "G H";
+  }
+}
+
+.participant-wrapper {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  video {
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    transform: scaleX(-1);
+  }
+}
