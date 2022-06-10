@@ -6,18 +6,18 @@ import {
 } from "twilio-video";
 
 import { getAccessToken } from "../api";
-import { TwilioContext } from "../context/TwilioContext";
+import { useTracksSettings } from "./useTracksSettings";
 
 const useRoom = () => {
   const [room, setRoom] = useState<Room | null>(null);
-  const { isAudioEnabled, isVideoEnabled } = useContext(TwilioContext);
+  const { getAudioSettings, getVideoSettings } = useTracksSettings();
 
   const connect = async (username: string) => {
     const accessToken = await getAccessToken(username);
 
     const tracks = await createLocalTracks({
-      audio: isAudioEnabled,
-      video: isVideoEnabled ? { facingMode: "user" } : false,
+      audio: getAudioSettings(),
+      video: getVideoSettings() ? { facingMode: "user" } : false,
     });
 
     const room = await twilioConnect(accessToken, {
