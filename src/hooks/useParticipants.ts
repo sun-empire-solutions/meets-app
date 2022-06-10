@@ -1,13 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { RemoteParticipant } from "twilio-video";
 
 import { TwilioContext } from "../context/TwilioContext";
 
 const useParticipants = () => {
   const { room } = useContext(TwilioContext);
-  const [participants, setParticipants] = useState(
-    Array.from(room?.participants.values() ?? [])
+
+  const remoteParticipants = useMemo(
+    () => Array.from(room?.participants.values() ?? []),
+    [room]
   );
+
+  const localParticipant = useMemo(() => room?.localParticipant, [room]);
+
+  const [participants, setParticipants] = useState([]);
+
+  useEffect(() => {
+    setParticipants([...remoteParticipants, ...[localParticipant ?? []]]);
+  }, [remoteParticipants, localParticipant]);
 
   useEffect(() => {
     if (room) {
@@ -20,8 +30,10 @@ const useParticipants = () => {
         setParticipants((prevParticipants) =>
           prevParticipants.filter((p) => p !== participant)
         );
+
       room.on("participantConnected", participantConnected);
       room.on("participantDisconnected", participantDisconnected);
+
       return () => {
         room.off("participantConnected", participantConnected);
         room.off("participantDisconnected", participantDisconnected);

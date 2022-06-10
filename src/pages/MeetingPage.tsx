@@ -7,8 +7,8 @@ const MeetingPage = () => {
     <div>
       <h1>MeetingPage</h1>
       <ul>
-        {participants.map((participant) => (
-          <li key={participant.sid}>{participant.identity}</li>
+        {participants.map((participant, index) => (
+          <li key={participant.sid ?? index}>{participant.identity}</li>
         ))}
       </ul>
     </div>
