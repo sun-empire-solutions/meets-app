@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { connect } from "twilio-video";
-
 import { TrackButtons } from "./TrackButtons";
 import { Button } from "./Button";
 import { useAuthUser } from "../hooks/useAuthUser";

@@ -1,11 +1,17 @@
 import { useMemo } from "react";
 import { Participant } from "../components/Participant";
-
+import { TrackButtons } from "../components/TrackButtons";
+import { Button } from "../components/Button";
+import { MdCallEnd } from "react-icons/md";
 import { useParticipants } from "../hooks/useParticipants";
 
 const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
+
+  const HandelClick = () => {
+    console.log("clicked");
+  };
 
   return (
     <>
@@ -18,6 +24,14 @@ const MeetingPage = () => {
           />
         ))}
       </ul>
+      <div className="lobby-buttons">
+        <Button
+          classNames="callend-button"
+          icon={<MdCallEnd size={35} />}
+          onClick={HandelClick}
+        />
+        <TrackButtons />
+      </div>
     </>
   );
 };
