@@ -1,20 +1,34 @@
 import { useEffect, useRef } from "react";
-import { Participant as IParticipant, RemoteParticipant } from "twilio-video";
+import { RemoteParticipant } from "twilio-video";
 
 const Participant = ({ participant, index }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const videoTrackPublications = Array.from(
       participant?.videoTracks?.values() ?? []
     );
     if (videoTrackPublications?.length) {
-      const publication = videoTrackPublications[0];
-      const videoTrack = publication?.track;
+      const videoPublication = videoTrackPublications[0];
+      const videoTrack = videoPublication?.track;
       videoTrack?.attach(videoRef.current);
 
-      publication.on("subscribed", (track) => {
+      videoPublication.on("subscribed", (track) => {
         track?.attach(videoRef.current);
+      });
+    }
+
+    const audioTrackPublications = Array.from(
+      participant?.audioTracks?.values() ?? []
+    );
+    if (audioTrackPublications?.length) {
+      const audioPublication = audioTrackPublications[0];
+      const audioTrack = audioPublication?.track;
+      audioTrack?.attach(videoRef.current);
+
+      audioPublication.on("subscribed", (track) => {
+        track?.attach(audioRef.current);
       });
     }
   }, [participant]);
@@ -22,6 +36,7 @@ const Participant = ({ participant, index }: IProps) => {
   return (
     <div className={`participant-wrapper participant-${index}`}>
       <video ref={videoRef}>{participant.identity}</video>
+      <audio ref={audioRef} autoPlay></audio>
     </div>
   );
 };
