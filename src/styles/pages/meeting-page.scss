@@ -5,6 +5,10 @@
   --four-rows: repeat(4, calc(100vh / 4));
 }
 
+.meeting-page {
+  width: 100%;
+}
+
 $videos: (
   "1": "A",
   "2": "B",

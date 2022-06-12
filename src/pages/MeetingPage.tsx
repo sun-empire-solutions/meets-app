@@ -8,8 +8,8 @@ const MeetingPage = () => {
   const size = useMemo(() => participants.length, [participants]);
 
   return (
-    <>
-      <ul className={`grid grid--${size}`}>
+    <div className="meeting-page">
+      <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant
             key={participant.sid ?? index}
@@ -17,9 +17,9 @@ const MeetingPage = () => {
             index={index}
           />
         ))}
-      </ul>
+      </div>
       <MeetingButtons />
-    </>
+    </div>
   );
 };
 
