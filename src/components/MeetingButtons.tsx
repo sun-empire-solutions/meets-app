@@ -1,18 +1,15 @@
-import { TrackButtons } from "../components/TrackButtons";
-import { Button } from "../components/Button";
 import { MdCallEnd } from "react-icons/md";
 
-const MeetingButtons = () => {
-  const HandelClick = () => {
-    console.log("clicked");
-  };
+import { TrackButtons } from "../components/TrackButtons";
+import { Button } from "../components/Button";
 
+const MeetingButtons = () => {
   return (
-    <div className="bar-buttons">
+    <div className="meeting-buttons">
       <Button
-        classNames="callend-button"
-        icon={<MdCallEnd size={35} />}
-        onClick={HandelClick}
+        classNames="leave-button"
+        icon={<MdCallEnd size={28} />}
+        onClick={() => {}}
       />
       <TrackButtons />
     </div>

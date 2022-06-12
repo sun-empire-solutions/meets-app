@@ -5,15 +5,22 @@ import { useMemo } from "react";
 
 const AppLayout = () => {
   const location = useLocation();
-  const NavBarView = useMemo(
-    () => location.pathname === "/" || location.pathname === "/meeting",
+  const isSignInView = useMemo(() => location.pathname === "/", [location]);
+  const isMeetingView = useMemo(
+    () => location.pathname === "/meeting",
     [location]
+  );
+  console.log(isSignInView, isMeetingView);
+
+  const isNavbarVisible = useMemo(
+    () => !(isSignInView || isMeetingView),
+    [isSignInView, isMeetingView]
   );
 
   return (
     <TwilioProvider>
       <div className="app-layout">
-        {!NavBarView && <NavBar />}
+        {isNavbarVisible && <NavBar />}
         <Outlet />
       </div>
     </TwilioProvider>

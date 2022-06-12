@@ -1,18 +1,17 @@
-import { ReactNode } from "react";
-
-const Button = ({ text, classNames, onClick, icon }: IProps) => {
+const Button = ({ icon, text, classNames, onClick }: IProps) => {
   return (
     <button className={`button ${classNames}`} onClick={onClick}>
-      {text} {icon}
+      {icon}
+      {text && <span className="text">{text}</span>}
     </button>
   );
 };
 
 type IProps = {
+  icon?: JSX.Element;
   text?: string;
-  icon?: ReactNode;
   classNames?: string;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 export { Button };
