@@ -18,6 +18,7 @@ const MeetingPage = () => {
           />
         ))}
       </div>
+
       <MeetingButtons />
     </div>
   );

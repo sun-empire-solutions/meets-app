@@ -10,7 +10,6 @@ const AppLayout = () => {
     () => location.pathname === "/meeting",
     [location]
   );
-  console.log(isSignInView, isMeetingView);
 
   const isNavbarVisible = useMemo(
     () => !(isSignInView || isMeetingView),
