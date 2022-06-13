@@ -46,7 +46,7 @@ module.exports = (_, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index.html",
-        favicon: "./public/favicon-32x32.png",
+        favicon: "./public/favicon.png",
       }),
       new webpack.ProvidePlugin({
         process: "process/browser",
