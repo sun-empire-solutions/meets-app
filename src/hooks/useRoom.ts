@@ -6,14 +6,11 @@ import {
 } from "twilio-video";
 
 import { getAccessToken } from "../api";
-import { useLocalTracks } from "./useLocalTracks";
 import { useTracksSettings } from "./useTracksSettings";
 
 const useRoom = () => {
   const [room, setRoom] = useState<Room | null>(null);
-  const trackSettings = useTracksSettings();
-  const { clearTracks } = useLocalTracks(room, trackSettings);
-  const { getAudioSettings, getVideoSettings } = trackSettings;
+  const { getAudioSettings, getVideoSettings } = useTracksSettings();
 
   const connect = async (username: string) => {
     const accessToken = await getAccessToken(username);
@@ -31,8 +28,8 @@ const useRoom = () => {
   };
 
   useEffect(() => {
-    room?.on("disconnected", (room) => {
-      clearTracks();
+    room?.on("disconnected", () => {
+      setRoom(null);
     });
   }, [room]);
 

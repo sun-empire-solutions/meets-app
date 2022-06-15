@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   createLocalTracks,
   createLocalVideoTrack,
-  LocalAudioTrack,
   LocalVideoTrack,
 } from "twilio-video";
 
@@ -36,18 +35,16 @@ const LobbyPage = () => {
 
   useEffect(() => {
     const videoSettings = getVideoSettings();
-    const audioSettings = getAudioSettings();
 
     createLocalTracks({
-      audio: audioSettings,
+      audio: false,
       video: videoSettings ? { facingMode: "user" } : false,
     }).then((tracks) => {
       const vTrack = tracks.find(findVideoTrack) as LocalVideoTrack;
-      const aTrack = tracks.find(findAudioTrack) as LocalAudioTrack;
       vTrack?.attach(videoRef.current);
       saveVideoTrack(vTrack);
       saveVideoSettings(vTrack?.isEnabled ?? false);
-      saveAudioSettings(aTrack?.isEnabled ?? false);
+      saveAudioSettings(getAudioSettings());
     });
   }, []);
 
