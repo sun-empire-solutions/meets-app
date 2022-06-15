@@ -26,10 +26,12 @@ const useParticipants = () => {
           ...prevParticipants,
           participant,
         ]);
-      const participantDisconnected = (participant: RemoteParticipant) =>
+      const participantDisconnected = (participant: RemoteParticipant) => {
+        alert(`Participant ${participant.identity} has disconnected from room`);
         setParticipants((prevParticipants) =>
           prevParticipants.filter((p) => p !== participant)
         );
+      };
 
       room.on("participantConnected", participantConnected);
       room.on("participantDisconnected", participantDisconnected);
