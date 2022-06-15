@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MdCallEnd } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -7,13 +7,20 @@ import { Button } from "../components/Button";
 import { TwilioContext } from "../context/TwilioContext";
 
 const MeetingButtons = () => {
-  const { room } = useContext(TwilioContext);
+  const { room, clearTracks, localVideoTrackPublication } =
+    useContext(TwilioContext);
   const navigate = useNavigate();
 
   const handleLeave = () => {
+    clearTracks();
     room.disconnect();
-    navigate("/lobby");
   };
+
+  useEffect(() => {
+    room?.on("disconnected", () => {
+      navigate("/lobby");
+    });
+  }, [room]);
 
   return (
     <div className="meeting-buttons">
