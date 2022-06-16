@@ -147,6 +147,7 @@ $videos: (
   height: 100%;
   overflow: hidden;
   width: 100%;
+  position: relative;
 
   video {
     height: 100%;
@@ -154,5 +155,18 @@ $videos: (
     object-fit: cover;
     width: 100%;
     transform: scaleX(-1);
+  }
+
+  .muted-indicator {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(151, 151, 151, 0.521);
+    width: 1.5rem;
+    height: 2rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
