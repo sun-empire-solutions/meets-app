@@ -11,7 +11,7 @@ type IProps = {
   icon?: JSX.Element;
   text?: string;
   classNames?: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export { Button };

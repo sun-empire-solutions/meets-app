@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { Participant } from "twilio-video";
 import { useNavigate } from "react-router-dom";
-
 import { TwilioContext } from "../context/TwilioContext";
+import { Button } from "../components/Button";
 
 const StartPage = () => {
   const [buttonText, setButtonText] = useState("Join call");
@@ -32,6 +32,16 @@ const StartPage = () => {
 
   return (
     <div className="start-page">
+      <div className="meeting-buttons">
+        <Button text="New meeting" classNames="meeting" />
+        <Button text="Join with a code" classNames="join" />
+      </div>
+      <div className="meetings">
+        <div className="title">
+          <h5>Meetings</h5>
+        </div>
+        <div className="meeting-list"></div>
+      </div>
       <div className="star-page-container">
         <h1>StartPage</h1>
         <input

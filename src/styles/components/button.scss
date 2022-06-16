@@ -15,3 +15,21 @@
     justify-content: center;
   }
 }
+
+.button.meeting {
+  background-color: transparent;
+  width: 100%;
+  border-radius: 3px;
+  height: 2rem;
+  border: 1px solid hsl(234, 11%, 52%);
+  font-weight: lighter;
+}
+
+.button.join {
+  background-color: transparent;
+  width: 100%;
+  border-radius: 3px;
+  height: 2rem;
+  border: 1px solid hsl(234, 11%, 52%);
+  font-weight: lighter;
+}
