@@ -42,24 +42,6 @@ const StartPage = () => {
         </div>
         <div className="meeting-list"></div>
       </div>
-      <div className="star-page-container">
-        <h1>StartPage</h1>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <button
-          className="button"
-          disabled={isButtonDisabled}
-          onClick={connectButtonHandler}
-        >
-          {buttonText}
-        </button>
-      </div>
     </div>
   );
 };
