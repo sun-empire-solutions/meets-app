@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  createLocalAudioTrack,
   createLocalVideoTrack,
   LocalAudioTrack,
   LocalAudioTrackPublication,
@@ -46,6 +47,18 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
 
   const toggleAudioTrack = () => {
     let newTrack: LocalAudioTrack | null = null;
+    if (!localAudioTrackPublication) {
+      createLocalAudioTrack()
+        .then((localAudioTrack) => {
+          return room?.localParticipant?.publishTrack(localAudioTrack);
+        })
+        .then((publication) => {
+          setLocalAudioTrackPublication(
+            publication as LocalAudioTrackPublication
+          );
+        });
+      return;
+    }
     if (localAudioTrackPublication?.track?.isEnabled || isAudioEnabled) {
       newTrack = localAudioTrackPublication?.track?.disable();
       saveAudioSettings(false);
