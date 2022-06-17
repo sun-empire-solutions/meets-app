@@ -9,6 +9,10 @@
   justify-content: center;
   font-weight: bold;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .icon {
     display: flex;
     align-items: center;
