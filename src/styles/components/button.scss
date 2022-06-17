@@ -9,27 +9,13 @@
   justify-content: center;
   font-weight: bold;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .icon {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-}
-
-.button.meeting {
-  background-color: rgb(124, 188, 231);
-  width: 100%;
-  border-radius: 3px;
-  height: 2rem;
-  border: 1px solid hsl(234, 11%, 52%);
-  color: hsl(235, 19%, 35%);
-}
-
-.button.join {
-  background-color: transparent;
-  width: 100%;
-  border-radius: 3px;
-  height: 2rem;
-  border: 1px solid hsl(234, 11%, 52%);
-  color: rgb(124, 188, 231);
 }
