@@ -4,12 +4,11 @@
   gap: 1rem;
 
   .meeting-button {
-    background-color: rgb(124, 188, 231);
+    background-color: #01d4b7;
     width: 100%;
     border-radius: 3px;
     height: 2rem;
-    border: 1px solid hsl(234, 11%, 52%);
-    color: hsl(235, 19%, 35%);
+    color: black;
   }
 
   .join-button {
@@ -17,7 +16,7 @@
     width: 100%;
     border-radius: 3px;
     height: 2rem;
-    border: 1px solid hsl(234, 11%, 52%);
-    color: rgb(124, 188, 231);
+    border: 1px solid hsl(188deg 100% 42%);
+    color: hsl(188deg 100% 42%);
   }
 }
