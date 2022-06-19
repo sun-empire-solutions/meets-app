@@ -28,6 +28,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@types/crypto-random-string": "^2.0.0",
     "@types/firebase": "^3.2.1",
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
@@ -50,6 +51,7 @@
   "dependencies": {
     "@twilio/runtime-handler": "1.2.3",
     "concurrently": "^7.2.0",
+    "crypto-random-string": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
