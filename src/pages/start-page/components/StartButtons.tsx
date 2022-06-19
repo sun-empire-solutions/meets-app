@@ -1,8 +1,12 @@
 import { Button } from "../../../components/Button";
 
-const StartButtons = () => (
+const StartButtons = ({ createMeeting }: IProps) => (
   <div className="start-page_buttons">
-    <Button text="New meeting" classNames="meeting-button" onClick={() => {}} />
+    <Button
+      text="New meeting"
+      classNames="meeting-button"
+      onClick={createMeeting}
+    />
     <Button
       text="Join with a code"
       classNames="join-button"
@@ -10,5 +14,9 @@ const StartButtons = () => (
     />
   </div>
 );
+
+type IProps = {
+  createMeeting: () => void;
+};
 
 export { StartButtons };

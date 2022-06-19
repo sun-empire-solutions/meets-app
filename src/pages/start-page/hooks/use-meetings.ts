@@ -7,6 +7,7 @@ const MEETINGS_KEY = "MEETINGS";
 
 const useMeetings = () => {
   const [meetings, setMeetings] = useState<IMeeting[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const createNewMeeting = () => {
     const code = getRandomCode();
@@ -21,6 +22,7 @@ const useMeetings = () => {
 
   useEffect(() => {
     setMeetings(getFromStorage(MEETINGS_KEY) || []);
+    setIsLoading(false);
 
     return () => {
       if (meetings.length) {
@@ -29,7 +31,7 @@ const useMeetings = () => {
     };
   }, []);
 
-  return { meetings, createNewMeeting };
+  return { meetings, createNewMeeting, isLoading };
 };
 
 const getRandomCode = () => {

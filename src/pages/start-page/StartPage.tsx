@@ -1,21 +1,32 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { StartButtons } from "./components/StartButtons";
+import { useMeetings } from "./hooks/use-meetings";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
 
 const StartPage = () => {
-  const [meetings, setMeetings] = useState([]);
+  const { meetings, createNewMeeting, isLoading } = useMeetings();
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div className="start-page">
-      <StartButtons />
+      <StartButtons createMeeting={createNewMeeting} />
       {haveMeetings ? (
         <div className="meetings">
           <h5 className="title">Meetings</h5>
-          <div className="meeting-list"></div>
+          <div className="meeting-list">
+            {meetings.map(({ code }) => (
+              <div key={code} className="meeting-item">
+                {code}
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="info-message">
