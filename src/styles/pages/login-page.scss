@@ -5,12 +5,13 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: white;
+  //background-color: white;
   padding: 0 3rem;
 
   .login-page_title {
     font-weight: bolder;
     font-size: 2.5rem;
+    color: #01d4b7;
   }
 
   .login-page_form {
@@ -29,6 +30,7 @@
       label {
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
+        color: hsl(0, 0%, 98%);
       }
 
       input {
@@ -39,9 +41,10 @@
         outline: none;
         font-size: 1.1rem;
         padding: 0.5rem;
+        color: hsl(0, 0%, 98%);
 
         &::placeholder {
-          color: hsl(234, 39%, 85%);
+          color: hsl(234, 11%, 52%);
         }
       }
     }
@@ -58,12 +61,13 @@
         height: 2.8rem;
         width: 100%;
         border-radius: 30px;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
 
         border: none;
         outline: none;
-        background-color: rgb(12, 148, 238);
-        color: white;
+        //background-color: rgb(12, 148, 238);
+        background-color: #1ea794;
+        color: hsl(0, 0%, 98%);
       }
     }
   }
@@ -78,7 +82,7 @@
 
     h3 {
       font-weight: lighter;
-      color: black;
+      color: hsl(0, 0%, 98%);
     }
     .buttons {
       display: flex;
@@ -111,11 +115,11 @@
 
     h3 {
       font-weight: lighter;
-      color: black;
+      color: hsl(0, 0%, 98%);
     }
 
     a {
-      color: rgb(12, 148, 238);
+      color: #01d4b7;
       text-decoration: none;
       font-size: 1rem;
     }
