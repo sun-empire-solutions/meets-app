@@ -54,7 +54,7 @@
       width: 100%;
       gap: 0.2rem;
       padding: 1rem;
-      border-bottom: 1px solid $LightGrayishBlue;
+      border-bottom: 1px solid $light-grayish-blue;
 
       .menu-body_user-photo {
         display: flex;
@@ -78,22 +78,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $DarkGrayishBlue;
+        color: $dark-grayish-blue;
       }
     }
 
     .logout-button {
-      // border-color: $LightGrayishBlue;
-      //box-shadow: 0px 10px 10px 10px white;
       padding: 0.2rem 1.5rem;
       margin-top: 1rem;
       margin-bottom: 0.5rem;
       border-radius: 3px;
-      border: 1px solid $LightGrayishBlue;
+      border: 1px solid $light-grayish-blue;
       outline: none;
       background-color: transparent;
       font-size: 1rem;
-      color: $DarkGrayishBlue;
+      color: $dark-grayish-blue;
 
       &:hover {
         cursor: pointer;

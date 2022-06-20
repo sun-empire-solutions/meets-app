@@ -104,11 +104,7 @@ const LoginPage = () => {
               <FcGoogle size={45} onClick={handleGoogleLogin} />
             </div>
             <div className="icon facebook-icon">
-              <FaFacebook
-                size={45}
-                onClick={handleFacebookLogin}
-                color="#2244bb"
-              />
+              <FaFacebook size={45} onClick={handleFacebookLogin} />
             </div>
           </div>
         </div>

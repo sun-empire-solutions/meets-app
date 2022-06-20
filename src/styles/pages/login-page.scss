@@ -5,12 +5,12 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: white;
   padding: 0 3rem;
 
   .login-page_title {
     font-weight: bolder;
     font-size: 2.5rem;
+    color: $primary-color;
   }
 
   .login-page_form {
@@ -29,6 +29,7 @@
       label {
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
+        color: hsl(0, 0%, 98%);
       }
 
       input {
@@ -39,9 +40,19 @@
         outline: none;
         font-size: 1.1rem;
         padding: 0.5rem;
+        color: hsl(0, 0%, 98%);
 
         &::placeholder {
-          color: hsl(234, 39%, 85%);
+          color: hsl(234, 11%, 52%);
+        }
+
+        /* Change Autocomplete styles in Chrome*/
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: hsl(0, 0%, 98%);
+          -webkit-box-shadow: 0 0 0px 1000px hsl(236deg, 12%, 14%) inset;
+          transition: background-color 5000s ease-in-out 0s;
         }
       }
     }
@@ -58,12 +69,12 @@
         height: 2.8rem;
         width: 100%;
         border-radius: 30px;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
 
         border: none;
         outline: none;
-        background-color: rgb(12, 148, 238);
-        color: white;
+        background-color: $primary-color;
+        color: hsl(0, 0%, 98%);
       }
     }
   }
@@ -78,8 +89,9 @@
 
     h3 {
       font-weight: lighter;
-      color: black;
+      color: hsl(0, 0%, 98%);
     }
+
     .buttons {
       display: flex;
       align-items: center;
@@ -97,6 +109,10 @@
 
       .facebook-icon {
         width: 42px;
+
+        svg {
+          color: rgb(80 134 255);
+        }
       }
     }
   }
@@ -111,11 +127,11 @@
 
     h3 {
       font-weight: lighter;
-      color: black;
+      color: hsl(0, 0%, 98%);
     }
 
     a {
-      color: rgb(12, 148, 238);
+      color: $primary-color;
       text-decoration: none;
       font-size: 1rem;
     }
