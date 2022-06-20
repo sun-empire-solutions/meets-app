@@ -45,6 +45,15 @@
         &::placeholder {
           color: hsl(234, 11%, 52%);
         }
+
+        /* Change Autocomplete styles in Chrome*/
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: hsl(0, 0%, 98%);
+          -webkit-box-shadow: 0 0 0px 1000px hsl(236deg, 12%, 14%) inset;
+          transition: background-color 5000s ease-in-out 0s;
+        }
       }
     }
 
