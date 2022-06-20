@@ -4,7 +4,7 @@
   gap: 1rem;
 
   .meeting-button {
-    background-color: #01d4b7;
+    background-color: $primary-color;
     width: 100%;
     border-radius: 3px;
     height: 2rem;
@@ -16,7 +16,7 @@
     width: 100%;
     border-radius: 3px;
     height: 2rem;
-    border: 1px solid hsl(188deg 100% 42%);
-    color: hsl(188deg 100% 42%);
+    border: 1px solid $secondary-color;
+    color: $secondary-color;
   }
 }

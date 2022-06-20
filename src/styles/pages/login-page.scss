@@ -10,7 +10,7 @@
   .login-page_title {
     font-weight: bolder;
     font-size: 2.5rem;
-    color: #01d4b7;
+    color: $primary-color;
   }
 
   .login-page_form {
@@ -73,8 +73,7 @@
 
         border: none;
         outline: none;
-        //background-color: rgb(12, 148, 238);
-        background-color: #1ea794;
+        background-color: $primary-color;
         color: hsl(0, 0%, 98%);
       }
     }
@@ -132,7 +131,7 @@
     }
 
     a {
-      color: #01d4b7;
+      color: $primary-color;
       text-decoration: none;
       font-size: 1rem;
     }
