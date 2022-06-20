@@ -49,7 +49,7 @@ const LoginPage = () => {
       <h1 className="login-page_title">
         {isSignInShowing ? "Sign in" : "Sign up"}
       </h1>
-      <div className="login-page_form">
+      <form className="login-page_form">
         <div className="form-field">
           <label htmlFor="email">Email</label>
           <input
@@ -74,7 +74,6 @@ const LoginPage = () => {
             placeholder="Type your password"
           />
         </div>
-
         {!isSignInShowing && (
           <div className="form-field">
             <label htmlFor="repeatPassword">Confirm Password</label>
@@ -95,7 +94,7 @@ const LoginPage = () => {
             {isSignInShowing ? "Sign in" : "Sign up"}
           </button>
         </div>
-      </div>
+      </form>
       {isSignInShowing && (
         <div className="form-buttons">
           <h3>Or Sign in Using</h3>
