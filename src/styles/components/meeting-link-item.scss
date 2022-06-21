@@ -1,0 +1,48 @@
+.meeting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  .meeting-item_left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .link-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $dark-grayish-blue;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+    }
+  }
+
+  .meeting-item_right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .copied-message {
+      display: flex;
+      gap: 0.5rem;
+
+      .copied-message_text {
+        font-style: italic;
+      }
+
+      svg {
+        color: $primary-color;
+      }
+    }
+  }
+}

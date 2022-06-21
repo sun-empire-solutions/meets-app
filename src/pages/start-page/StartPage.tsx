@@ -5,6 +5,7 @@ import { useMeetings } from "./hooks/use-meetings";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
+import { MeetingLinkItem } from "./components/MeetingLinkItem";
 
 const StartPage = () => {
   const { meetings, createNewMeeting, isLoading } = useMeetings();
@@ -22,9 +23,7 @@ const StartPage = () => {
           <h5 className="title">Meetings</h5>
           <div className="meeting-list">
             {meetings.map(({ code }) => (
-              <div key={code} className="meeting-item">
-                {code}
-              </div>
+              <MeetingLinkItem key={code} code={code} />
             ))}
           </div>
         </div>
