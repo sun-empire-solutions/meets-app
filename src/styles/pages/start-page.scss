@@ -20,6 +20,42 @@
       color: hsl(236, 9%, 61%);
       font-weight: lighter;
     }
+
+    .meeting-list {
+      .meeting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        margin-top: 1rem;
+        gap: 1rem;
+        .link {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $primary-color;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+          }
+        }
+        .icon-copy-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2rem;
+          height: 2rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 
   .info-message {
