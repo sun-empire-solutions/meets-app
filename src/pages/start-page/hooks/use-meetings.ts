@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import randomString from "crypto-random-string";
 
-import { getFromStorage, saveToStorage } from "../../../services/storage";
+import {getFromStorage, saveToStorage} from "../../../services/storage";
 
 const MEETINGS_KEY = "MEETINGS";
 
@@ -11,7 +11,7 @@ const useMeetings = () => {
 
   const createNewMeeting = () => {
     const code = getRandomCode();
-    const meeting: IMeeting = { code, timestamp: new Date().toLocaleString() };
+    const meeting: IMeeting = {code, timestamp: new Date().toLocaleString()};
 
     setMeetings((meetings) => {
       const newMeetings = [...meetings, meeting];
@@ -20,8 +20,8 @@ const useMeetings = () => {
     });
   };
 
-  useEffect(() => {
-    setMeetings(getFromStorage(MEETINGS_KEY) || []);
+  useLayoutEffect(() => {
+    setMeetings((getFromStorage(MEETINGS_KEY) || []).filter(isMeetingInRange));
     setIsLoading(false);
 
     return () => {
@@ -31,18 +31,18 @@ const useMeetings = () => {
     };
   }, []);
 
-  return { meetings, createNewMeeting, isLoading };
+  return {meetings, createNewMeeting, isLoading};
 };
 
 const getRandomCode = () => {
   const threeLengthCode = () =>
-    randomString({ length: 3, type: "distinguishable" });
+    randomString({length: 3, type: "distinguishable"});
   return `${threeLengthCode()}-${threeLengthCode()}-${threeLengthCode()}`;
 };
 
 const isMeetingInRange = (meeting: IMeeting) => {
   return (
-    new Date().getTime() - new Date(meeting.timestamp).getTime() >
+    new Date().getTime() - new Date(meeting.timestamp).getTime() <
     1000 * 60 * 60
   );
 };
@@ -52,4 +52,4 @@ type IMeeting = {
   timestamp: string;
 };
 
-export { useMeetings };
+export {useMeetings};
