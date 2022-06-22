@@ -2,7 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { withAuthGuard, withLoginGuard } from "../guards";
 import { AppLayout } from "../layouts/AppLayout";
-import { LobbyPage, LoginPage, MeetingPage, StartPage } from "../pages";
+import {
+  LobbyPage,
+  LoginPage,
+  MeetingPage,
+  NotFoundPage,
+  StartPage,
+} from "../pages";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -12,6 +18,7 @@ const AppRoutes = () => (
         <Route path="/start" element={withAuthGuard(<StartPage />)} />
         <Route path="/lobby" element={withAuthGuard(<LobbyPage />)} />
         <Route path="/meeting" element={withAuthGuard(<MeetingPage />)} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </BrowserRouter>
