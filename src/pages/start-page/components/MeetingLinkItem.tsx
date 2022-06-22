@@ -8,7 +8,7 @@ const MeetingLinkItem = ({ code }: IProps) => {
 
   const copyCodeToClipboard = () => {
     if (!isCopied) {
-      navigator.clipboard.writeText(`${code}`);
+      navigator.clipboard.writeText(`${window.location.origin}/join/${code}`);
       setIsCopied(true);
     }
   };
