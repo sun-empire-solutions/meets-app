@@ -2,10 +2,10 @@ import { useMemo } from "react";
 
 import { StartButtons } from "./components/StartButtons";
 import { useMeetings } from "./hooks/use-meetings";
+import { MeetingLinkItem } from "./components/MeetingLinkItem";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
-import { MeetingLinkItem } from "./components/MeetingLinkItem";
 
 const StartPage = () => {
   const { meetings, createNewMeeting, isLoading } = useMeetings();
@@ -22,8 +22,8 @@ const StartPage = () => {
         <div className="meetings">
           <h5 className="title">Meetings</h5>
           <div className="meeting-list">
-            {meetings.map(({ code }) => (
-              <MeetingLinkItem key={code} code={code} />
+            {meetings.map((meeting) => (
+              <MeetingLinkItem key={meeting.code} meeting={meeting} />
             ))}
           </div>
         </div>

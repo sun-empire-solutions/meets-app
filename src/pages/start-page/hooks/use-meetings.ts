@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useLayoutEffect, useState} from "react";
 import randomString from "crypto-random-string";
 
 import {getFromStorage, saveToStorage} from "../../../services/storage";
@@ -47,7 +47,7 @@ const isMeetingInRange = (meeting: IMeeting) => {
   );
 };
 
-type IMeeting = {
+export type IMeeting = {
   code: string;
   timestamp: string;
 };

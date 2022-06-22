@@ -3,8 +3,14 @@ import { BsCheckLg } from "react-icons/bs";
 import { FiLink2 } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 
-const MeetingLinkItem = ({ code }: IProps) => {
+import { IMeeting } from "../hooks/use-meetings";
+
+const MeetingLinkItem = ({ meeting }: IProps) => {
+  const { code, timestamp } = meeting;
   const [isCopied, setIsCopied] = useState(false);
+  const [timePassed, setTimePassed] = useState(
+    getTimePassed(new Date(timestamp))
+  );
 
   const copyCodeToClipboard = () => {
     if (!isCopied) {
@@ -21,13 +27,22 @@ const MeetingLinkItem = ({ code }: IProps) => {
     }
   }, [isCopied]);
 
+  useEffect(() => {
+    setInterval(() => {
+      setTimePassed(getTimePassed(new Date(timestamp)));
+    }, 500);
+  }, []);
+
   return (
     <div key={code} className="meeting-item">
       <div className="meeting-item_left">
         <div className="link-icon">
           <FiLink2 />
         </div>
-        <div className="meeting-content">{code}</div>
+        <div className="meeting-content">
+          <div className="meeting-content_code">{code}</div>
+          <div className="meeting-content_time">{`Link created ${timePassed}`}</div>
+        </div>
       </div>
       <div className="meeting-item_right">
         {isCopied ? (
@@ -43,8 +58,18 @@ const MeetingLinkItem = ({ code }: IProps) => {
   );
 };
 
+const getTimePassed = (date: Date): string => {
+  const now = new Date();
+  const timePassed = now.getTime() - date.getTime();
+  const seconds = Math.floor(timePassed / 1000);
+  if (seconds < 30) return "just now";
+  if (seconds < 60) return "a few seconds ago";
+  if (seconds < 120) return "a min ago";
+  return `${Math.floor(seconds / 60)} mins ago`;
+};
+
 type IProps = {
-  code: string;
+  meeting: IMeeting;
 };
 
 export { MeetingLinkItem };

@@ -15,10 +15,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $dark-grayish-blue;
+      background-color: #4b5a5d;
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
+    }
+
+    .meeting-content {
+      display: flex;
+      flex-direction: column;
+
+      .meeting-content_time {
+        color: hsl(236deg, 9%, 61%);
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+      }
     }
   }
 
