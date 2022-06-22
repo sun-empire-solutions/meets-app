@@ -1,0 +1,46 @@
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3rem;
+
+  .code {
+    font-size: 7rem;
+    color: $primary-color;
+  }
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+
+    .title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      font-style: italic;
+    }
+  }
+
+  .home-button {
+    margin-top: 2rem;
+    padding: 0.5rem 2rem;
+    border: 1px solid $primary-color;
+    background-color: transparent;
+    border-radius: 20px;
+    color: $primary-color;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
