@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
+const { NetlifyPlugin } = require("netlify-webpack-plugin");
 
 module.exports = (_, argv) => {
   let envKeys = {};
@@ -52,6 +53,15 @@ module.exports = (_, argv) => {
         process: "process/browser",
       }),
       new webpack.DefinePlugin(envKeys),
+      new NetlifyPlugin({
+        redirects: [
+          {
+            from: "/*",
+            to: "/index.html",
+            status: 200,
+          },
+        ],
+      }),
     ],
     devServer: {
       port: 4200,
