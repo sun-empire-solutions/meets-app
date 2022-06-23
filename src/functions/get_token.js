@@ -16,7 +16,7 @@ exports.handler = async function (context, event, callback) {
   );
   accessToken.identity = event.username;
   const videoGrant = new twilio.jwt.AccessToken.VideoGrant({
-    room: "My Room",
+    room: event.room,
   });
   accessToken.addGrant(videoGrant);
   response.appendHeader("Content-Type", "application/json");

@@ -9,6 +9,7 @@ import {
   NotFoundPage,
   StartPage,
 } from "../pages";
+import { JoinPage } from "../pages/join-page/JoinPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ const AppRoutes = () => (
         <Route path="/start" element={withAuthGuard(<StartPage />)} />
         <Route path="/lobby" element={withAuthGuard(<LobbyPage />)} />
         <Route path="/meeting" element={withAuthGuard(<MeetingPage />)} />
+        <Route path="/join/:code" element={<JoinPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
