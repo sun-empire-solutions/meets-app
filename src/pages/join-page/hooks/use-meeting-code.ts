@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getFromStorage, saveToStorage} from "../../../services/storage";
+import {getFromStorage, removeFromStorage, saveToStorage} from "../../../services/storage";
 
 const CODE_KEY = "MEETING_CODE"
 
@@ -11,11 +11,15 @@ const useMeetingCode = () => {
         setMeetingCode(code);
     }
 
+    const removeMeetingCode = () => {
+        removeFromStorage(CODE_KEY);
+    }
+
     useEffect(() => {
         saveMeetingCode(getFromStorage(CODE_KEY) ?? "");
     }, [])
 
-    return {meetingCode, saveMeetingCode}
+    return {meetingCode, saveMeetingCode, removeMeetingCode}
 }
 
 export {useMeetingCode}
