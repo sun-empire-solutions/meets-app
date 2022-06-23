@@ -2,7 +2,6 @@ import { useMemo } from "react";
 
 import { StartButtons } from "./components/StartButtons";
 import { useMeetings } from "./hooks/use-meetings";
-import { MeetingLinkItem } from "./components/MeetingLinkItem";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
