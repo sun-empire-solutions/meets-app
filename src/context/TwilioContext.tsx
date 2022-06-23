@@ -29,7 +29,7 @@ type IContext = {
   toggleVideoTrack: () => void;
   toggleAudioTrack: () => void;
   clearTracks: () => void;
-  connect: (token: string) => Promise<void> | null;
+  connect: (username: string, room: string) => Promise<void> | null;
 } & TrackSettings;
 
 export { TwilioContext };

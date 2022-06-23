@@ -82,8 +82,6 @@ const LobbyPage = () => {
   );
 };
 
-const findAudioTrack = (track) => track.kind === "audio";
-
 const findVideoTrack = (track) => track.kind === "video";
 
 const cleanPrevVideoTrack = (
