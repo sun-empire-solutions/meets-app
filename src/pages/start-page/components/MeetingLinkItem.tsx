@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { FiLink2 } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
+import { useMeetingCode } from "../../join-page/hooks/use-meeting-code";
 import { IMeeting } from "../hooks/use-meetings";
 
 const MeetingLinkItem = ({ meeting }: IProps) => {
+  const navigate = useNavigate();
+  const { saveMeetingCode } = useMeetingCode();
   const { code, timestamp } = meeting;
   const [isCopied, setIsCopied] = useState(false);
   const [timePassed, setTimePassed] = useState(
@@ -17,6 +21,11 @@ const MeetingLinkItem = ({ meeting }: IProps) => {
       navigator.clipboard.writeText(`${window.location.origin}/join/${code}`);
       setIsCopied(true);
     }
+  };
+
+  const saveCodeAndNavigateToLobby = () => {
+    saveMeetingCode(code);
+    navigate("/lobby");
   };
 
   useEffect(() => {
@@ -35,7 +44,11 @@ const MeetingLinkItem = ({ meeting }: IProps) => {
 
   return (
     <div key={code} className="meeting-item">
-      <div className="meeting-item_left">
+      <div
+        className="meeting-item_left"
+        role="button"
+        onClick={saveCodeAndNavigateToLobby}
+      >
         <div className="link-icon">
           <FiLink2 />
         </div>
