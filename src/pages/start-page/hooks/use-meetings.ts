@@ -11,7 +11,7 @@ const useMeetings = () => {
 
   const createNewMeeting = () => {
     const code = getRandomCode();
-    const meeting: IMeeting = {code, timestamp: new Date().toLocaleString()};
+    const meeting: IMeeting = {code, timestamp: Date()};
 
     setMeetings((meetings) => {
       const newMeetings = [...meetings, meeting];
