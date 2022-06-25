@@ -8,7 +8,8 @@ import linkImageSrc from "./../../assets/images/meeting-link.png";
 import { MeetingList } from "./components/MeetingList";
 
 const StartPage = () => {
-  const { meetings, createNewMeeting, isLoading } = useMeetings();
+  const { meetings, createNewMeeting, removeMeeting, isLoading } =
+    useMeetings();
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
 
   if (isLoading) {
@@ -19,7 +20,7 @@ const StartPage = () => {
     <div className="start-page">
       <StartButtons createMeeting={createNewMeeting} />
       {haveMeetings ? (
-        <MeetingList meetings={meetings} />
+        <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
       ) : (
         <div className="info-message">
           <div className="info-message_image">

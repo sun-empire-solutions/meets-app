@@ -20,29 +20,27 @@ const useMeetings = () => {
     });
   };
 
-  const removeMeeting= (code:String) =>{
-    const meetingArray:IMeeting[] =JSON.parse(localStorage.getItem(MEETINGS_KEY));
-    const newMeetings=meetingArray.filter(element => element.code !== code);
-    saveToStorage(MEETINGS_KEY, newMeetings);
-    
-   // return setMeetings((getFromStorage(MEETINGS_KEY)));
-   
+  const removeMeeting = ({code}: IMeeting) => {
+    const meetings = getFromStorage(MEETINGS_KEY);
+    const filteredMeetings = meetings.filter((meeting) => meeting.code !== code);
+    saveToStorage(MEETINGS_KEY, filteredMeetings);
+    setMeetings(filteredMeetings);
   }
 
 
 
   useLayoutEffect(() => {
-    setMeetings((getFromStorage(MEETINGS_KEY) || []));
+    setMeetings((getFromStorage(MEETINGS_KEY) || []).filter(isMeetingInRange));
     setIsLoading(false);
 
     return () => {
       if (meetings.length) {
-        saveToStorage(MEETINGS_KEY, meetings);
+        saveToStorage(MEETINGS_KEY, meetings.filter(isMeetingInRange));
       }
     };
   }, []);
 
-  return {meetings, createNewMeeting,removeMeeting, isLoading};
+  return {meetings, createNewMeeting, removeMeeting, isLoading};
 };
 
 const getRandomCode = () => {
