@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useMeetingCode } from "../../join-page/hooks/use-meeting-code";
 import { IMeeting } from "../hooks/use-meetings";
+import { MEETING_AVAILABLE_MINUTES } from "../../../constants";
 
 const MeetingLinkItem = ({ meeting, removeMeeting }: IProps) => {
   const navigate = useNavigate();
@@ -94,7 +95,7 @@ const getTimeLabel = (seconds: number) => {
 const isMeetingOutOfRange = ({ timestamp }: IMeeting) => {
   const now = new Date();
   const timePassed = now.getTime() - new Date(timestamp).getTime();
-  return timePassed > 1000 * 60 * 30;
+  return timePassed > 1000 * 60 * MEETING_AVAILABLE_MINUTES;
 };
 
 type IProps = {

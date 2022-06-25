@@ -2,6 +2,7 @@ import {useLayoutEffect, useState} from "react";
 import randomString from "crypto-random-string";
 
 import {getFromStorage, saveToStorage} from "../../../services/storage";
+import {MEETING_AVAILABLE_MINUTES} from "../../../constants";
 
 const MEETINGS_KEY = "MEETINGS";
 
@@ -52,7 +53,7 @@ const getRandomCode = () => {
 const isMeetingInRange = (meeting: IMeeting) => {
   return (
     new Date().getTime() - new Date(meeting.timestamp).getTime() <
-    1000 * 60 * 60
+    1000 * 60 * MEETING_AVAILABLE_MINUTES
   );
 };
 
