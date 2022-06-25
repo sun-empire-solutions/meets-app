@@ -94,7 +94,7 @@ const getTimeLabel = (seconds: number) => {
 const isMeetingOutOfRange = ({ timestamp }: IMeeting) => {
   const now = new Date();
   const timePassed = now.getTime() - new Date(timestamp).getTime();
-  return timePassed > 1000 * 10;
+  return timePassed > 1000 * 60 * 30;
 };
 
 type IProps = {
