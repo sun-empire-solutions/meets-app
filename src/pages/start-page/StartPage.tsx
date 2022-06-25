@@ -8,7 +8,8 @@ import linkImageSrc from "./../../assets/images/meeting-link.png";
 import { MeetingList } from "./components/MeetingList";
 
 const StartPage = () => {
-  const { meetings, createNewMeeting, isLoading } = useMeetings();
+  const { meetings, createNewMeeting, removeMeeting, isLoading } =
+    useMeetings();
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
 
   if (isLoading) {
@@ -19,13 +20,13 @@ const StartPage = () => {
     <div className="start-page">
       <StartButtons createMeeting={createNewMeeting} />
       {haveMeetings ? (
-        <MeetingList meetings={meetings} />
+        <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
       ) : (
         <div className="info-message">
           <div className="info-message_image">
             <img src={linkImageSrc} alt="Link" />
           </div>
-          <div className="info-message_title">Get a lik you can share</div>
+          <div className="info-message_title">Get a link you can share</div>
           <div className="info-message_subtitle">
             Tap <strong>New meeting</strong> to get a link you can send to
             people yo want to meet with
