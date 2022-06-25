@@ -3,17 +3,18 @@ import { BsCheckLg } from "react-icons/bs";
 import { FiLink2 } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-
+import { useMeetings } from "../hooks/use-meetings";
 import { useMeetingCode } from "../../join-page/hooks/use-meeting-code";
 import { IMeeting } from "../hooks/use-meetings";
 
 const MeetingLinkItem = ({ meeting }: IProps) => {
   const navigate = useNavigate();
   const { saveMeetingCode } = useMeetingCode();
+  const { removeMeeting } = useMeetings();
   const { code, timestamp } = meeting;
   const [isCopied, setIsCopied] = useState(false);
   const [timePassed, setTimePassed] = useState(
-    getTimePassed(new Date(timestamp))
+    getTimePassed(new Date(timestamp), removeMeeting, code)
   );
 
   const copyCodeToClipboard = () => {
@@ -38,7 +39,7 @@ const MeetingLinkItem = ({ meeting }: IProps) => {
 
   useEffect(() => {
     setInterval(() => {
-      setTimePassed(getTimePassed(new Date(timestamp)));
+      setTimePassed(getTimePassed(new Date(timestamp), removeMeeting, code));
     }, 500);
   }, []);
 
@@ -71,10 +72,15 @@ const MeetingLinkItem = ({ meeting }: IProps) => {
   );
 };
 
-const getTimePassed = (date: Date): string => {
+const getTimePassed = (date: Date, removeMeeting, code: String): string => {
   const now = new Date();
   const timePassed = now.getTime() - date.getTime();
   const seconds = Math.floor(timePassed / 1000);
+
+  if (seconds == 15) {
+    removeMeeting(code); //remove a meeting from localstorage after a period of time
+  }
+
   if (seconds < 30) return "just now";
   if (seconds < 60) return "a few seconds ago";
   if (seconds < 120) return "a min ago";
