@@ -26,7 +26,7 @@ const StartPage = () => {
           <div className="info-message_image">
             <img src={linkImageSrc} alt="Link" />
           </div>
-          <div className="info-message_title">Get a lik you can share</div>
+          <div className="info-message_title">Get a link you can share</div>
           <div className="info-message_subtitle">
             Tap <strong>New meeting</strong> to get a link you can send to
             people yo want to meet with
