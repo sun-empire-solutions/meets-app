@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import {
+  LocalVideoTrack,
   RemoteAudioTrack,
   RemoteAudioTrackPublication,
   RemoteParticipant,
@@ -7,6 +8,7 @@ import {
   RemoteTrackPublication,
   RemoteVideoTrack,
   RemoteVideoTrackPublication,
+  VideoTrackPublication,
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
 
@@ -20,7 +22,7 @@ const Participant = ({ participant, index }: IProps) => {
   const [videoTrackPublication, setVideoTrackPublication] =
     useState<RemoteVideoTrackPublication>(null);
   const [isMuted, setIsMuted] = useState(false);
-  const { room } = useContext(TwilioContext);
+  const { room, localVideoTrackPublication } = useContext(TwilioContext);
 
   const handleAudioTrackDisabled = (track: RemoteAudioTrack) => {
     track.on("disabled", () => {
@@ -37,7 +39,7 @@ const Participant = ({ participant, index }: IProps) => {
   };
 
   const handleVideoPublicationDisabled = (
-    publication: RemoteVideoTrackPublication
+    publication: VideoTrackPublication
   ) => {
     publication.on("unsubscribed", () => {
       publication.track?.detach(videoRef.current);
@@ -45,7 +47,7 @@ const Participant = ({ participant, index }: IProps) => {
   };
 
   const handleVideoPublicationEnabled = (
-    publication: RemoteVideoTrackPublication
+    publication: VideoTrackPublication
   ) => {
     publication.on("subscribed", () => {
       publication.track.attach(videoRef.current);
@@ -144,6 +146,18 @@ const Participant = ({ participant, index }: IProps) => {
       }
     );
   }, [room]);
+
+  useEffect(() => {
+    if (room?.localParticipant.identity === participant.identity) {
+      if (localVideoTrackPublication) {
+        const { track } = localVideoTrackPublication;
+        (track as LocalVideoTrack)?.attach(videoRef.current);
+        handleVideoPublicationDisabled(localVideoTrackPublication);
+        handleVideoPublicationEnabled(localVideoTrackPublication);
+      }
+    }
+  }),
+    [localVideoTrackPublication];
 
   return (
     <div className={`participant-wrapper participant-${index}`}>
