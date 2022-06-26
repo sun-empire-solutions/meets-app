@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   createLocalAudioTrack,
   createLocalVideoTrack,
@@ -8,7 +8,7 @@ import {
   Room,
 } from "twilio-video";
 
-import { TrackSettings } from "./useTracksSettings";
+import {TrackSettings} from "./useTracksSettings";
 
 const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
   const [localVideoTrackPublication, setLocalVideoTrackPublication] =
@@ -68,10 +68,10 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
     setLocalAudioTrackPublication(
       (publication) =>
-        ({
-          ...publication,
-          track: newTrack,
-        } as LocalAudioTrackPublication)
+      ({
+        ...publication,
+        track: newTrack,
+      } as LocalAudioTrackPublication)
     );
   };
 
@@ -105,4 +105,4 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
   };
 };
 
-export { useLocalTracks };
+export {useLocalTracks};

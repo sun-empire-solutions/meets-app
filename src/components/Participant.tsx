@@ -5,8 +5,11 @@ import {
   RemoteParticipant,
   RemoteTrack,
   RemoteTrackPublication,
+  RemoteVideoTrack,
+  RemoteVideoTrackPublication,
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
+
 import { TwilioContext } from "../context/TwilioContext";
 
 const Participant = ({ participant, index }: IProps) => {
@@ -14,6 +17,8 @@ const Participant = ({ participant, index }: IProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [audioTrackPublication, setAudioTrackPublication] =
     useState<RemoteAudioTrackPublication>(null);
+  const [videoTrackPublication, setVideoTrackPublication] =
+    useState<RemoteVideoTrackPublication>(null);
   const [isMuted, setIsMuted] = useState(false);
   const { room } = useContext(TwilioContext);
 
@@ -31,23 +36,33 @@ const Participant = ({ participant, index }: IProps) => {
     });
   };
 
+  const handleVideoPublicationDisabled = (
+    publication: RemoteVideoTrackPublication
+  ) => {
+    publication.on("unsubscribed", () => {
+      publication.track?.detach(videoRef.current);
+    });
+  };
+
+  const handleVideoPublicationEnabled = (
+    publication: RemoteVideoTrackPublication
+  ) => {
+    publication.on("subscribed", () => {
+      publication.track.attach(videoRef.current);
+    });
+  };
+
   useEffect(() => {
     setIsMuted(!audioTrackPublication?.isTrackEnabled);
   }, [audioTrackPublication]);
 
   useEffect(() => {
-    const videoTrackPublications = Array.from(
-      participant?.videoTracks?.values() ?? []
-    );
-    if (videoTrackPublications?.length) {
-      const videoPublication = videoTrackPublications[0];
-      const videoTrack = videoPublication?.track;
-      videoTrack?.attach(videoRef.current);
-
-      videoPublication.on("subscribed", (track) => {
-        track?.attach(videoRef.current);
-      });
-    }
+    setVideoTrackPublication(() => {
+      const videoTrackPublications = Array.from(
+        participant?.videoTracks?.values() ?? []
+      );
+      return videoTrackPublications?.[0] ?? null;
+    });
 
     setAudioTrackPublication(() => {
       const audioTrackPublications = Array.from(
@@ -76,6 +91,24 @@ const Participant = ({ participant, index }: IProps) => {
   }, [audioTrackPublication]);
 
   useEffect(() => {
+    if (videoTrackPublication) {
+      const videoTrack = videoTrackPublication?.track;
+      videoTrack?.attach(videoRef.current);
+
+      if (videoTrackPublication.isSubscribed) {
+        handleVideoPublicationDisabled(videoTrackPublication);
+        handleVideoPublicationEnabled(videoTrackPublication);
+      }
+
+      videoTrackPublication.on("subscribed", (track) => {
+        track?.attach(videoRef.current);
+        handleVideoPublicationDisabled(videoTrackPublication);
+        handleVideoPublicationEnabled(videoTrackPublication);
+      });
+    }
+  }, [videoTrackPublication]);
+
+  useEffect(() => {
     room?.on(
       "trackSubscribed",
       (
@@ -83,6 +116,8 @@ const Participant = ({ participant, index }: IProps) => {
         publication: RemoteTrackPublication,
         trackParticipant: RemoteParticipant
       ) => {
+        console.log("trackSubscribed", track, publication, trackParticipant);
+
         if (trackParticipant.identity === participant.identity) {
           if (publication.kind === "audio") {
             setAudioTrackPublication(
@@ -92,6 +127,18 @@ const Participant = ({ participant, index }: IProps) => {
             (track as RemoteAudioTrack)?.attach(audioRef.current);
             handleAudioTrackDisabled(track as RemoteAudioTrack);
             handleAudioTrackEnabled(track as RemoteAudioTrack);
+          } else if (publication.kind === "video") {
+            setVideoTrackPublication(
+              publication as RemoteVideoTrackPublication
+            );
+            const { track } = publication;
+            (track as RemoteVideoTrack)?.attach(videoRef.current);
+            handleVideoPublicationDisabled(
+              publication as RemoteVideoTrackPublication
+            );
+            handleVideoPublicationEnabled(
+              publication as RemoteVideoTrackPublication
+            );
           }
         }
       }
