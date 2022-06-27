@@ -1,0 +1,19 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+
+  .avatar-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  .avatar-icon {
+    height: 100%;
+    width: 100%;
+  }
+}

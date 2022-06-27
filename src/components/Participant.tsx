@@ -13,13 +13,11 @@ import {
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
 
-import { useAuthUser } from "../hooks/useAuthUser";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
+import { ParticipantAvatar } from "./ParticipantAvatar";
 
 const Participant = ({ participant, index }: IProps) => {
-  const { user } = useAuthUser();
-  const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [audioTrackPublication, setAudioTrackPublication] =
@@ -175,14 +173,7 @@ const Participant = ({ participant, index }: IProps) => {
 
   return (
     <div hidden className={`participant-wrapper participant-${index}`}>
-      <div
-        className="avatar-container"
-        style={
-          userPhotoUrl
-            ? { backgroundImage: `url(${userPhotoUrl})` }
-            : { backgroundColor: "rgb(12, 148, 238)" }
-        }
-      ></div>
+      {!isVideoEnabled && <ParticipantAvatar />}
       <video ref={videoRef} className={classNames({ hidden: !isVideoEnabled })}>
         {participant.identity}
       </video>
