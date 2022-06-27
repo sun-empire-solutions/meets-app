@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   LocalVideoTrack,
@@ -173,7 +172,11 @@ const Participant = ({ participant, index }: IProps) => {
 
   return (
     <div hidden className={`participant-wrapper participant-${index}`}>
-      {!isVideoEnabled && <ParticipantAvatar />}
+      {!isVideoEnabled && (
+        <ParticipantAvatar
+          isLocal={room?.localParticipant.identity === participant.identity}
+        />
+      )}
       <video ref={videoRef} className={classNames({ hidden: !isVideoEnabled })}>
         {participant.identity}
       </video>

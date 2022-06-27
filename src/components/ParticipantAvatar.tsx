@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import randomColor from "randomcolor";
 
 import { useAuthUser } from "../hooks/useAuthUser";
 import { useClassNames } from "../hooks/useClassNames";
 
-const ParticipantAvatar = () => {
+const ParticipantAvatar = ({ isLocal }: IProps) => {
   const { user } = useAuthUser();
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -19,6 +20,16 @@ const ParticipantAvatar = () => {
     setErrorOccured(true);
   };
 
+  const avatarIcon = (
+    <div className="avatar-icon">
+      <FaUserCircle color={randomColor({ luminosity: "dark" })} />
+    </div>
+  );
+
+  if (!isLocal) {
+    return <div className="avatar">{avatarIcon}</div>;
+  }
+
   return (
     <div className="avatar">
       <img
@@ -28,11 +39,13 @@ const ParticipantAvatar = () => {
         onError={handleError}
         onLoad={handleLoad}
       />
-      <div className={clasNames("avatar-icon", { hidden: !errorOccured })}>
-        <FaUserCircle />
-      </div>
+      {avatarIcon}
     </div>
   );
+};
+
+type IProps = {
+  isLocal?: boolean;
 };
 
 export { ParticipantAvatar };
