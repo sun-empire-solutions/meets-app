@@ -156,8 +156,7 @@ const Participant = ({ participant, index }: IProps) => {
         handleVideoPublicationEnabled(localVideoTrackPublication);
       }
     }
-  }),
-    [localVideoTrackPublication];
+  }, [localVideoTrackPublication]);
 
   return (
     <div className={`participant-wrapper participant-${index}`}>
