@@ -15,6 +15,7 @@ import { BsMicMuteFill } from "react-icons/bs";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
 import { ParticipantAvatar } from "./ParticipantAvatar";
+import { getFromStorage } from "../services/storage";
 
 const Participant = ({ participant, index }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,6 +30,7 @@ const Participant = ({ participant, index }: IProps) => {
     localVideoTrackPublication?.track?.isEnabled
   );
   const classNames = useClassNames();
+  const videoEnabled = getFromStorage("TWILIO:VS");
 
   const handleAudioTrackDisabled = (track: RemoteAudioTrack) => {
     track.on("disabled", () => {
@@ -172,7 +174,7 @@ const Participant = ({ participant, index }: IProps) => {
 
   return (
     <div hidden className={`participant-wrapper participant-${index}`}>
-      {!isVideoEnabled && (
+      {!videoEnabled && (
         <ParticipantAvatar
           isLocal={room?.localParticipant.identity === participant.identity}
         />

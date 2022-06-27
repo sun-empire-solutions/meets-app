@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import randomColor from "randomcolor";
+//import randomColor from "randomcolor";
 
 import { useAuthUser } from "../hooks/useAuthUser";
 import { useClassNames } from "../hooks/useClassNames";
@@ -22,7 +22,7 @@ const ParticipantAvatar = ({ isLocal }: IProps) => {
 
   const avatarIcon = (
     <div className="avatar-icon">
-      <FaUserCircle color={randomColor({ luminosity: "dark" })} />
+      <FaUserCircle color="#0fad98" />
     </div>
   );
 
