@@ -1,5 +1,5 @@
-const API_URL = "https://twilio-video-chat-app-7815-dev.twil.io";
-// const API_URL = "http://localhost:3000";
+// const API_URL = "https://twilio-video-chat-app-7815-dev.twil.io";
+const API_URL = "http://localhost:3000";
 
 const request = (
   url: string,

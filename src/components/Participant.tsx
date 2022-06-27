@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   LocalVideoTrack,
@@ -11,9 +12,10 @@ import {
   VideoTrackPublication,
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
+
 import { useAuthUser } from "../hooks/useAuthUser";
 import { TwilioContext } from "../context/TwilioContext";
-import { useMemo } from "react";
+import { useClassNames } from "../hooks/useClassNames";
 
 const Participant = ({ participant, index }: IProps) => {
   const { user } = useAuthUser();
@@ -26,6 +28,10 @@ const Participant = ({ participant, index }: IProps) => {
     useState<RemoteVideoTrackPublication>(null);
   const [isMuted, setIsMuted] = useState(false);
   const { room, localVideoTrackPublication } = useContext(TwilioContext);
+  const [isVideoEnabled, setIsVideoEnabled] = useState(
+    localVideoTrackPublication?.track?.isEnabled
+  );
+  const classNames = useClassNames();
 
   const handleAudioTrackDisabled = (track: RemoteAudioTrack) => {
     track.on("disabled", () => {
@@ -46,6 +52,7 @@ const Participant = ({ participant, index }: IProps) => {
   ) => {
     publication.on("unsubscribed", () => {
       publication.track?.detach(videoRef.current);
+      setIsVideoEnabled(false);
     });
   };
 
@@ -54,6 +61,7 @@ const Participant = ({ participant, index }: IProps) => {
   ) => {
     publication.on("subscribed", () => {
       publication.track.attach(videoRef.current);
+      setIsVideoEnabled(true);
     });
   };
 
@@ -101,15 +109,18 @@ const Participant = ({ participant, index }: IProps) => {
       videoTrack?.attach(videoRef.current);
 
       if (videoTrackPublication.isSubscribed) {
+        setIsVideoEnabled(true);
         handleVideoPublicationDisabled(videoTrackPublication);
         handleVideoPublicationEnabled(videoTrackPublication);
       }
 
       videoTrackPublication.on("subscribed", (track) => {
         track?.attach(videoRef.current);
+        setIsVideoEnabled(true);
         handleVideoPublicationDisabled(videoTrackPublication);
         handleVideoPublicationEnabled(videoTrackPublication);
       });
+      return;
     }
   }, [videoTrackPublication]);
 
@@ -121,8 +132,6 @@ const Participant = ({ participant, index }: IProps) => {
         publication: RemoteTrackPublication,
         trackParticipant: RemoteParticipant
       ) => {
-        console.log("trackSubscribed", track, publication, trackParticipant);
-
         if (trackParticipant.identity === participant.identity) {
           if (publication.kind === "audio") {
             setAudioTrackPublication(
@@ -157,7 +166,10 @@ const Participant = ({ participant, index }: IProps) => {
         (track as LocalVideoTrack)?.attach(videoRef.current);
         handleVideoPublicationDisabled(localVideoTrackPublication);
         handleVideoPublicationEnabled(localVideoTrackPublication);
+        setIsVideoEnabled(true);
+        return;
       }
+      setIsVideoEnabled(false);
     }
   }, [localVideoTrackPublication]);
 
@@ -171,7 +183,9 @@ const Participant = ({ participant, index }: IProps) => {
             : { backgroundColor: "rgb(12, 148, 238)" }
         }
       ></div>
-      <video ref={videoRef}>{participant.identity}</video>
+      <video ref={videoRef} className={classNames({ hidden: !isVideoEnabled })}>
+        {participant.identity}
+      </video>
       <audio ref={audioRef} autoPlay></audio>
       {isMuted && room?.localParticipant.identity !== participant.identity && (
         <div className="muted-indicator">
