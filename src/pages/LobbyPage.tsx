@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useMemo } from "react";
 import {
   createLocalTracks,
   createLocalVideoTrack,
@@ -9,7 +8,6 @@ import {
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
-import { useAuthUser } from "../hooks/useAuthUser";
 import { ParticipantAvatar } from "../components/ParticipantAvatar";
 
 const LobbyPage = () => {
@@ -73,7 +71,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      {!videoTrack && <ParticipantAvatar />}
+      {!isVideoEnabled && <ParticipantAvatar />}
       <video
         className={classNames({ hidden: !videoTrack })}
         ref={videoRef}
