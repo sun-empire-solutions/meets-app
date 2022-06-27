@@ -1,15 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
+import { useMemo } from "react";
 import {
   createLocalTracks,
   createLocalVideoTrack,
   LocalVideoTrack,
 } from "twilio-video";
+import { UserBindingContext } from "twilio/lib/rest/chat/v2/service/user/userBinding";
 
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
 
 const LobbyPage = () => {
+  const { user, logout } = useFirebaseAuth();
+  const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const {
     isVideoEnabled,
@@ -70,6 +75,14 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
+      <div
+        className="avatar-container"
+        style={
+          userPhotoUrl
+            ? { backgroundImage: `url(${userPhotoUrl})` }
+            : { backgroundColor: "rgb(12, 148, 238)" }
+        }
+      ></div>
       <video
         className={classNames({ hidden: !videoTrack })}
         ref={videoRef}
