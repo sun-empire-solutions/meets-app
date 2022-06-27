@@ -11,10 +11,13 @@ import {
   VideoTrackPublication,
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
-
+import { useAuthUser } from "../hooks/useAuthUser";
 import { TwilioContext } from "../context/TwilioContext";
+import { useMemo } from "react";
 
 const Participant = ({ participant, index }: IProps) => {
+  const { user } = useAuthUser();
+  const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [audioTrackPublication, setAudioTrackPublication] =
@@ -160,7 +163,15 @@ const Participant = ({ participant, index }: IProps) => {
     [localVideoTrackPublication];
 
   return (
-    <div className={`participant-wrapper participant-${index}`}>
+    <div hidden className={`participant-wrapper participant-${index}`}>
+      <div
+        className="avatar-container"
+        style={
+          userPhotoUrl
+            ? { backgroundImage: `url(${userPhotoUrl})` }
+            : { backgroundColor: "rgb(12, 148, 238)" }
+        }
+      ></div>
       <video ref={videoRef}>{participant.identity}</video>
       <audio ref={audioRef} autoPlay></audio>
       {isMuted && room?.localParticipant.identity !== participant.identity && (
