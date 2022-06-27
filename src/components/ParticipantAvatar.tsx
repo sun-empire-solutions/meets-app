@@ -12,7 +12,7 @@ const ParticipantAvatar = () => {
       {userPhotoUrl ? (
         <img className="avatar-image" src={userPhotoUrl} alt="user photo" />
       ) : (
-        <div className="avtar-icon">
+        <div className="avatar-icon">
           <FaUserCircle />
         </div>
       )}

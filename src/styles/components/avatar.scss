@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
   background-size: cover;
 
   .avatar-image {
@@ -15,5 +15,11 @@
   .avatar-icon {
     height: 100%;
     width: 100%;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      color: #9394a5;
+    }
   }
 }
