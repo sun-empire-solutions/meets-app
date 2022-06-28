@@ -15,7 +15,6 @@ const TrackButtons = () => {
 
   return (
     <div className="track-buttons">
-      <TrackButton type="switcher" isActive={true} onClick={toggleVideoTrack} />
       <TrackButton
         type="camera"
         isActive={localVideoTrackPublication?.isTrackEnabled || isVideoEnabled}

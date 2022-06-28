@@ -4,7 +4,6 @@ import {
   BsMicFill,
   BsMicMuteFill,
 } from "react-icons/bs";
-import { IoMdReverseCamera } from "react-icons/io";
 
 const TrackButton = ({ type, isActive, classNames = "", onClick }: IProps) => (
   <button
@@ -24,7 +23,6 @@ const renderButtonIconByType = (type: IType, isActive: boolean) => {
       <BsCameraVideoOffFill size={18} />
     ),
     mic: isActive ? <BsMicFill size={18} /> : <BsMicMuteFill size={18} />,
-    switcher: <IoMdReverseCamera size={20} />,
   };
 
   return buttonsMap[type];
@@ -37,6 +35,6 @@ type IProps = {
   onClick: () => void;
 };
 
-export type IType = "mic" | "camera" | "switcher";
+export type IType = "mic" | "camera";
 
 export { TrackButton };

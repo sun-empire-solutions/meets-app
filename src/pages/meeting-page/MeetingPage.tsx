@@ -1,15 +1,19 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 
-import { Participant } from "../components/Participant";
-import { useParticipants } from "../hooks/useParticipants";
-import { MeetingButtons } from "../components/MeetingButtons";
+import { Participant } from "../../components/Participant";
+import { useParticipants } from "../../hooks/useParticipants";
+import { MeetingButtons } from "../../components/MeetingButtons";
+import { MeetingTopActions } from "./components/MeetingTopActions";
+import { TwilioContext } from "../../context/TwilioContext";
 
 const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
+  const { localVideoTrackPublication } = useContext(TwilioContext);
 
   return (
     <div className="meeting-page">
+      {localVideoTrackPublication && <MeetingTopActions />}
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant
@@ -19,7 +23,6 @@ const MeetingPage = () => {
           />
         ))}
       </div>
-
       <MeetingButtons />
     </div>
   );

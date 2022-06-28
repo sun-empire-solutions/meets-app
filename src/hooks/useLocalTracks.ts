@@ -32,7 +32,7 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
 
     if (room) {
-      createLocalVideoTrack()
+      createLocalVideoTrack({facingMode: {exact: "environment"}})
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
