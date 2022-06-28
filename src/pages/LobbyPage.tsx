@@ -8,6 +8,7 @@ import {
 import { LobbyButtons } from "../components/LobbyButtons";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
+import { ParticipantAvatar } from "../components/ParticipantAvatar";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -70,6 +71,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
+      {!isVideoEnabled && <ParticipantAvatar isLocal />}
       <video
         className={classNames({ hidden: !videoTrack })}
         ref={videoRef}

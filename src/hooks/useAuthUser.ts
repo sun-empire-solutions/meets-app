@@ -1,6 +1,7 @@
-import { User } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { getFromStorage, saveToStorage } from "../services/storage";
+import {User} from "firebase/auth";
+import {useEffect, useState} from "react";
+
+import {getFromStorage, saveToStorage} from "../services/storage";
 
 const USER_KEY = "AUTH_USER";
 
@@ -16,7 +17,7 @@ const useAuthUser = () => {
     setUser(getFromStorage(USER_KEY));
   }, []);
 
-  return { user, saveUser };
+  return {user, saveUser};
 };
 
-export { useAuthUser };
+export {useAuthUser};
