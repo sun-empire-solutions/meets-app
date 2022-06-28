@@ -71,7 +71,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      {!isVideoEnabled && <ParticipantAvatar />}
+      {!isVideoEnabled && <ParticipantAvatar isLocal />}
       <video
         className={classNames({ hidden: !videoTrack })}
         ref={videoRef}
