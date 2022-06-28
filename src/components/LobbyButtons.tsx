@@ -15,8 +15,13 @@ const LobbyButtons = () => {
 
   const handleJoinClick = () => {
     const { displayName } = user;
-    connect(displayName, meetingCode);
-    navigate("/meeting");
+    connect(displayName, meetingCode)
+      .then(() => {
+        navigate("/meeting");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
 
   return (
