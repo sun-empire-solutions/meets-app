@@ -50,6 +50,7 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "@react-hook/window-size": "^3.0.7",
     "@twilio/runtime-handler": "1.2.3",
     "@uiball/loaders": "^1.2.6",
     "concurrently": "^7.2.0",
@@ -61,7 +62,6 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "twilio": "^3.77.0",
-    "twilio-video": "^2.21.1",
-    "use-screen-dimensions": "^1.0.2"
+    "twilio-video": "^2.21.1"
   }
 }
