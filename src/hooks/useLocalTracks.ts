@@ -57,6 +57,7 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
             publication as LocalAudioTrackPublication
           );
         });
+      saveAudioSettings(!isAudioEnabled);
       return;
     }
     if (localAudioTrackPublication?.track?.isEnabled || isAudioEnabled) {
