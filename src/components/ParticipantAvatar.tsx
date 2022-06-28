@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import randomColor from "randomcolor";
 import { useAuthUser } from "../hooks/useAuthUser";
@@ -38,7 +38,9 @@ const ParticipantAvatar = ({ isLocal }: IProps) => {
         onError={handleError}
         onLoad={handleLoad}
       />
-      {avatarIcon}
+      <div className={clasNames("avatar-icon", { hidden: !errorOccured })}>
+        <FaUserCircle color={randomColor({ luminosity: "dark" })} />
+      </div>
     </div>
   );
 };
@@ -47,4 +49,6 @@ type IProps = {
   isLocal?: boolean;
 };
 
-export { ParticipantAvatar };
+const MemoizedAvatar = React.memo(ParticipantAvatar);
+
+export { MemoizedAvatar as ParticipantAvatar };
