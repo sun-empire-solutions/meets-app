@@ -21,6 +21,8 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     saveVideoSettings,
     saveAudioSettings,
   } = tracksSettings;
+  const [videoMediaDevices, setVideoMediaDevices] = useState([]);
+  const [isFrontCameraEnabled, setIsFrontCameraEnabled] = useState(true);
 
   const toggleVideoTrack = () => {
     if (localVideoTrackPublication || isVideoEnabled) {
@@ -32,7 +34,7 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
 
     if (room) {
-      createLocalVideoTrack({facingMode: {exact: "environment"}})
+      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? "user" : {exact: "environment"}})
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
@@ -76,6 +78,26 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     );
   };
 
+  const switchCamera = () => {
+    if (localVideoTrackPublication) {
+      localVideoTrackPublication?.track?.stop();
+      localVideoTrackPublication?.unpublish();
+      setLocalVideoTrackPublication(null);
+      saveVideoSettings(false);
+
+      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? "user" : {exact: "environment"}})
+        .then((localVideoTrack) => {
+          return room?.localParticipant?.publishTrack(localVideoTrack);
+        })
+        .then((publication) => {
+          setLocalVideoTrackPublication(
+            publication as LocalVideoTrackPublication
+          );
+          setIsFrontCameraEnabled(enabled => !enabled);
+        });
+    }
+  };
+
   const clearTracks = () => {
     localVideoTrackPublication?.track?.stop();
     localVideoTrackPublication?.unpublish();
@@ -97,12 +119,19 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     );
   }, [room]);
 
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
+      setVideoMediaDevices(stream.getVideoTracks());
+    })
+  }, []);
+
   return {
     localVideoTrackPublication,
     localAudioTrackPublication,
     toggleVideoTrack,
     toggleAudioTrack,
     clearTracks,
+    switchCamera
   };
 };
 

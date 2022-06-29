@@ -20,6 +20,7 @@ const TwilioContext = createContext<IContext>({
   toggleVideoTrack: null,
   toggleAudioTrack: null,
   clearTracks: null,
+  switchCamera: null,
 });
 
 type IContext = {
@@ -29,6 +30,7 @@ type IContext = {
   toggleVideoTrack: () => void;
   toggleAudioTrack: () => void;
   clearTracks: () => void;
+  switchCamera: () => void;
   connect: (username: string, room: string) => Promise<void> | null;
 } & TrackSettings;
 
