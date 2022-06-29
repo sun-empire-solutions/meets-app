@@ -20,7 +20,7 @@ const MeetingButtons = () => {
 
   useEffect(() => {
     room?.on("disconnected", () => {
-      navigate("/lobby");
+      navigate("/start");
     });
   }, [room]);
 
