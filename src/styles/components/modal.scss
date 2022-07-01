@@ -29,6 +29,7 @@
 
   .modal-content {
     width: 80%;
+    min-height: 190px;
     max-width: 500px;
     padding: 20px;
     background-color: #343434ed;
@@ -79,7 +80,7 @@
     }
 
     .modal-body {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
     }
 
     .modal-footer {

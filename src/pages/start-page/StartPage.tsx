@@ -18,6 +18,7 @@ const StartPage = () => {
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [meetingName, setMeetingName] = useState("");
+  const [showError, setShowError] = useState(false);
   const { saveMeetingCode } = useMeetingCode();
   const navigate = useNavigate();
 
@@ -30,12 +31,17 @@ const StartPage = () => {
   };
 
   const closeModal = () => {
+    setShowError(false);
     setIsModalOpen(false);
   };
 
   const joinMeeting = () => {
-    saveMeetingCode(meetingName);
-    navigate("/lobby");
+    if (isMeetingCodeValid(meetingName)) {
+      setShowError(false);
+      saveMeetingCode(meetingName);
+      navigate("/lobby");
+    }
+    setShowError(true);
   };
 
   return (
@@ -49,9 +55,14 @@ const StartPage = () => {
               placeholder="Ej: abc-mnop-xyz"
               value={meetingName}
               onChange={(evt) => {
-                setMeetingName(evt.target.value);
+                const meetingCode = evt.target.value;
+                setMeetingName(meetingCode);
+                if (isMeetingCodeValid(meetingCode)) {
+                  setShowError(false);
+                }
               }}
             />
+            {showError && <div className="error-message">Invalid code</div>}
           </div>
         }
         footer={
@@ -83,6 +94,10 @@ const StartPage = () => {
       )}
     </div>
   );
+};
+
+const isMeetingCodeValid = (meetingCode: string) => {
+  return new RegExp(/^\w{3}-\w{3}-\w{3}$/i).test(meetingCode);
 };
 
 export { StartPage };
