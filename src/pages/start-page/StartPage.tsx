@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { StartButtons } from "./components/StartButtons";
 import { useMeetings } from "./hooks/use-meetings";
 import { useState, useEffect } from "react";
-import { InputLink } from "./../../components/InputLink";
+import { Input } from "../../components/Input";
 import { Button } from "./../../components/Button";
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
@@ -43,7 +43,7 @@ const StartPage = () => {
         <div className="container-join-link">
           <h3>Join with a code</h3>
           <h4>Enter the code provided by the organizer of the meeting:</h4>
-          <InputLink classNames="input-link" placeholder="Ej: abc-mnop-xyz" />
+          <Input classNames="input-link" placeholder="Ej: abc-mnop-xyz" />
           <Button
             classNames="button-join-link"
             onClick={handelClickJoinLink}

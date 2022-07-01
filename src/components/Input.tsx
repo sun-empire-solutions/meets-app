@@ -1,4 +1,4 @@
-const InputLink = ({ classNames, placeholder }: IProps) => {
+const Input = ({ classNames, placeholder }: IProps) => {
   return <input type="text" className={classNames} placeholder={placeholder} />;
 };
 
@@ -7,4 +7,4 @@ type IProps = {
   classNames?: string;
 };
 
-export { InputLink };
+export { Input };
