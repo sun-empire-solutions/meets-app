@@ -21,12 +21,14 @@ const TwilioContext = createContext<IContext>({
   toggleAudioTrack: null,
   clearTracks: null,
   switchCamera: null,
+  isFrontCameraEnabled: null,
 });
 
 type IContext = {
   room: Room | null;
   localAudioTrackPublication: LocalAudioTrackPublication;
   localVideoTrackPublication: LocalVideoTrackPublication;
+  isFrontCameraEnabled: boolean;
   toggleVideoTrack: () => void;
   toggleAudioTrack: () => void;
   clearTracks: () => void;

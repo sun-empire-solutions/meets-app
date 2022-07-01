@@ -83,9 +83,8 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
       localVideoTrackPublication?.track?.stop();
       localVideoTrackPublication?.unpublish();
       setLocalVideoTrackPublication(null);
-      saveVideoSettings(false);
 
-      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? "user" : {exact: "environment"}})
+      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? {exact: "environment"} : "user"})
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
@@ -131,7 +130,8 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     toggleVideoTrack,
     toggleAudioTrack,
     clearTracks,
-    switchCamera
+    switchCamera,
+    isFrontCameraEnabled
   };
 };
 

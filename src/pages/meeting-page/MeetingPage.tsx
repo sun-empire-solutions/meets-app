@@ -9,11 +9,11 @@ import { TwilioContext } from "../../context/TwilioContext";
 const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
-  const { localVideoTrackPublication } = useContext(TwilioContext);
+  const { isVideoEnabled } = useContext(TwilioContext);
 
   return (
     <div className="meeting-page">
-      {localVideoTrackPublication && <MeetingTopActions />}
+      {isVideoEnabled && <MeetingTopActions />}
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant
