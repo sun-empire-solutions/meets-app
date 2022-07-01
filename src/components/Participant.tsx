@@ -24,7 +24,12 @@ const Participant = ({ participant, index }: IProps) => {
   const [videoTrackPublication, setVideoTrackPublication] =
     useState<RemoteVideoTrackPublication>(null);
   const [isMuted, setIsMuted] = useState(false);
-  const { room, localVideoTrackPublication } = useContext(TwilioContext);
+  const {
+    room,
+    localVideoTrackPublication,
+    isFrontCameraEnabled,
+    isSwitchingCamera,
+  } = useContext(TwilioContext);
   const [isVideoEnabled, setIsVideoEnabled] = useState(
     localVideoTrackPublication?.track?.isEnabled
   );
@@ -172,12 +177,18 @@ const Participant = ({ participant, index }: IProps) => {
 
   return (
     <div hidden className={`participant-wrapper participant-${index}`}>
-      {!isVideoEnabled && (
+      {!isVideoEnabled && !isSwitchingCamera && (
         <ParticipantAvatar
           isLocal={room?.localParticipant.identity === participant.identity}
         />
       )}
-      <video ref={videoRef} className={classNames({ hidden: !isVideoEnabled })}>
+      <video
+        ref={videoRef}
+        className={classNames({
+          hidden: !isVideoEnabled,
+          "is-front": isFrontCameraEnabled,
+        })}
+      >
         {participant.identity}
       </video>
       <audio ref={audioRef} autoPlay></audio>

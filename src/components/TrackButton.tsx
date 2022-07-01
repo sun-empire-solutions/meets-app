@@ -1,7 +1,9 @@
-import { BsCameraVideoOffFill } from "react-icons/bs";
-import { BsCameraVideoFill } from "react-icons/bs";
-import { BsMicFill } from "react-icons/bs";
-import { BsMicMuteFill } from "react-icons/bs";
+import {
+  BsCameraVideoFill,
+  BsCameraVideoOffFill,
+  BsMicFill,
+  BsMicMuteFill,
+} from "react-icons/bs";
 
 const TrackButton = ({ type, isActive, classNames = "", onClick }: IProps) => (
   <button

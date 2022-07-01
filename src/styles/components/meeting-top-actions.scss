@@ -1,0 +1,11 @@
+.meeting-top-actions {
+  position: absolute;
+  height: 10vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #636363, transparent);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2rem;
+}

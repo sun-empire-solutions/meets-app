@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   createLocalAudioTrack,
   createLocalVideoTrack,
@@ -8,9 +8,12 @@ import {
   Room,
 } from "twilio-video";
 
-import {TrackSettings} from "./useTracksSettings";
+import { TrackSettings } from "./useTracksSettings";
 
-const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
+const useLocalTracks = (
+  room: Room,
+  tracksSettings: TrackSettings
+): LocalTracksTypes => {
   const [localVideoTrackPublication, setLocalVideoTrackPublication] =
     useState<LocalVideoTrackPublication>(null);
   const [localAudioTrackPublication, setLocalAudioTrackPublication] =
@@ -21,6 +24,13 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     saveVideoSettings,
     saveAudioSettings,
   } = tracksSettings;
+  const [videoMediaDevices, setVideoMediaDevices] = useState([]);
+  const [isFrontCameraEnabled, setIsFrontCameraEnabled] = useState(true);
+  const [isSwitchingCamera, setIsSwitchingCamera] = useState(false);
+  const hasMultipleVideoInputs = useMemo(
+    () => videoMediaDevices.length > 1,
+    [videoMediaDevices]
+  );
 
   const toggleVideoTrack = () => {
     if (localVideoTrackPublication || isVideoEnabled) {
@@ -32,7 +42,9 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
 
     if (room) {
-      createLocalVideoTrack()
+      createLocalVideoTrack({
+        facingMode: isFrontCameraEnabled ? "user" : { exact: "environment" },
+      })
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
@@ -69,11 +81,40 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
     setLocalAudioTrackPublication(
       (publication) =>
-      ({
-        ...publication,
-        track: newTrack,
-      } as LocalAudioTrackPublication)
+        ({
+          ...publication,
+          track: newTrack,
+        } as LocalAudioTrackPublication)
     );
+  };
+
+  const switchCamera = () => {
+    if (localVideoTrackPublication) {
+      setIsSwitchingCamera(true);
+      localVideoTrackPublication?.track?.stop();
+      localVideoTrackPublication?.unpublish();
+      setLocalVideoTrackPublication(null);
+
+      createLocalVideoTrack({
+        facingMode: isFrontCameraEnabled ? { exact: "environment" } : "user",
+      })
+        .then((localVideoTrack) => {
+          return room?.localParticipant?.publishTrack(localVideoTrack);
+        })
+        .then((publication) => {
+          setLocalVideoTrackPublication(
+            publication as LocalVideoTrackPublication
+          );
+          setIsFrontCameraEnabled((enabled) => !enabled);
+          setIsSwitchingCamera(false);
+        });
+    }
+  };
+
+  const setVideoInputDevices = () => {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      setVideoMediaDevices(devices.filter((d) => d.kind === "videoinput"));
+    });
   };
 
   const clearTracks = () => {
@@ -103,7 +144,25 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     toggleVideoTrack,
     toggleAudioTrack,
     clearTracks,
+    switchCamera,
+    isFrontCameraEnabled,
+    hasMultipleVideoInputs,
+    setVideoInputDevices,
+    isSwitchingCamera,
   };
 };
 
-export {useLocalTracks};
+export type LocalTracksTypes = {
+  localVideoTrackPublication: LocalVideoTrackPublication;
+  localAudioTrackPublication: LocalAudioTrackPublication;
+  toggleVideoTrack: () => void;
+  toggleAudioTrack: () => void;
+  clearTracks: () => void;
+  switchCamera: () => void;
+  isFrontCameraEnabled: boolean;
+  hasMultipleVideoInputs: boolean;
+  setVideoInputDevices: () => void;
+  isSwitchingCamera: boolean;
+};
+
+export { useLocalTracks };
