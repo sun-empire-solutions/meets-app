@@ -10,6 +10,49 @@
   padding-left: 1rem;
   padding-top: 5rem;
 
+  .container-join-link {
+    position: absolute;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    // justify-content: center;
+    justify-content: space-between;
+    margin-top: 13rem;
+    height: 25%;
+    width: 90%;
+    max-width: 450px;
+    background-color: white;
+    border-radius: 5px;
+
+    @media screen and (min-width: 440px) {
+      margin-top: 10.5rem;
+      height: 28%;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    h4 {
+      font-size: 0.85rem;
+    }
+
+    .input-link {
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      border-bottom: 1px solid black;
+    }
+    .button-join-link {
+      height: 2rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      background-color: $primary-color;
+    }
+  }
+
   .meetings {
     display: flex;
     flex-direction: column;
