@@ -1,6 +1,6 @@
 import { Button } from "../../../components/Button";
 
-const StartButtons = ({ createMeeting, handelJoinLink }: IProps) => {
+const StartButtons = ({ createMeeting, joinMeetingWithCode }: IProps) => {
   return (
     <div className="start-page_buttons">
       <Button
@@ -11,7 +11,7 @@ const StartButtons = ({ createMeeting, handelJoinLink }: IProps) => {
       <Button
         text="Join with a code"
         classNames="join-button"
-        onClick={handelJoinLink}
+        onClick={joinMeetingWithCode}
       />
     </div>
   );
@@ -19,7 +19,7 @@ const StartButtons = ({ createMeeting, handelJoinLink }: IProps) => {
 
 type IProps = {
   createMeeting: () => void;
-  handelJoinLink: () => void;
+  joinMeetingWithCode: () => void;
 };
 
 export { StartButtons };

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { StartButtons } from "./components/StartButtons";
 import { useMeetings } from "./hooks/use-meetings";
@@ -6,6 +7,7 @@ import { Input } from "../../components/Input";
 import { Button } from "./../../components/Button";
 import { MeetingList } from "./components/MeetingList";
 import { Modal } from "../../components/Modal";
+import { useMeetingCode } from "../join-page/hooks/use-meeting-code";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
@@ -15,6 +17,9 @@ const StartPage = () => {
     useMeetings();
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [meetingName, setMeetingName] = useState("");
+  const { saveMeetingCode } = useMeetingCode();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return null;
@@ -28,6 +33,11 @@ const StartPage = () => {
     setIsModalOpen(false);
   };
 
+  const joinMeeting = () => {
+    saveMeetingCode(meetingName);
+    navigate("/lobby");
+  };
+
   return (
     <div className="start-page">
       <Modal
@@ -35,13 +45,19 @@ const StartPage = () => {
         title="Join with code"
         body={
           <div className="start-page__modal-body">
-            <Input placeholder="Ej: abc-mnop-xyz" />
+            <Input
+              placeholder="Ej: abc-mnop-xyz"
+              value={meetingName}
+              onChange={(evt) => {
+                setMeetingName(evt.target.value);
+              }}
+            />
           </div>
         }
         footer={
           <Button
             classNames="join-code-button"
-            onClick={openModal}
+            onClick={joinMeeting}
             text="Join"
           />
         }
@@ -49,7 +65,7 @@ const StartPage = () => {
       />
       <StartButtons
         createMeeting={createNewMeeting}
-        handelJoinLink={openModal}
+        joinMeetingWithCode={openModal}
       />
       {haveMeetings ? (
         <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
