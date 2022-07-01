@@ -25,6 +25,7 @@ const TwilioContext = createContext<IContext>({
   isFrontCameraEnabled: null,
   hasMultipleVideoInputs: null,
   setVideoInputDevices: null,
+  isSwitchingCamera: null,
 });
 
 type IContext = {

@@ -26,6 +26,7 @@ const useLocalTracks = (
   } = tracksSettings;
   const [videoMediaDevices, setVideoMediaDevices] = useState([]);
   const [isFrontCameraEnabled, setIsFrontCameraEnabled] = useState(true);
+  const [isSwitchingCamera, setIsSwitchingCamera] = useState(false);
   const hasMultipleVideoInputs = useMemo(
     () => videoMediaDevices.length > 1,
     [videoMediaDevices]
@@ -89,6 +90,7 @@ const useLocalTracks = (
 
   const switchCamera = () => {
     if (localVideoTrackPublication) {
+      setIsSwitchingCamera(true);
       localVideoTrackPublication?.track?.stop();
       localVideoTrackPublication?.unpublish();
       setLocalVideoTrackPublication(null);
@@ -104,6 +106,7 @@ const useLocalTracks = (
             publication as LocalVideoTrackPublication
           );
           setIsFrontCameraEnabled((enabled) => !enabled);
+          setIsSwitchingCamera(false);
         });
     }
   };
@@ -145,6 +148,7 @@ const useLocalTracks = (
     isFrontCameraEnabled,
     hasMultipleVideoInputs,
     setVideoInputDevices,
+    isSwitchingCamera,
   };
 };
 
@@ -158,6 +162,7 @@ export type LocalTracksTypes = {
   isFrontCameraEnabled: boolean;
   hasMultipleVideoInputs: boolean;
   setVideoInputDevices: () => void;
+  isSwitchingCamera: boolean;
 };
 
 export { useLocalTracks };
