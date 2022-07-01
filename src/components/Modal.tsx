@@ -10,9 +10,17 @@ const Modal = ({ title, isOpen, body, footer, onClose }: IProps) => {
   useOutsideClick(modalContentRef, onClose);
 
   const modal = (
-    <div className={classNames("modal", { "is-open": isOpen })}>
-      <div className="modal-background" />
-      <div className="modal-content" ref={modalContentRef}>
+    <div
+      className={classNames("modal", {
+        "is-open": isOpen,
+        "is-close": !isOpen,
+      })}
+    >
+      <div className={classNames("modal-background", { out: !isOpen })} />
+      <div
+        className={classNames("modal-content", { out: !isOpen })}
+        ref={modalContentRef}
+      >
         <div className="modal-header">
           <h2 className="title">{title}</h2>
           <button className="modal-close-button" onClick={onClose}>
