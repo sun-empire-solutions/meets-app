@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   createLocalAudioTrack,
   createLocalVideoTrack,
@@ -8,9 +8,12 @@ import {
   Room,
 } from "twilio-video";
 
-import {TrackSettings} from "./useTracksSettings";
+import { TrackSettings } from "./useTracksSettings";
 
-const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
+const useLocalTracks = (
+  room: Room,
+  tracksSettings: TrackSettings
+): LocalTracksTypes => {
   const [localVideoTrackPublication, setLocalVideoTrackPublication] =
     useState<LocalVideoTrackPublication>(null);
   const [localAudioTrackPublication, setLocalAudioTrackPublication] =
@@ -23,6 +26,10 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
   } = tracksSettings;
   const [videoMediaDevices, setVideoMediaDevices] = useState([]);
   const [isFrontCameraEnabled, setIsFrontCameraEnabled] = useState(true);
+  const hasMultipleVideoInputs = useMemo(
+    () => videoMediaDevices.length > 1,
+    [videoMediaDevices]
+  );
 
   const toggleVideoTrack = () => {
     if (localVideoTrackPublication || isVideoEnabled) {
@@ -34,7 +41,9 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
 
     if (room) {
-      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? "user" : {exact: "environment"}})
+      createLocalVideoTrack({
+        facingMode: isFrontCameraEnabled ? "user" : { exact: "environment" },
+      })
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
@@ -71,10 +80,10 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     }
     setLocalAudioTrackPublication(
       (publication) =>
-      ({
-        ...publication,
-        track: newTrack,
-      } as LocalAudioTrackPublication)
+        ({
+          ...publication,
+          track: newTrack,
+        } as LocalAudioTrackPublication)
     );
   };
 
@@ -84,7 +93,9 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
       localVideoTrackPublication?.unpublish();
       setLocalVideoTrackPublication(null);
 
-      createLocalVideoTrack({facingMode: isFrontCameraEnabled ? {exact: "environment"} : "user"})
+      createLocalVideoTrack({
+        facingMode: isFrontCameraEnabled ? { exact: "environment" } : "user",
+      })
         .then((localVideoTrack) => {
           return room?.localParticipant?.publishTrack(localVideoTrack);
         })
@@ -92,9 +103,15 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
           setLocalVideoTrackPublication(
             publication as LocalVideoTrackPublication
           );
-          setIsFrontCameraEnabled(enabled => !enabled);
+          setIsFrontCameraEnabled((enabled) => !enabled);
         });
     }
+  };
+
+  const setVideoInputDevices = () => {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      setVideoMediaDevices(devices.filter((d) => d.kind === "videoinput"));
+    });
   };
 
   const clearTracks = () => {
@@ -118,12 +135,6 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     );
   }, [room]);
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
-      setVideoMediaDevices(stream.getVideoTracks());
-    })
-  }, []);
-
   return {
     localVideoTrackPublication,
     localAudioTrackPublication,
@@ -131,8 +142,22 @@ const useLocalTracks = (room: Room, tracksSettings: TrackSettings) => {
     toggleAudioTrack,
     clearTracks,
     switchCamera,
-    isFrontCameraEnabled
+    isFrontCameraEnabled,
+    hasMultipleVideoInputs,
+    setVideoInputDevices,
   };
 };
 
-export {useLocalTracks};
+export type LocalTracksTypes = {
+  localVideoTrackPublication: LocalVideoTrackPublication;
+  localAudioTrackPublication: LocalAudioTrackPublication;
+  toggleVideoTrack: () => void;
+  toggleAudioTrack: () => void;
+  clearTracks: () => void;
+  switchCamera: () => void;
+  isFrontCameraEnabled: boolean;
+  hasMultipleVideoInputs: boolean;
+  setVideoInputDevices: () => void;
+};
+
+export { useLocalTracks };

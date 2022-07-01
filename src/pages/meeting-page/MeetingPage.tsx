@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { Participant } from "../../components/Participant";
 import { useParticipants } from "../../hooks/useParticipants";
@@ -9,11 +9,16 @@ import { TwilioContext } from "../../context/TwilioContext";
 const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
-  const { isVideoEnabled } = useContext(TwilioContext);
+  const { isVideoEnabled, hasMultipleVideoInputs, setVideoInputDevices } =
+    useContext(TwilioContext);
+
+  useEffect(() => {
+    setVideoInputDevices();
+  }, []);
 
   return (
     <div className="meeting-page">
-      {isVideoEnabled && <MeetingTopActions />}
+      {isVideoEnabled && hasMultipleVideoInputs && <MeetingTopActions />}
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant

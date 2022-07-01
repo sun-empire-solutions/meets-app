@@ -4,6 +4,7 @@ import {
   LocalVideoTrackPublication,
   Room,
 } from "twilio-video";
+import { LocalTracksTypes } from "../hooks/useLocalTracks";
 import { TrackSettings } from "../hooks/useTracksSettings";
 
 const TwilioContext = createContext<IContext>({
@@ -22,18 +23,14 @@ const TwilioContext = createContext<IContext>({
   clearTracks: null,
   switchCamera: null,
   isFrontCameraEnabled: null,
+  hasMultipleVideoInputs: null,
+  setVideoInputDevices: null,
 });
 
 type IContext = {
   room: Room | null;
-  localAudioTrackPublication: LocalAudioTrackPublication;
-  localVideoTrackPublication: LocalVideoTrackPublication;
-  isFrontCameraEnabled: boolean;
-  toggleVideoTrack: () => void;
-  toggleAudioTrack: () => void;
-  clearTracks: () => void;
-  switchCamera: () => void;
   connect: (username: string, room: string) => Promise<void> | null;
-} & TrackSettings;
+} & LocalTracksTypes &
+  TrackSettings;
 
 export { TwilioContext };
