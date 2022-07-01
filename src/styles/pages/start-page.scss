@@ -38,19 +38,6 @@
     h4 {
       font-size: 0.85rem;
     }
-
-    .input-link {
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      border-bottom: 1px solid black;
-    }
-    .button-join-link {
-      height: 2rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      background-color: $primary-color;
-    }
   }
 
   .meetings {
@@ -99,5 +86,21 @@
         color: $primary-color;
       }
     }
+  }
+}
+
+.join-code-button {
+  height: 2rem;
+  width: 5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: transparent;
+  box-shadow: none;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: white;
   }
 }
