@@ -1,59 +1,55 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+
 import { StartButtons } from "./components/StartButtons";
 import { useMeetings } from "./hooks/use-meetings";
-import { useState, useEffect } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "./../../components/Button";
+import { MeetingList } from "./components/MeetingList";
+import { Modal } from "../../components/Modal";
+
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
-import { MeetingList } from "./components/MeetingList";
 
 const StartPage = () => {
   const { meetings, createNewMeeting, removeMeeting, isLoading } =
     useMeetings();
-
   const haveMeetings = useMemo(() => meetings.length > 0, [meetings]);
-  const [isContainerJoinLinkVisible, setisContainerJoinLinkVisible] =
-    useState(false);
-
-  useEffect(() => {
-    if (isContainerJoinLinkVisible == true) {
-      setisContainerJoinLinkVisible(false);
-    }
-  }, [meetings]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return null;
   }
 
-  const ContainerJoinLink = () => {
-    if (isContainerJoinLinkVisible == false) {
-      return setisContainerJoinLinkVisible(true);
-    }
-    return setisContainerJoinLinkVisible(false);
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
-  const handelClickJoinLink = () => {
-    console.log("Hola mundo");
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="start-page">
-      {isContainerJoinLinkVisible && (
-        <div className="container-join-link">
-          <h3>Join with a code</h3>
-          <h4>Enter the code provided by the organizer of the meeting:</h4>
-          <Input classNames="input-link" placeholder="Ej: abc-mnop-xyz" />
+      <Modal
+        isOpen={isModalOpen}
+        title="Join with code"
+        body={
+          <div className="start-page__modal-body">
+            <Input placeholder="Ej: abc-mnop-xyz" />
+          </div>
+        }
+        footer={
           <Button
-            classNames="button-join-link"
-            onClick={handelClickJoinLink}
+            classNames="join-code-button"
+            onClick={openModal}
             text="Join"
           />
-        </div>
-      )}
+        }
+        onClose={closeModal}
+      />
       <StartButtons
         createMeeting={createNewMeeting}
-        handelJoinLink={ContainerJoinLink}
+        handelJoinLink={openModal}
       />
       {haveMeetings ? (
         <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
