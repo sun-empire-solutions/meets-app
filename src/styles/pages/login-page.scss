@@ -13,73 +13,7 @@
     color: $primary-color;
   }
 
-  .login-page_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-    width: 100%;
-    gap: 1.5rem;
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      label {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-        color: hsl(0, 0%, 98%);
-      }
-
-      input {
-        background-color: transparent;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        outline: none;
-        font-size: 1.1rem;
-        padding: 0.5rem;
-        color: hsl(0, 0%, 98%);
-
-        &::placeholder {
-          color: hsl(234, 11%, 52%);
-        }
-
-        /* Change Autocomplete styles in Chrome*/
-        &:-webkit-autofill,
-        &:-webkit-autofill:hover,
-        &:-webkit-autofill:focus {
-          -webkit-text-fill-color: hsl(0, 0%, 98%);
-          -webkit-box-shadow: 0 0 0px 1000px hsl(236deg, 12%, 14%) inset;
-          transition: background-color 5000s ease-in-out 0s;
-        }
-      }
-    }
-
-    .form-buttons {
-      margin: 1.5rem 0;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      gap: 1.5rem;
-
-      button {
-        height: 2.8rem;
-        width: 100%;
-        border-radius: 30px;
-        font-size: 1.25rem;
-
-        border: none;
-        outline: none;
-        background-color: $primary-color;
-        color: hsl(0, 0%, 98%);
-      }
-    }
-  }
-
-  .form-buttons {
+  .login-page_providers {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,7 +51,7 @@
     }
   }
 
-  .form-bottom {
+  .login-page_switcher {
     display: flex;
     flex-direction: column;
     align-items: center;
