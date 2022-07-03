@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
+import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 
 const LoginForm = ({ isSignInForm }: IProps) => {
   const [email, setEmail] = useState("");

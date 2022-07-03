@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 
-import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "./components/LoginForm";
+import { LoginProviders } from "./components/LoginProviders";
 
 const LoginPage = () => {
-  const { loginWithGoogle, loginWithFacebook } = useFirebaseAuth();
   const [isSignInShowing, setIsSignInShowing] = useState(true);
 
   return (
@@ -15,19 +12,7 @@ const LoginPage = () => {
         {isSignInShowing ? "Sign in" : "Sign up"}
       </h1>
       <LoginForm isSignInForm={isSignInShowing} />
-      {isSignInShowing && (
-        <div className="login-page_providers">
-          <h3>Or Sign in Using</h3>
-          <div className="buttons">
-            <div className="icon google-icon">
-              <FcGoogle size={45} onClick={loginWithGoogle} />
-            </div>
-            <div className="icon facebook-icon">
-              <FaFacebook size={45} onClick={loginWithFacebook} />
-            </div>
-          </div>
-        </div>
-      )}
+      {isSignInShowing && <LoginProviders />}
       <div className="login-page_switcher">
         <h3>
           {isSignInShowing
