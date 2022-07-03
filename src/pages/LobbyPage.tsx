@@ -5,10 +5,9 @@ import {
   LocalVideoTrack,
 } from "twilio-video";
 
-import { LobbyButtons } from "../components/LobbyButtons";
+import { LobbyButtons, ParticipantAvatar } from "../components";
 import { TwilioContext } from "../context/TwilioContext";
 import { useClassNames } from "../hooks/useClassNames";
-import { ParticipantAvatar } from "../components/ParticipantAvatar";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

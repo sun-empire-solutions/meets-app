@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { TrackButtons } from "../components/TrackButtons";
 import { Button } from "../components/Button";
 import { TwilioContext } from "../context/TwilioContext";
-import { useMeetingCode } from "../pages/join-page/hooks/use-meeting-code";
+import { useMeetingCode } from "../hooks/use-meeting-code";
 
 const MeetingButtons = () => {
   const { room, clearTracks } = useContext(TwilioContext);

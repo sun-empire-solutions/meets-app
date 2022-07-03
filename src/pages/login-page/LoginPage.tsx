@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { LoginForm } from "./components/LoginForm";
-import { LoginProviders } from "./components/LoginProviders";
+import { LoginForm, LoginProviders } from "./components";
 
 const LoginPage = () => {
   const [isSignInShowing, setIsSignInShowing] = useState(true);

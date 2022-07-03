@@ -1,5 +1,5 @@
 import { MeetingLinkItem } from "./MeetingLinkItem";
-import { IMeeting } from "../hooks/use-meetings";
+import { IMeeting } from "../hooks/useMeetings";
 
 const MeetingList = ({ meetings, removeMeeting }: IProps) => {
   return (

@@ -4,8 +4,8 @@ import { FiLink2 } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import { useMeetingCode } from "../../join-page/hooks/use-meeting-code";
-import { IMeeting } from "../hooks/use-meetings";
+import { useMeetingCode } from "../../../hooks/use-meeting-code";
+import { IMeeting } from "../hooks/useMeetings";
 import { MEETING_AVAILABLE_MINUTES } from "../../../constants";
 
 const MeetingLinkItem = ({ meeting, removeMeeting }: IProps) => {

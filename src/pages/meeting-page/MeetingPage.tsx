@@ -1,10 +1,9 @@
 import { useContext, useEffect, useMemo } from "react";
 
-import { Participant } from "../../components/Participant";
 import { useParticipants } from "../../hooks/useParticipants";
-import { MeetingButtons } from "../../components/MeetingButtons";
-import { MeetingTopActions } from "./components/MeetingTopActions";
 import { TwilioContext } from "../../context/TwilioContext";
+import { MeetingButtons, Participant } from "../../components";
+import { MeetingTopActions } from "./components";
 
 const MeetingPage = () => {
   const { participants } = useParticipants();

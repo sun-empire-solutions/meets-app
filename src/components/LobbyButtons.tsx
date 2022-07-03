@@ -6,7 +6,7 @@ import { TrackButtons } from "./TrackButtons";
 import { Button } from "./Button";
 import { useAuthUser } from "../hooks/useAuthUser";
 import { TwilioContext } from "../context/TwilioContext";
-import { useMeetingCode } from "../pages/join-page/hooks/use-meeting-code";
+import { useMeetingCode } from "../hooks/use-meeting-code";
 
 const LobbyButtons = () => {
   const navigate = useNavigate();
