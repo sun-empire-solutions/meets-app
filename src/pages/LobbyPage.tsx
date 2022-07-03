@@ -56,6 +56,7 @@ const LobbyPage = () => {
       }).then((track) => {
         track?.attach(videoRef.current);
         saveVideoTrack(track);
+        saveVideoSettings(true);
       });
       return;
     }
@@ -71,7 +72,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      {!isVideoEnabled && <ParticipantAvatar isLocal />}
+      {!videoTrack && <ParticipantAvatar isLocal />}
       <video
         className={classNames({ hidden: !videoTrack })}
         ref={videoRef}
