@@ -7,6 +7,7 @@ import { useOutsideClick } from "./useOutsideClick";
 import { useParticipants } from "./useParticipants";
 import { useRoom } from "./useRoom";
 import { useTracksSettings } from "./useTracksSettings";
+import { useMediaStreamTrack } from "./useMediaStreamTrack";
 
 export {
   useAuthUser,
@@ -18,4 +19,5 @@ export {
   useParticipants,
   useRoom,
   useTracksSettings,
+  useMediaStreamTrack,
 };
