@@ -1,7 +1,7 @@
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import { useFirebaseAuth } from "../../../hooks";
 
 const LoginProviders = () => {
   const { loginWithGoogle, loginWithFacebook } = useFirebaseAuth();

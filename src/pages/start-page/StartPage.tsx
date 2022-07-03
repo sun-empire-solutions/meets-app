@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useMeetingCode } from "../../hooks";
+import { Button, Input, Modal } from "../../components";
+
 import { useMeetings } from "./hooks";
 import { MeetingList, StartButtons } from "./components";
-import { Button, Input, Modal } from "../../components";
-import { useMeetingCode } from "../../hooks/use-meeting-code";
 
 //@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";

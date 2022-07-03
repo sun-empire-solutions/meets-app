@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { LoadingIndicator } from "../../components";
-import { useMeetingCode } from "../../hooks/use-meeting-code";
+import { useMeetingCode } from "../../hooks/useMeetingCode";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 
 const JoinPage = () => {

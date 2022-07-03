@@ -3,6 +3,7 @@ import randomString from "crypto-random-string";
 
 import { getFromStorage, saveToStorage } from "../../../services/storage";
 import { MEETING_AVAILABLE_MINUTES } from "../../../constants";
+import { IMeeting } from "../../../types";
 
 const MEETINGS_KEY = "MEETINGS";
 
@@ -55,11 +56,6 @@ const isMeetingInRange = (meeting: IMeeting) => {
     new Date().getTime() - new Date(meeting.timestamp).getTime() <
     1000 * 60 * MEETING_AVAILABLE_MINUTES
   );
-};
-
-export type IMeeting = {
-  code: string;
-  timestamp: string;
 };
 
 export { useMeetings };
