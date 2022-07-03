@@ -1,6 +1,12 @@
+import { StrictMode } from "react";
+
 import { AppRoutes } from "./routes/AppRoutes";
 
 const App = () => {
-  return <AppRoutes />;
+  return (
+    <StrictMode>
+      <AppRoutes />
+    </StrictMode>
+  );
 };
 export { App };
