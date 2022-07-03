@@ -8,6 +8,7 @@ import { useParticipants } from "./useParticipants";
 import { useRoom } from "./useRoom";
 import { useTracksSettings } from "./useTracksSettings";
 import { useMediaStreamTrack } from "./useMediaStreamTrack";
+import { useVideoTrackDimensions } from "./useVideoTrackDimensions";
 
 export {
   useAuthUser,
@@ -20,4 +21,5 @@ export {
   useRoom,
   useTracksSettings,
   useMediaStreamTrack,
+  useVideoTrackDimensions,
 };
