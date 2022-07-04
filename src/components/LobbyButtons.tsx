@@ -1,18 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ring } from "@uiball/loaders";
 
+import { useAuthUser, useMeetingCode } from "../hooks";
+import { useTwilioContext } from "../context";
+
 import { TrackButtons } from "./TrackButtons";
 import { Button } from "./Button";
-import { useAuthUser } from "../hooks/useAuthUser";
-import { TwilioContext } from "../context/TwilioContext";
-import { useMeetingCode } from "../hooks/useMeetingCode";
 
 const LobbyButtons = () => {
   const navigate = useNavigate();
   const { user } = useAuthUser();
   const { meetingCode } = useMeetingCode();
-  const { connect } = useContext(TwilioContext);
+  const { connect } = useTwilioContext();
   const [isConnecting, setIsConnecting] = useState(false);
 
   const handleJoinClick = () => {

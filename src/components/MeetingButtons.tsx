@@ -1,14 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { MdCallEnd } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import { TrackButtons } from "../components/TrackButtons";
-import { Button } from "../components/Button";
-import { TwilioContext } from "../context/TwilioContext";
-import { useMeetingCode } from "../hooks/useMeetingCode";
+import { useTwilioContext } from "../context";
+import { useMeetingCode } from "../hooks";
+
+import { Button } from "./Button";
+import { TrackButtons } from "./TrackButtons";
 
 const MeetingButtons = () => {
-  const { room, clearTracks } = useContext(TwilioContext);
+  const { room, clearTracks } = useTwilioContext();
   const navigate = useNavigate();
   const { removeMeetingCode } = useMeetingCode();
 

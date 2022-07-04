@@ -1,6 +1,5 @@
-import { useContext } from "react";
+import { useTwilioContext } from "../context";
 
-import { TwilioContext } from "../context/TwilioContext";
 import { TrackButton } from "./TrackButton";
 
 const TrackButtons = () => {
@@ -11,7 +10,7 @@ const TrackButtons = () => {
     isVideoEnabled,
     toggleAudioTrack,
     toggleVideoTrack,
-  } = useContext(TwilioContext);
+  } = useTwilioContext();
 
   return (
     <div className="track-buttons">

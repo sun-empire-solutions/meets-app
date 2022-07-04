@@ -1,10 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RemoteParticipant } from "twilio-video";
 
-import { TwilioContext } from "../context/TwilioContext";
+import { useTwilioContext } from "../context";
 
 const useParticipants = () => {
-  const { room } = useContext(TwilioContext);
+  const { room } = useTwilioContext();
 
   const remoteParticipants = useMemo(
     () => Array.from(room?.participants.values() ?? []),

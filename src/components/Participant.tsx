@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   LocalVideoTrack,
   RemoteAudioTrack,
@@ -12,8 +12,9 @@ import {
 } from "twilio-video";
 import { BsMicMuteFill } from "react-icons/bs";
 
-import { TwilioContext } from "../context/TwilioContext";
-import { useClassNames } from "../hooks/useClassNames";
+import { useClassNames } from "../hooks";
+import { useTwilioContext } from "../context";
+
 import { ParticipantAvatar } from "./ParticipantAvatar";
 
 const Participant = ({ participant, index }: IProps) => {
@@ -29,7 +30,7 @@ const Participant = ({ participant, index }: IProps) => {
     localVideoTrackPublication,
     isFrontCameraEnabled,
     isSwitchingCamera,
-  } = useContext(TwilioContext);
+  } = useTwilioContext();
   const [isVideoEnabled, setIsVideoEnabled] = useState(
     localVideoTrackPublication?.track?.isEnabled
   );

@@ -1,8 +1,8 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
-import { TwilioContext } from "../../context/TwilioContext";
 import { useParticipants } from "../../hooks";
 import { MeetingButtons, Participant } from "../../components";
+import { useTwilioContext } from "../../context";
 
 import { MeetingTopActions } from "./components";
 
@@ -10,7 +10,7 @@ const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
   const { isVideoEnabled, hasMultipleVideoInputs, setVideoInputDevices } =
-    useContext(TwilioContext);
+    useTwilioContext();
 
   useEffect(() => {
     setVideoInputDevices();
