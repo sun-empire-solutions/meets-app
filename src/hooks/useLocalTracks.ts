@@ -1,168 +1,196 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  createLocalAudioTrack,
-  createLocalVideoTrack,
+import { useCallback, useEffect, useState } from "react";
+import Twilio, {
+  LocalVideoTrack,
   LocalAudioTrack,
-  LocalAudioTrackPublication,
-  LocalVideoTrackPublication,
-  Room,
+  CreateLocalTrackOptions,
 } from "twilio-video";
 
-import { TrackSettings } from "./useTracksSettings";
+import {
+  DEFAULT_VIDEO_CONSTRAINTS,
+  SELECTED_AUDIO_INPUT_KEY,
+  SELECTED_VIDEO_INPUT_KEY,
+} from "../constants";
+import { getDeviceInfo, isPermissionDenied } from "../utils";
 
-const useLocalTracks = (
-  room: Room,
-  tracksSettings: TrackSettings
-): LocalTracksTypes => {
-  const [localVideoTrackPublication, setLocalVideoTrackPublication] =
-    useState<LocalVideoTrackPublication>(null);
-  const [localAudioTrackPublication, setLocalAudioTrackPublication] =
-    useState<LocalAudioTrackPublication>(null);
-  const {
-    isAudioEnabled,
-    isVideoEnabled,
-    saveVideoSettings,
-    saveAudioSettings,
-  } = tracksSettings;
-  const [videoMediaDevices, setVideoMediaDevices] = useState([]);
-  const [isFrontCameraEnabled, setIsFrontCameraEnabled] = useState(true);
-  const [isSwitchingCamera, setIsSwitchingCamera] = useState(false);
-  const hasMultipleVideoInputs = useMemo(
-    () => videoMediaDevices.length > 1,
-    [videoMediaDevices]
-  );
+const useLocalTracks = () => {
+  const [audioTrack, setAudioTrack] = useState<LocalAudioTrack>();
+  const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
+  const [isAcquiringLocalTracks, setIsAcquiringLocalTracks] = useState(false);
+  const [isAcquiringLocalVideoTrack, setIsAcquiringLocalVideoTrack] =
+    useState(true);
 
-  const toggleVideoTrack = () => {
-    if (localVideoTrackPublication || isVideoEnabled) {
-      localVideoTrackPublication?.track?.stop();
-      localVideoTrackPublication?.unpublish();
-      setLocalVideoTrackPublication(null);
-      saveVideoSettings(false);
-      return;
+  const getLocalAudioTrack = useCallback((deviceId?: string) => {
+    const options: CreateLocalTrackOptions = {};
+
+    if (deviceId) {
+      options.deviceId = { exact: deviceId };
     }
 
-    if (room) {
-      createLocalVideoTrack({
-        facingMode: isFrontCameraEnabled ? "user" : { exact: "environment" },
-      })
-        .then((localVideoTrack) => {
-          return room?.localParticipant?.publishTrack(localVideoTrack);
-        })
-        .then((publication) => {
-          setLocalVideoTrackPublication(
-            publication as LocalVideoTrackPublication
-          );
-        });
-    }
-    saveVideoSettings(true);
-  };
-
-  const toggleAudioTrack = () => {
-    let newTrack: LocalAudioTrack | null = null;
-    if (!localAudioTrackPublication) {
-      createLocalAudioTrack()
-        .then((localAudioTrack) => {
-          return room?.localParticipant?.publishTrack(localAudioTrack);
-        })
-        .then((publication) => {
-          setLocalAudioTrackPublication(
-            publication as LocalAudioTrackPublication
-          );
-        });
-      saveAudioSettings(!isAudioEnabled);
-      return;
-    }
-    if (localAudioTrackPublication?.track?.isEnabled || isAudioEnabled) {
-      newTrack = localAudioTrackPublication?.track?.disable();
-      saveAudioSettings(false);
-    } else {
-      newTrack = localAudioTrackPublication?.track?.enable();
-      saveAudioSettings(true);
-    }
-    setLocalAudioTrackPublication(
-      (publication) =>
-        ({
-          ...publication,
-          track: newTrack,
-        } as LocalAudioTrackPublication)
-    );
-  };
-
-  const switchCamera = () => {
-    if (localVideoTrackPublication) {
-      setIsSwitchingCamera(true);
-      localVideoTrackPublication?.track?.stop();
-      localVideoTrackPublication?.unpublish();
-      setLocalVideoTrackPublication(null);
-
-      createLocalVideoTrack({
-        facingMode: isFrontCameraEnabled ? { exact: "environment" } : "user",
-      })
-        .then((localVideoTrack) => {
-          return room?.localParticipant?.publishTrack(localVideoTrack);
-        })
-        .then((publication) => {
-          setLocalVideoTrackPublication(
-            publication as LocalVideoTrackPublication
-          );
-          setIsFrontCameraEnabled((enabled) => !enabled);
-          setIsSwitchingCamera(false);
-        });
-    }
-  };
-
-  const setVideoInputDevices = () => {
-    navigator.mediaDevices.enumerateDevices().then((devices) => {
-      setVideoMediaDevices(devices.filter((d) => d.kind === "videoinput"));
+    return Twilio.createLocalAudioTrack(options).then((newTrack) => {
+      setAudioTrack(newTrack);
+      return newTrack;
     });
-  };
+  }, []);
 
-  const clearTracks = () => {
-    localVideoTrackPublication?.track?.stop();
-    localVideoTrackPublication?.unpublish();
-    setLocalVideoTrackPublication(null);
-    localAudioTrackPublication?.track?.disable();
-    setLocalAudioTrackPublication(null);
-  };
+  const getLocalVideoTrack = useCallback(async () => {
+    setIsAcquiringLocalVideoTrack(true);
+    const selectedVideoDeviceId = window.localStorage.getItem(
+      SELECTED_VIDEO_INPUT_KEY
+    );
+
+    const { videoInputDevices } = await getDeviceInfo();
+
+    const hasSelectedVideoDevice = videoInputDevices.some(
+      (device) =>
+        selectedVideoDeviceId && device.deviceId === selectedVideoDeviceId
+    );
+
+    const options: CreateLocalTrackOptions = {
+      ...(DEFAULT_VIDEO_CONSTRAINTS as {}),
+      name: `camera-${Date.now()}`,
+      ...(hasSelectedVideoDevice && {
+        deviceId: { exact: selectedVideoDeviceId! },
+      }),
+    };
+
+    return Twilio.createLocalVideoTrack(options).then((newTrack) => {
+      setVideoTrack(newTrack);
+      return newTrack;
+    });
+  }, []);
 
   useEffect(() => {
-    setLocalVideoTrackPublication(
-      Array.from(room?.localParticipant?.tracks?.values?.() ?? []).find(
-        (track) => track?.kind === "video"
-      ) as LocalVideoTrackPublication
+    if (videoTrack) {
+      setIsAcquiringLocalVideoTrack(false);
+    }
+  }, [videoTrack]);
+
+  const removeLocalAudioTrack = useCallback(() => {
+    if (audioTrack) {
+      audioTrack.stop();
+      setAudioTrack(undefined);
+    }
+  }, [audioTrack]);
+
+  const removeLocalVideoTrack = useCallback(() => {
+    if (videoTrack) {
+      videoTrack.stop();
+      setVideoTrack(undefined);
+    }
+  }, [videoTrack]);
+
+  const getAudioAndVideoTracks = useCallback(async () => {
+    const {
+      audioInputDevices,
+      videoInputDevices,
+      hasAudioInputDevices,
+      hasVideoInputDevices,
+    } = await getDeviceInfo();
+
+    if (!hasAudioInputDevices && !hasVideoInputDevices)
+      return Promise.resolve();
+    if (isAcquiringLocalTracks || audioTrack || videoTrack)
+      return Promise.resolve();
+
+    setIsAcquiringLocalTracks(true);
+
+    const selectedAudioDeviceId = window.localStorage.getItem(
+      SELECTED_AUDIO_INPUT_KEY
     );
-    setLocalAudioTrackPublication(
-      Array.from(room?.localParticipant?.tracks?.values?.() ?? []).find(
-        (track) => track?.kind === "audio"
-      ) as LocalAudioTrackPublication
+    const selectedVideoDeviceId = window.localStorage.getItem(
+      SELECTED_VIDEO_INPUT_KEY
     );
-  }, [room]);
+
+    const hasSelectedAudioDevice = audioInputDevices.some(
+      (device) =>
+        selectedAudioDeviceId && device.deviceId === selectedAudioDeviceId
+    );
+    const hasSelectedVideoDevice = videoInputDevices.some(
+      (device) =>
+        selectedVideoDeviceId && device.deviceId === selectedVideoDeviceId
+    );
+
+    // In Chrome, it is possible to deny permissions to only audio or only video.
+    // If that has happened, then we don't want to attempt to acquire the device.
+    const isCameraPermissionDenied = await isPermissionDenied("camera" as any);
+    const isMicrophonePermissionDenied = await isPermissionDenied(
+      "microphone" as any
+    );
+
+    const shouldAcquireVideo =
+      hasVideoInputDevices && !isCameraPermissionDenied;
+    const shouldAcquireAudio =
+      hasAudioInputDevices && !isMicrophonePermissionDenied;
+
+    const localTrackConstraints = {
+      video: shouldAcquireVideo && {
+        ...(DEFAULT_VIDEO_CONSTRAINTS as {}),
+        name: `camera-${Date.now()}`,
+        ...(hasSelectedVideoDevice && {
+          deviceId: { exact: selectedVideoDeviceId! },
+        }),
+      },
+      audio:
+        shouldAcquireAudio &&
+        (hasSelectedAudioDevice
+          ? { deviceId: { exact: selectedAudioDeviceId! } }
+          : hasAudioInputDevices),
+    };
+
+    return Twilio.createLocalTracks(localTrackConstraints)
+      .then((tracks) => {
+        const newVideoTrack = tracks.find(
+          (track) => track.kind === "video"
+        ) as LocalVideoTrack;
+        const newAudioTrack = tracks.find(
+          (track) => track.kind === "audio"
+        ) as LocalAudioTrack;
+        if (newVideoTrack) {
+          setVideoTrack(newVideoTrack);
+          // Save the deviceId so it can be picked up by the VideoInputList component. This only matters
+          // in cases where the user's video is disabled.
+          window.localStorage.setItem(
+            SELECTED_VIDEO_INPUT_KEY,
+            newVideoTrack.mediaStreamTrack.getSettings().deviceId ?? ""
+          );
+        }
+        if (newAudioTrack) {
+          setAudioTrack(newAudioTrack);
+        }
+
+        // These custom errors will be picked up by the MediaErrorSnackbar component.
+        if (isCameraPermissionDenied && isMicrophonePermissionDenied) {
+          const error = new Error();
+          error.name = "NotAllowedError";
+          throw error;
+        }
+
+        if (isCameraPermissionDenied) {
+          throw new Error("CameraPermissionsDenied");
+        }
+
+        if (isMicrophonePermissionDenied) {
+          throw new Error("MicrophonePermissionsDenied");
+        }
+      })
+      .finally(() => setIsAcquiringLocalTracks(false));
+  }, [audioTrack, videoTrack, isAcquiringLocalTracks]);
+
+  const localTracks = [audioTrack, videoTrack].filter(
+    (track) => track !== undefined
+  ) as (LocalAudioTrack | LocalVideoTrack)[];
 
   return {
-    localVideoTrackPublication,
-    localAudioTrackPublication,
-    toggleVideoTrack,
-    toggleAudioTrack,
-    clearTracks,
-    switchCamera,
-    isFrontCameraEnabled,
-    hasMultipleVideoInputs,
-    setVideoInputDevices,
-    isSwitchingCamera,
+    videoTrack,
+    localTracks,
+    getLocalVideoTrack,
+    isAcquiringLocalVideoTrack,
+    getLocalAudioTrack,
+    isAcquiringLocalTracks,
+    removeLocalAudioTrack,
+    removeLocalVideoTrack,
+    getAudioAndVideoTracks,
   };
-};
-
-export type LocalTracksTypes = {
-  localVideoTrackPublication: LocalVideoTrackPublication;
-  localAudioTrackPublication: LocalAudioTrackPublication;
-  toggleVideoTrack: () => void;
-  toggleAudioTrack: () => void;
-  clearTracks: () => void;
-  switchCamera: () => void;
-  isFrontCameraEnabled: boolean;
-  hasMultipleVideoInputs: boolean;
-  setVideoInputDevices: () => void;
-  isSwitchingCamera: boolean;
 };
 
 export { useLocalTracks };

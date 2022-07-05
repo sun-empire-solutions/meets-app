@@ -8,6 +8,7 @@ import {
 import { LobbyButtons, ParticipantAvatar } from "../../components";
 import { useTwilioContext } from "../../context";
 import { useClassNames } from "../../hooks/useClassNames";
+import { LocalVideoPreview } from "./components/LocalVideoPreview";
 
 const LobbyPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -71,14 +72,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      {!videoTrack && <ParticipantAvatar isLocal />}
-      <video
-        className={classNames({ hidden: !videoTrack })}
-        ref={videoRef}
-        id="localVideo"
-        width={400}
-        height={200}
-      ></video>
+      <LocalVideoPreview />
       <LobbyButtons />
     </div>
   );

@@ -1,37 +1,33 @@
 import { createContext } from "react";
-import {
-  LocalAudioTrackPublication,
-  LocalVideoTrackPublication,
-  Room,
-} from "twilio-video";
-import { LocalTracksTypes } from "../hooks/useLocalTracks";
+import { Room } from "twilio-video";
+
 import { TrackSettings } from "../hooks/useTracksSettings";
+import { ILocalTracksOptions } from "../types";
 
 const TwilioContext = createContext<IContext>({
   room: null,
   connect: null,
-  localVideoTrackPublication: null,
-  localAudioTrackPublication: null,
   isAudioEnabled: false,
   isVideoEnabled: false,
   saveAudioSettings: null,
   saveVideoSettings: null,
   getAudioSettings: null,
   getVideoSettings: null,
-  toggleVideoTrack: null,
-  toggleAudioTrack: null,
-  clearTracks: null,
-  switchCamera: null,
-  isFrontCameraEnabled: null,
-  hasMultipleVideoInputs: null,
-  setVideoInputDevices: null,
-  isSwitchingCamera: null,
+  localTracks: null,
+  getAudioAndVideoTracks: null,
+  getLocalVideoTrack: null,
+  getLocalAudioTrack: null,
+  isAcquiringLocalTracks: false,
+  removeLocalAudioTrack: null,
+  removeLocalVideoTrack: null,
+  isAcquiringLocalVideoTrack: false,
+  videoTrack: null,
 });
 
 type IContext = {
   room: Room | null;
   connect: (username: string, room: string) => Promise<void> | null;
-} & LocalTracksTypes &
+} & ILocalTracksOptions &
   TrackSettings;
 
 export { TwilioContext };
