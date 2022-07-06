@@ -9,6 +9,7 @@ import { useTracksSettings } from "./useTracksSettings";
 import { useMediaStreamTrack } from "./useMediaStreamTrack";
 import { useVideoTrackDimensions } from "./useVideoTrackDimensions";
 import { useLocalTracks } from "./useLocalTracks";
+import { useLocalVideoToggle } from "./useLocalVideoToggle";
 
 export {
   useAuthUser,
@@ -22,4 +23,5 @@ export {
   useTracksSettings,
   useMediaStreamTrack,
   useVideoTrackDimensions,
+  useLocalVideoToggle,
 };

@@ -1,4 +1,8 @@
-import { ParticipantAvatar, VideoTrack } from "../../../components";
+import {
+  LoadingIndicator,
+  ParticipantAvatar,
+  VideoTrack,
+} from "../../../components";
 import { useTwilioContext } from "../../../context";
 
 // TO-DO: Display participant's identity
@@ -6,7 +10,7 @@ const LocalVideoPreview = () => {
   const { videoTrack, isAcquiringLocalVideoTrack } = useTwilioContext();
 
   if (isAcquiringLocalVideoTrack) {
-    return null;
+    return <LoadingIndicator />;
   }
 
   return videoTrack ? (
