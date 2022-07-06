@@ -1,6 +1,5 @@
 import {
   LocalAudioTrack,
-  LocalTrack,
   LocalVideoTrack,
   RemoteVideoTrack,
 } from "twilio-video";
@@ -22,6 +21,7 @@ export type IVideoTrack = LocalVideoTrack | RemoteVideoTrack;
 
 export type ILocalTracksOptions = {
   videoTrack: LocalVideoTrack;
+  audioTrack: LocalAudioTrack;
   localTracks: (LocalVideoTrack | LocalAudioTrack)[];
   getLocalVideoTrack: () => Promise<LocalVideoTrack>;
   isAcquiringLocalVideoTrack: boolean;

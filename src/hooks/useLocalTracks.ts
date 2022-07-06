@@ -182,6 +182,7 @@ const useLocalTracks = () => {
 
   return {
     videoTrack,
+    audioTrack,
     localTracks,
     getLocalVideoTrack,
     isAcquiringLocalVideoTrack,
