@@ -6,18 +6,14 @@ import { useTwilioContext } from "../../context";
 import { LocalVideoPreview } from "./components/LocalVideoPreview";
 
 const LobbyPage = () => {
-  const { getVideoSettings, getLocalVideoTrack, removeLocalVideoTrack } =
+  const { getAudioAndVideoTracks, removeLocalAudioAndVideoTracks } =
     useTwilioContext();
 
   useEffect(() => {
-    const isVideoEnabled = getVideoSettings();
-
-    if (isVideoEnabled) {
-      getLocalVideoTrack();
-    }
+    getAudioAndVideoTracks();
 
     return () => {
-      removeLocalVideoTrack();
+      removeLocalAudioAndVideoTracks();
     };
   }, []);
 
