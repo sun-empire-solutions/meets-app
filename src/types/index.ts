@@ -30,4 +30,5 @@ export type ILocalTracksOptions = {
   removeLocalAudioTrack: () => void;
   removeLocalVideoTrack: () => void;
   getAudioAndVideoTracks: () => Promise<void>;
+  removeLocalAudioAndVideoTracks: () => void;
 };

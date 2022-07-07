@@ -11,6 +11,7 @@ import {
   SELECTED_VIDEO_INPUT_KEY,
 } from "../constants";
 import { getDeviceInfo, isPermissionDenied } from "../utils";
+import { useTracksSettings } from "./useTracksSettings";
 
 const useLocalTracks = () => {
   const [audioTrack, setAudioTrack] = useState<LocalAudioTrack>();
@@ -18,6 +19,9 @@ const useLocalTracks = () => {
   const [isAcquiringLocalTracks, setIsAcquiringLocalTracks] = useState(false);
   const [isAcquiringLocalVideoTrack, setIsAcquiringLocalVideoTrack] =
     useState(true);
+  const { getAudioSettings, getVideoSettings } = useTracksSettings();
+  const isAudioEnabled = getAudioSettings();
+  const isVideoEnabled = getVideoSettings();
 
   const getLocalAudioTrack = useCallback((deviceId?: string) => {
     const options: CreateLocalTrackOptions = {};
@@ -118,9 +122,9 @@ const useLocalTracks = () => {
     );
 
     const shouldAcquireVideo =
-      hasVideoInputDevices && !isCameraPermissionDenied;
+      isVideoEnabled && hasVideoInputDevices && !isCameraPermissionDenied;
     const shouldAcquireAudio =
-      hasAudioInputDevices && !isMicrophonePermissionDenied;
+      isAudioEnabled && hasAudioInputDevices && !isMicrophonePermissionDenied;
 
     const localTrackConstraints = {
       video: shouldAcquireVideo && {
@@ -176,6 +180,11 @@ const useLocalTracks = () => {
       .finally(() => setIsAcquiringLocalTracks(false));
   }, [audioTrack, videoTrack, isAcquiringLocalTracks]);
 
+  const removeLocalAudioAndVideoTracks = useCallback(() => {
+    removeLocalAudioTrack();
+    removeLocalVideoTrack();
+  }, []);
+
   const localTracks = [audioTrack, videoTrack].filter(
     (track) => track !== undefined
   ) as (LocalAudioTrack | LocalVideoTrack)[];
@@ -191,6 +200,7 @@ const useLocalTracks = () => {
     removeLocalAudioTrack,
     removeLocalVideoTrack,
     getAudioAndVideoTracks,
+    removeLocalAudioAndVideoTracks,
   };
 };
 
