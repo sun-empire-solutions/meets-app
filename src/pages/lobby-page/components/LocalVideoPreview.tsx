@@ -8,11 +8,11 @@ import { useTracksSettings } from "../../../hooks";
 
 // TO-DO: Display participant's identity
 const LocalVideoPreview = () => {
-  const { videoTrack, isAcquiringLocalVideoTrack } = useTwilioContext();
+  const { videoTrack, isAcquiringLocalTracks } = useTwilioContext();
   const { getVideoSettings } = useTracksSettings();
   const isVideoEnabled = getVideoSettings();
 
-  if (isAcquiringLocalVideoTrack && isVideoEnabled) {
+  if (isAcquiringLocalTracks && isVideoEnabled) {
     return <LoadingIndicator />;
   }
 

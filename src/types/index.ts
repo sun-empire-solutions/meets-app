@@ -24,7 +24,6 @@ export type ILocalTracksOptions = {
   audioTrack: LocalAudioTrack;
   localTracks: (LocalVideoTrack | LocalAudioTrack)[];
   getLocalVideoTrack: () => Promise<LocalVideoTrack>;
-  isAcquiringLocalVideoTrack: boolean;
   getLocalAudioTrack: (deviceId?: string) => Promise<LocalAudioTrack>;
   isAcquiringLocalTracks: boolean;
   removeLocalAudioTrack: () => void;

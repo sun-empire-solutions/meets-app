@@ -19,7 +19,6 @@ logger.setLevel("info");
 
 const TwilioProvider = ({ children }: IProps) => {
   const { room, connect } = useRoom();
-  const trackSettings = useTracksSettings();
   const localTracks = useLocalTracks();
 
   return (
@@ -28,7 +27,6 @@ const TwilioProvider = ({ children }: IProps) => {
         room,
         connect,
         ...localTracks,
-        ...trackSettings,
       }}
     >
       {children}

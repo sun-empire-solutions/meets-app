@@ -17,8 +17,6 @@ const useLocalTracks = () => {
   const [audioTrack, setAudioTrack] = useState<LocalAudioTrack>();
   const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
   const [isAcquiringLocalTracks, setIsAcquiringLocalTracks] = useState(false);
-  const [isAcquiringLocalVideoTrack, setIsAcquiringLocalVideoTrack] =
-    useState(true);
   const { getAudioSettings, getVideoSettings } = useTracksSettings();
   const isAudioEnabled = getAudioSettings();
   const isVideoEnabled = getVideoSettings();
@@ -29,7 +27,7 @@ const useLocalTracks = () => {
     if (deviceId) {
       options.deviceId = { exact: deviceId };
     }
-
+    removeLocalAudioTrack();
     return Twilio.createLocalAudioTrack(options).then((newTrack) => {
       setAudioTrack(newTrack);
       return newTrack;
@@ -37,7 +35,6 @@ const useLocalTracks = () => {
   }, []);
 
   const getLocalVideoTrack = useCallback(async () => {
-    setIsAcquiringLocalVideoTrack(true);
     const selectedVideoDeviceId = window.localStorage.getItem(
       SELECTED_VIDEO_INPUT_KEY
     );
@@ -57,17 +54,12 @@ const useLocalTracks = () => {
       }),
     };
 
+    removeLocalVideoTrack();
     return Twilio.createLocalVideoTrack(options).then((newTrack) => {
       setVideoTrack(newTrack);
       return newTrack;
     });
   }, []);
-
-  useEffect(() => {
-    if (videoTrack) {
-      setIsAcquiringLocalVideoTrack(false);
-    }
-  }, [videoTrack]);
 
   const removeLocalAudioTrack = useCallback(() => {
     if (audioTrack) {
@@ -125,6 +117,7 @@ const useLocalTracks = () => {
       isVideoEnabled && hasVideoInputDevices && !isCameraPermissionDenied;
     const shouldAcquireAudio =
       isAudioEnabled && hasAudioInputDevices && !isMicrophonePermissionDenied;
+    console.log(shouldAcquireAudio, shouldAcquireVideo);
 
     const localTrackConstraints = {
       video: shouldAcquireVideo && {
@@ -194,7 +187,6 @@ const useLocalTracks = () => {
     audioTrack,
     localTracks,
     getLocalVideoTrack,
-    isAcquiringLocalVideoTrack,
     getLocalAudioTrack,
     isAcquiringLocalTracks,
     removeLocalAudioTrack,
