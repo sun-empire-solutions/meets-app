@@ -12,6 +12,8 @@ import { useLocalTracks } from "./useLocalTracks";
 import { useLocalVideoToggle } from "./useLocalVideoToggle";
 import { useLocalAudioToggle } from "./useLocalAudioToggle";
 import { useIsTrackEnabled } from "./useIsTrackEnabled";
+import { usePublications } from "./usePublications";
+import { useTrack } from "./useTrack";
 
 export {
   useAuthUser,
@@ -28,4 +30,6 @@ export {
   useLocalVideoToggle,
   useIsTrackEnabled,
   useLocalAudioToggle,
+  usePublications,
+  useTrack,
 };
