@@ -14,6 +14,7 @@ import { useLocalAudioToggle } from "./useLocalAudioToggle";
 import { useIsTrackEnabled } from "./useIsTrackEnabled";
 import { usePublications } from "./usePublications";
 import { useTrack } from "./useTrack";
+import { useIsTrackSwitchedOff } from "./useIsTrackSwitchedOff";
 
 export {
   useAuthUser,
@@ -32,4 +33,5 @@ export {
   useLocalAudioToggle,
   usePublications,
   useTrack,
+  useIsTrackSwitchedOff,
 };
