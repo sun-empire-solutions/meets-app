@@ -11,6 +11,7 @@ import { ParticipantAvatar } from "./ParticipantAvatar";
 import { TrackButton } from "./TrackButton";
 import { TrackButtons } from "./TrackButtons";
 import { VideoTrack, AudioTrack } from "./tracks";
+import { Publication } from "./publication";
 
 export {
   Button,
@@ -27,4 +28,5 @@ export {
   TrackButtons,
   VideoTrack,
   AudioTrack,
+  Publication,
 };
