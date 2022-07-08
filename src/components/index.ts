@@ -12,6 +12,7 @@ import { TrackButton } from "./TrackButton";
 import { TrackButtons } from "./TrackButtons";
 import { VideoTrack, AudioTrack } from "./tracks";
 import { Publication } from "./publication";
+import { ParticipantTracks } from "./participant";
 
 export {
   Button,
@@ -29,4 +30,5 @@ export {
   VideoTrack,
   AudioTrack,
   Publication,
+  ParticipantTracks,
 };
