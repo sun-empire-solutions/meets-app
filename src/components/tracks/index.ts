@@ -1,3 +1,4 @@
 import { VideoTrack } from "./VideoTrack";
+import { AudioTrack } from "./AudioTrack";
 
-export { VideoTrack };
+export { VideoTrack, AudioTrack };
