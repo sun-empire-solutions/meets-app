@@ -46,7 +46,7 @@ const StartPage = () => {
     <div className="start-page">
       <Modal
         isOpen={isModalOpen}
-        title="Join with code"
+        title="Join with a code"
         body={
           <div className="start-page__modal-body">
             <Input
