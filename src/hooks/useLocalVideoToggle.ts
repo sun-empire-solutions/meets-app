@@ -2,6 +2,7 @@ import { LocalVideoTrack } from "twilio-video";
 import { useCallback, useState } from "react";
 
 import { useTwilioContext } from "../context";
+
 import { useTracksSettings } from "./useTracksSettings";
 
 const useLocalVideoToggle = () => {

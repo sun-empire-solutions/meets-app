@@ -31,7 +31,7 @@ const VideoTrack = ({ track, isLocal, priority }: IProps) => {
   const isFrontFacing =
     mediaStreamTrack?.getSettings().facingMode !== "environment";
   const style = {
-    transform: isLocal && isFrontFacing ? "scaleX(-1)" : "",
+    transform: isFrontFacing ? "scaleX(-1)" : "",
     objectFit:
       isPortrait || track.name.includes("screen")
         ? ("contain" as const)
