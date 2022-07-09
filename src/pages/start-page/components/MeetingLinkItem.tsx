@@ -19,7 +19,7 @@ const MeetingLinkItem = ({ meeting, removeMeeting }: IProps) => {
 
   const copyCodeToClipboard = () => {
     if (!isCopied) {
-      navigator.clipboard.writeText(`${window.location.origin}/join/${code}`);
+      navigator.clipboard.writeText(code);
       setIsCopied(true);
     }
   };
