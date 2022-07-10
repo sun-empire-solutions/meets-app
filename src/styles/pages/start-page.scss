@@ -10,11 +10,38 @@
   padding-left: 1rem;
   padding-top: 5rem;
 
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    padding-top: 0rem;
+  }
+
   .meetings {
     display: flex;
     flex-direction: column;
     width: 100%;
     text-align: start;
+
+    @media screen and (min-width: 768px) {
+      height: 81%;
+    }
+
+    .meeting-list {
+      margin-top: 1rem;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-right: 1rem;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media screen and (min-width: 768px) {
+        margin-top: 0.7rem;
+      }
+    }
 
     .title {
       color: hsl(236, 9%, 61%);

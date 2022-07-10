@@ -3,12 +3,21 @@
   display: flex;
   gap: 1rem;
 
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .meeting-button {
     background-color: $primary-color;
     width: 100%;
     border-radius: 3px;
     height: 2rem;
     color: black;
+
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
   }
 
   .join-button {
@@ -18,5 +27,9 @@
     height: 2rem;
     border: 1px solid $secondary-color;
     color: $secondary-color;
+
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
   }
 }
