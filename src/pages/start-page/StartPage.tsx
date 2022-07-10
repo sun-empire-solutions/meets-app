@@ -72,24 +72,29 @@ const StartPage = () => {
         }
         onClose={closeModal}
       />
-      <StartButtons
-        createMeeting={createNewMeeting}
-        joinMeetingWithCode={openModal}
-      />
-      {haveMeetings ? (
-        <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
-      ) : (
-        <div className="info-message">
-          <div className="info-message_image">
-            <img src={linkImageSrc} alt="Link" />
+      <div className="left">
+        <div className="welcome">Welcome!</div>
+        <StartButtons
+          createMeeting={createNewMeeting}
+          joinMeetingWithCode={openModal}
+        />
+      </div>
+      <div className="right">
+        {haveMeetings ? (
+          <MeetingList meetings={meetings} removeMeeting={removeMeeting} />
+        ) : (
+          <div className="info-message">
+            <div className="info-message_image">
+              <img src={linkImageSrc} alt="Link" />
+            </div>
+            <div className="info-message_title">Get a link you can share</div>
+            <div className="info-message_subtitle">
+              Tap <strong>New meeting</strong> to get a link you can send to
+              people yo want to meet with
+            </div>
           </div>
-          <div className="info-message_title">Get a link you can share</div>
-          <div className="info-message_subtitle">
-            Tap <strong>New meeting</strong> to get a link you can send to
-            people yo want to meet with
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
