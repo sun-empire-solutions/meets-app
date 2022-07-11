@@ -3,11 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100vw;
-  padding: 0 3rem;
-  @media screen and (min-width: 768px) {
-    width: 80vw;
-  }
+  width: min(100vw, 1200px);
 
   .left {
     display: none;
@@ -15,10 +11,13 @@
     @media screen and (min-width: 768px) {
       display: flex;
       flex: 1;
+      align-items: center;
+      justify-content: center;
     }
 
     img {
-      height: 80vh;
+      width: max(40vw, 400px);
+      max-width: 650px;
     }
   }
 
@@ -28,7 +27,7 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    //background-color: red;
+    padding: 0 4rem;
 
     padding: 1rem, 0rem;
 
