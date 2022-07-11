@@ -2,34 +2,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   height: 100%;
-  width: 100vw;
-  padding: 0 3rem;
+  width: min(100vw, 1200px);
 
-  .login-page_title {
-    font-weight: bolder;
-    font-size: 2.5rem;
-    color: $primary-color;
-  }
+  .left {
+    display: none;
 
-  .login-page_switcher {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    row-gap: 0.5rem;
-    margin-top: 4rem;
-
-    h3 {
-      font-weight: lighter;
-      color: hsl(0, 0%, 98%);
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
     }
 
-    a {
+    img {
+      width: max(40vw, 400px);
+      max-width: 650px;
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4rem;
+
+    padding: 1rem, 0rem;
+
+    .login-page_title {
+      font-weight: bolder;
+      font-size: 2.5rem;
       color: $primary-color;
-      text-decoration: none;
-      font-size: 1rem;
+    }
+
+    .login-page_switcher {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      row-gap: 0.5rem;
+      margin-top: 4rem;
+
+      h3 {
+        font-weight: lighter;
+        color: hsl(0, 0%, 98%);
+      }
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-size: 1rem;
+      }
     }
   }
 }
