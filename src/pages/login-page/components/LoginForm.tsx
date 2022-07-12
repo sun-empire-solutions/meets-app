@@ -22,11 +22,13 @@ const LoginForm = ({ isSignInForm }: IProps) => {
     setPasswordConfirmation(event.target.value);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     login(email, password);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
     if (password !== passwordConfirmation) {
       alert("Password must match!");
       return;
