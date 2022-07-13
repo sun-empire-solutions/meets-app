@@ -16,9 +16,9 @@ const LobbyButtons = () => {
   const [isConnecting, setIsConnecting] = useState(false);
 
   const handleJoinClick = () => {
-    const { displayName } = user;
+    const { displayName, email } = user;
     setIsConnecting(true);
-    connect(displayName, meetingCode)
+    connect(displayName ?? email, meetingCode)
       .then(() => {
         setIsConnecting(false);
         navigate("/meeting");

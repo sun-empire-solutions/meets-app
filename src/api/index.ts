@@ -19,10 +19,10 @@ const request = (
 const getAccessToken = async (username: string, room: string) => {
   const response = await request(`${API_URL}/functions/get_token`, "POST", {
     username,
-    room
+    room,
   });
   const json = await response.json();
   return json.token;
 };
 
-export {getAccessToken};
+export { getAccessToken };
