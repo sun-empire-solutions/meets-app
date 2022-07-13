@@ -58,7 +58,8 @@
       border: none;
       outline: none;
       background-color: $primary-color;
-      color: hsl(0, 0%, 98%);
+      color: rgb(0, 0, 0);
+      font-weight: bold;
 
       &:hover {
         cursor: pointer;
