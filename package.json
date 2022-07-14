@@ -1,5 +1,5 @@
 {
-  "name": "twilio-video-app",
+  "name": "video-chat-app",
   "version": "1.0.1",
   "description": "basic react skeleton",
   "main": "index.js",
