@@ -30,6 +30,6 @@ This is a video chat app developed with react and twilio (**work in progress**)
 
 [![Forkers repo roster for @sun-empire-solutions/video-chat-app](https://reporoster.com/forks/sun-empire-solutions/video-chat-app)](https://github.com/sun-empire-solutions/video-chat-app/network/members)
 
-## [License](https://github.com/iharsh234/WebApp/blob/master/LICENSE.md)
+## [License](https://github.com/sun-empire-solutions/video-chat-app/blob/main/LICENSE)
 
 MIT © [amendezm ](https://github.com/amendezm)
