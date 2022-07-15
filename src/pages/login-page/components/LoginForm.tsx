@@ -1,19 +1,13 @@
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useFirebaseAuth } from "../../../hooks";
+
+import { useFirebaseAuth, useToast } from "../../../hooks";
 
 const LoginForm = ({ isSignInForm }: IProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { login, signup } = useFirebaseAuth();
-
-  const diffToast = () => {
-    toast.error("Password must match!", {
-      position: "top-right",
-    });
-  };
+  const { showToast } = useToast();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -37,8 +31,7 @@ const LoginForm = ({ isSignInForm }: IProps) => {
   const handleSignUp = (e) => {
     e.preventDefault();
     if (password !== passwordConfirmation) {
-      diffToast();
-      // alert("Password must match!");
+      showToast("error", "Passwords do not match");
       return;
     }
     signup(email, password);
@@ -46,7 +39,6 @@ const LoginForm = ({ isSignInForm }: IProps) => {
 
   return (
     <form className="login-form">
-      <ToastContainer />
       <div className="form-field">
         <label htmlFor="email">Email</label>
         <input

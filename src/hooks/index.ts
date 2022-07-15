@@ -16,6 +16,7 @@ import { usePublications } from "./usePublications";
 import { useTrack } from "./useTrack";
 import { useIsTrackSwitchedOff } from "./useIsTrackSwitchedOff";
 import { useParticipantIsReconnecting } from "./useParticipantReconnecting";
+import { useToast } from "./useToast";
 
 export {
   useAuthUser,
@@ -36,4 +37,5 @@ export {
   useTrack,
   useIsTrackSwitchedOff,
   useParticipantIsReconnecting,
+  useToast,
 };
