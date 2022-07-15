@@ -3,24 +3,30 @@ import { useCallback } from "react";
 import { useIsTrackEnabled } from "./useIsTrackEnabled";
 import { useTwilioContext } from "../context";
 import { useTracksSettings } from "./useTracksSettings";
+import { LocalAudioTrack } from "twilio-video";
 
 const useLocalAudioToggle = () => {
-  const { audioTrack, getLocalAudioTrack } = useTwilioContext();
+  const { audioTrack, getLocalAudioTrack, room, removeLocalAudioTrack } =
+    useTwilioContext();
+  const localParticipant = room?.localParticipant;
   const isEnabled = useIsTrackEnabled(audioTrack);
   const { saveAudioSettings } = useTracksSettings();
 
   const toggleAudioEnabled = useCallback(() => {
     if (audioTrack) {
-      if (audioTrack.isEnabled) {
-        audioTrack.disable();
-        saveAudioSettings(false);
-        return;
-      }
-      saveAudioSettings(true);
-      audioTrack.enable();
+      const localTrackPublication =
+        localParticipant?.unpublishTrack(audioTrack);
+      localParticipant?.emit("trackUnpublished", localTrackPublication);
+      removeLocalAudioTrack();
+      saveAudioSettings(false);
+      return;
     }
-    saveAudioSettings(true);
-    getLocalAudioTrack();
+    getLocalAudioTrack()
+      .then((track: LocalAudioTrack) => {
+        saveAudioSettings(true);
+        return localParticipant?.publishTrack(track, { priority: "low" });
+      })
+      .catch((error) => console.log(error));
   }, [audioTrack]);
 
   return [isEnabled, toggleAudioEnabled] as const;

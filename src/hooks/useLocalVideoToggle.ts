@@ -21,18 +21,18 @@ const useLocalVideoToggle = () => {
         localParticipant?.emit("trackUnpublished", localTrackPublication);
         removeLocalVideoTrack();
         saveVideoSettings(false);
-      } else {
-        setIspublishing(true);
-        getLocalVideoTrack()
-          .then((track: LocalVideoTrack) => {
-            saveVideoSettings(true);
-            return localParticipant?.publishTrack(track, { priority: "low" });
-          })
-          .catch((error) => console.log(error))
-          .finally(() => {
-            setIspublishing(false);
-          });
+        return;
       }
+      setIspublishing(true);
+      getLocalVideoTrack()
+        .then((track: LocalVideoTrack) => {
+          saveVideoSettings(true);
+          return localParticipant?.publishTrack(track, { priority: "low" });
+        })
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setIspublishing(false);
+        });
     }
   }, [
     videoTrack,

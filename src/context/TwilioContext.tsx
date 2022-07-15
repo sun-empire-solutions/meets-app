@@ -13,7 +13,6 @@ const TwilioContext = createContext<IContext>({
   isAcquiringLocalTracks: false,
   removeLocalAudioTrack: null,
   removeLocalVideoTrack: null,
-  isAcquiringLocalVideoTrack: false,
   removeLocalAudioAndVideoTracks: null,
   videoTrack: null,
   audioTrack: null,
