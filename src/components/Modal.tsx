@@ -9,7 +9,7 @@ const Modal = ({ title, isOpen, body, footer, onClose }: IProps) => {
   const modalContentRef = useRef<HTMLDivElement>(null);
   useOutsideClick(modalContentRef, onClose);
 
-  const modal = (
+  return createPortal(
     <div
       className={classNames("modal", {
         "is-open": isOpen,
@@ -30,10 +30,9 @@ const Modal = ({ title, isOpen, body, footer, onClose }: IProps) => {
         <div className="modal-body">{body}</div>
         <div className="modal-footer">{footer}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
-
-  return createPortal(modal, document.body);
 };
 
 type IProps = {
