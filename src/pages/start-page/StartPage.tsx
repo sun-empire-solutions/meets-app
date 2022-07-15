@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMeetingCode } from "../../hooks";
@@ -19,6 +19,14 @@ const StartPage = () => {
   const [showError, setShowError] = useState(false);
   const { saveMeetingCode } = useMeetingCode();
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      inputRef.current?.focus();
+      console.log("focus", inputRef.current);
+    }
+  }, [inputRef, isModalOpen]);
 
   if (isLoading) {
     return null;
@@ -50,6 +58,7 @@ const StartPage = () => {
         body={
           <div className="start-page__modal-body">
             <Input
+              ref={inputRef}
               placeholder="Ej: abc-mnop-xyz"
               value={meetingName}
               onChange={(evt) => {
