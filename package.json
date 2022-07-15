@@ -39,6 +39,7 @@
     "firebase": "^9.8.1",
     "netlify-webpack-plugin": "^1.1.3",
     "process": "^0.11.10",
+    "react-toastify": "^9.0.5",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",

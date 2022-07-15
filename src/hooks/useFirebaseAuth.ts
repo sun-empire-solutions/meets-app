@@ -33,6 +33,8 @@ const useFirebaseAuth = () => {
     [firebaseApp]
   );
 
+  
+
   const login = useCallback(
     (email, password) => {
       if (auth) {
@@ -41,6 +43,8 @@ const useFirebaseAuth = () => {
             saveUser(u.user);
           })
           .catch(function (error) {
+           // return error;
+          
             alert("User or Password wrong");
             //console.log(error);
           });
