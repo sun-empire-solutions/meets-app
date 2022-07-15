@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { LoginForm, LoginProviders } from "./components";
 
-//@ts-ignore
+
 import loginSvg from "./../../assets/svg/for_login.svg";
 
 const LoginPage = () => {
