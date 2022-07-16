@@ -4,7 +4,7 @@ import { Track } from "twilio-video";
 import { useMediaStreamTrack, useVideoTrackDimensions } from "../../hooks";
 import { IVideoTrack } from "../../types";
 
-const VideoTrack = ({ track, isLocal, priority }: IProps) => {
+const VideoTrack = ({ track, priority }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null!);
   const mediaStreamTrack = useMediaStreamTrack(track);
   const dimensions = useVideoTrackDimensions(track);
