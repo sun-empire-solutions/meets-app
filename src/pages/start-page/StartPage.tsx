@@ -7,7 +7,6 @@ import { Button, Input, Modal } from "../../components";
 import { useMeetings } from "./hooks";
 import { MeetingList, StartButtons } from "./components";
 
-//@ts-ignore
 import linkImageSrc from "./../../assets/images/meeting-link.png";
 
 const StartPage = () => {
