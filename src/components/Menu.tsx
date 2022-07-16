@@ -9,9 +9,7 @@ const Menu = () => {
   const { user, logout } = useFirebaseAuth();
   const userInitials = useMemo(() => {
     const displayName = user?.providerData?.[0]?.displayName;
-    console.log("this is the displayname");
     if (displayName) {
-      console.log("displayname present");
       const names = displayName.split(" ");
       return names
         .map((name) => name.charAt(0))
