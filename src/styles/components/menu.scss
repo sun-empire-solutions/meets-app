@@ -24,6 +24,7 @@
     width: 2.4rem;
     border-radius: 50%;
     background-size: cover;
+    color: white;
 
     &:hover {
       cursor: pointer;
@@ -36,7 +37,7 @@
     position: absolute;
     align-items: center;
     justify-content: center;
-    top: 4rem;
+    top: 5rem;
     right: 1.3rem;
     padding: 0.5rem;
     background-color: white;
@@ -64,6 +65,8 @@
         height: 5rem;
         border-radius: 50%;
         background-size: cover;
+        font-size: 2.25rem;
+        color: white;
       }
 
       .menu-body_user-name {

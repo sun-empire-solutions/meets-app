@@ -9,14 +9,19 @@ const Menu = () => {
   const { user, logout } = useFirebaseAuth();
   const userInitials = useMemo(() => {
     const displayName = user?.providerData?.[0]?.displayName;
+    console.log("this is the displayname");
     if (displayName) {
+      console.log("displayname present");
       const names = displayName.split(" ");
       return names
         .map((name) => name.charAt(0))
         .join("")
         .substring(0, names.length == 1 ? 1 : 2);
     }
-    return user?.email.substring(0, 2);
+    const emailInitial = user?.providerData?.[0].email
+      .substring(0, 2)
+      .toUpperCase();
+    return emailInitial;
   }, [user]);
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const menuRef = useRef();
@@ -60,7 +65,9 @@ const Menu = () => {
                   ? { backgroundImage: `url(${userPhotoUrl})` }
                   : { backgroundColor: "rgb(12, 148, 238)" }
               }
-            ></div>
+            >
+              {userPhotoUrl ? "" : userInitials?.toUpperCase()}
+            </div>
             <div className="menu-body_user-name">{user?.displayName}</div>
             <div className="menu-body_user-email">{user?.email}</div>
           </div>
