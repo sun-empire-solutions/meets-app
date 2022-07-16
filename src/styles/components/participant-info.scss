@@ -1,0 +1,23 @@
+.participant-info {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .participant-identity {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(128, 128, 128, 0.527);
+    top: 0.25rem;
+    left: 0;
+  }
+
+  .participant-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

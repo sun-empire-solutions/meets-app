@@ -4,6 +4,7 @@ import { Participant as IParticipant } from "twilio-video";
 import { useTwilioContext } from "../context";
 
 import { ParticipantTracks } from "./participant";
+import { ParticipantInfo } from "./participant/ParticipantInfo";
 
 const Participant = ({ participant, index }: IProps) => {
   const { room } = useTwilioContext();
@@ -14,10 +15,15 @@ const Participant = ({ participant, index }: IProps) => {
 
   return (
     <div hidden className={`participant-wrapper participant-${index}`}>
-      <ParticipantTracks
+      <ParticipantInfo
         participant={participant}
         isLocalParticipant={isLocalParticipant}
-      />
+      >
+        <ParticipantTracks
+          participant={participant}
+          isLocalParticipant={isLocalParticipant}
+        />
+      </ParticipantInfo>
     </div>
   );
 };
