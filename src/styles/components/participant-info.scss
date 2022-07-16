@@ -14,6 +14,14 @@
     left: 0;
   }
 
+  .muted-indicator {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(128, 128, 128, 0.527);
+    bottom: 0.25rem;
+    right: 0;
+  }
+
   .participant-content {
     height: 100%;
     display: flex;

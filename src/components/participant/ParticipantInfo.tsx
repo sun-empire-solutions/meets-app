@@ -1,4 +1,11 @@
-import { LocalVideoTrack, Participant, RemoteVideoTrack } from "twilio-video";
+import { useMemo } from "react";
+import { BsMicMuteFill } from "react-icons/bs";
+import {
+  AudioTrack,
+  LocalVideoTrack,
+  Participant,
+  RemoteVideoTrack,
+} from "twilio-video";
 
 import {
   useIsTrackSwitchedOff,
@@ -14,6 +21,15 @@ const ParticipantInfo = ({
   isLocalParticipant,
 }: IProps) => {
   const { publications } = usePublications(participant);
+
+  const trackPublication = publications.find((p) => p.kind === "audio");
+
+  const audioTrack = useTrack(trackPublication);
+
+  const isMuted = useMemo(
+    () => !(audioTrack as AudioTrack)?.isEnabled,
+    [audioTrack]
+  );
 
   const videoPublication = publications.find(
     (p) => !p.trackName.includes("screen") && p.kind === "video"
@@ -37,6 +53,11 @@ const ParticipantInfo = ({
         {participant.identity}
         {isLocalParticipant && " (You)"}
       </div>
+      {isMuted && (
+        <div className="muted-indicator">
+          <BsMicMuteFill size={16} color="white" />
+        </div>
+      )}
       <div className="participant-content">
         {(!isVideoEnabled || isVideoSwitchedOff) && <ParticipantAvatar />}
         {isParticipantReconnecting && <div>Reconnecting...</div>}
