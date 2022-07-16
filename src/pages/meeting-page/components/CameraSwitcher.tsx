@@ -1,9 +1,9 @@
 import { IoMdReverseCamera } from "react-icons/io";
 
-import { useTwilioContext } from "../../../context";
+import { useCameraSwitch } from "../hooks";
 
 const CameraSwitcher = () => {
-  const { switchCamera } = useTwilioContext();
+  const { switchCamera } = useCameraSwitch();
 
   return (
     <div className="camera-switcher" role="button" onClick={switchCamera}>

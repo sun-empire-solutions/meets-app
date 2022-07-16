@@ -157,10 +157,6 @@ $videos: (
     display: block;
     object-fit: cover;
     width: 100%;
-
-    &.is-front {
-      transform: scaleX(-1);
-    }
   }
 
   .muted-indicator {
