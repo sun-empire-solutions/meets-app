@@ -9,21 +9,13 @@
   justify-content: center;
   font-weight: bold;
 
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 0.5px 0.5px 2.5px 0.5px rgba(0, 0, 0, 0.24);
-    opacity: 0.5;
+  &:hover {
+    cursor: pointer;
   }
 
   .icon {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  @media (min-width: 400px) {
-    &:hover {
-      cursor: pointer;
-      opacity: 0.5;
-    }
   }
 }

@@ -15,6 +15,23 @@
     height: 2rem;
     color: black;
 
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0.5px 0.5px 2.5px 0.5px rgba(0, 0, 0, 0.48);
+      background-color: lighten($primary-color, 25%);
+      box-shadow: 1px 1px 5px 2.5px $primary-color;
+      color: black;
+    }
+
+    @media (min-width: 400px) {
+      &:hover {
+        cursor: pointer;
+        background-color: lighten($primary-color, 35%);
+        box-shadow: 1px 1px 5px 2.5px $primary-color;
+        color: black;
+      }
+    }
+
     @media screen and (min-width: 768px) {
       width: 70%;
       height: 3rem;
@@ -29,6 +46,22 @@
     height: 2rem;
     border: 1px solid $secondary-color;
     color: $secondary-color;
+
+    &:active {
+      transform: scale(0.98);
+      background-color: lighten($secondary-color, 20%);
+      box-shadow: 1px 1px 5px 2.5px $secondary-color;
+      color: black;
+    }
+
+    @media (min-width: 400px) {
+      &:hover {
+        cursor: pointer;
+        background-color: lighten($secondary-color, 30%);
+        box-shadow: 1px 1px 5px 2.5px $secondary-color;
+        color: black;
+      }
+    }
 
     @media screen and (min-width: 768px) {
       width: 70%;
