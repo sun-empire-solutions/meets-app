@@ -23,7 +23,6 @@ const StartPage = () => {
   useEffect(() => {
     if (isModalOpen) {
       inputRef.current?.focus();
-      // console.log("focus", inputRef.current);
     }
   }, [inputRef, isModalOpen]);
 
@@ -51,12 +50,7 @@ const StartPage = () => {
 
   const joinMeetingEnterKey = (event) => {
     if (event.code === "Enter") {
-      if (isMeetingCodeValid(meetingName)) {
-        setShowError(false);
-        saveMeetingCode(meetingName);
-        navigate("/lobby");
-      }
-      setShowError(true);
+      joinMeeting();
     }
   };
 
