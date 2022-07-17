@@ -9,12 +9,12 @@ import { Button } from "./Button";
 import { TrackButtons } from "./TrackButtons";
 
 const MeetingButtons = () => {
-  const { room, clearTracks } = useTwilioContext();
+  const { room, removeLocalAudioAndVideoTracks } = useTwilioContext();
   const navigate = useNavigate();
   const { removeMeetingCode } = useMeetingCode();
 
   const handleLeave = () => {
-    clearTracks();
+    removeLocalAudioAndVideoTracks();
     removeMeetingCode();
     room.disconnect();
   };

@@ -1,6 +1,10 @@
 {
-  "AC351695f7ece6c25b5066950a53cb0f03": {
-    "serviceSid": "ZS8e06843b8c32250c37aea4e634568d5e",
-    "latestBuild": "ZB77d6ce39e15535ff53c350b09429e1d6"
-  }
+	"AC351695f7ece6c25b5066950a53cb0f03": {
+		"serviceSid": "ZS8e06843b8c32250c37aea4e634568d5e",
+		"latestBuild": "ZBf4abc5ddc0928310a56bb20e8b6d413c"
+	},
+	"AC8068969a0804952e89ade3aa78968cd3": {
+		"serviceSid": "ZS5dc40e38a746acf8dcc3106762f29700",
+		"latestBuild": "ZB3337533bd69a5ea55af7d3edaec61ae4"
+	}
 }
