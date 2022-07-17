@@ -15,6 +15,12 @@
     height: 2rem;
     color: black;
 
+    &:active,
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+      box-shadow: 1px 1px 3px 1px $primary-color;
+    }
+
     @media screen and (min-width: 768px) {
       width: 70%;
       height: 3rem;
@@ -29,6 +35,13 @@
     height: 2rem;
     border: 1px solid $secondary-color;
     color: $secondary-color;
+
+    &:active,
+    &:hover {
+      background-color: lighten($secondary-color, 10%);
+      box-shadow: 1px 1px 3px 1px $secondary-color;
+      color: black;
+    }
 
     @media screen and (min-width: 768px) {
       width: 70%;
