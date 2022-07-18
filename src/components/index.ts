@@ -13,6 +13,7 @@ import { TrackButtons } from "./TrackButtons";
 import { VideoTrack, AudioTrack } from "./tracks";
 import { Publication } from "./publication";
 import { ParticipantTracks } from "./participant";
+import { ToastifyContainer } from "./common/ToastifyContainer";
 
 export {
   Button,
@@ -31,4 +32,5 @@ export {
   AudioTrack,
   Publication,
   ParticipantTracks,
+  ToastifyContainer,
 };
