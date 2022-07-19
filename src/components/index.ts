@@ -11,6 +11,10 @@ import { ParticipantAvatar } from "./ParticipantAvatar";
 import { TrackButton } from "./TrackButton";
 import { TrackButtons } from "./TrackButtons";
 import { ShareButton } from "./ShareButton";
+import { VideoTrack, AudioTrack } from "./tracks";
+import { Publication } from "./publication";
+import { ParticipantTracks } from "./participant";
+import { ToastifyContainer } from "./common/ToastifyContainer";
 
 export {
   Button,
@@ -25,5 +29,10 @@ export {
   ParticipantAvatar,
   TrackButton,
   TrackButtons,
-  ShareButton
+  ShareButton,
+  VideoTrack,
+  AudioTrack,
+  Publication,
+  ParticipantTracks,
+  ToastifyContainer,
 };

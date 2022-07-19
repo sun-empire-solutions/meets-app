@@ -1,29 +1,21 @@
-import { useTwilioContext } from "../context";
+import { useLocalAudioToggle, useLocalVideoToggle } from "../hooks";
 
 import { TrackButton } from "./TrackButton";
 
 const TrackButtons = () => {
-  const {
-    localVideoTrackPublication,
-    localAudioTrackPublication,
-    isAudioEnabled,
-    isVideoEnabled,
-    toggleAudioTrack,
-    toggleVideoTrack,
-  } = useTwilioContext();
+  const [isVideoEnabled, toggleVideoTrack] = useLocalVideoToggle();
+  const [isAudioEnabled, toggleAudioTrack] = useLocalAudioToggle();
 
   return (
     <div className="track-buttons">
       <TrackButton
         type="camera"
-        isActive={localVideoTrackPublication?.isTrackEnabled || isVideoEnabled}
+        isActive={isVideoEnabled}
         onClick={toggleVideoTrack}
       />
       <TrackButton
         type="mic"
-        isActive={
-          localAudioTrackPublication?.track?.isEnabled || isAudioEnabled
-        }
+        isActive={isAudioEnabled}
         onClick={toggleAudioTrack}
       />
     </div>

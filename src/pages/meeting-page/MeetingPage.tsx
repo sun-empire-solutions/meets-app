@@ -1,27 +1,23 @@
-import { useEffect, useMemo } from "react";
-
-import { useMeetingCode, useParticipants } from "../../hooks";
+import { useMemo } from "react";
+import { useMeetingCode, useParticipants, useTracksSettings } from "../../hooks";
 import { MeetingButtons, Participant } from "../../components";
-import { useTwilioContext } from "../../context";
 
 import { MeetingTopActions } from "./components";
 import { ShareButton } from "../../components";
+import { useHasMultipleCameras } from "./hooks";
 
 const MeetingPage = () => {
   const { participants } = useParticipants();
   const size = useMemo(() => participants.length, [participants]);
-  const { isVideoEnabled, hasMultipleVideoInputs, setVideoInputDevices } =
-    useTwilioContext();
-  const { meetingCode: meetCode } = useMeetingCode()
-  console.log(meetCode)
-  useEffect(() => {
-    setVideoInputDevices();
-  }, []);
+  const { hasMultipleCameras } = useHasMultipleCameras();
+  const { getVideoSettings } = useTracksSettings();
+  const isVideoEnabled = getVideoSettings();
+  const { meetingCode } = useMeetingCode();
 
   return (
     <div className="meeting-page">
-      {isVideoEnabled && hasMultipleVideoInputs && <MeetingTopActions />}
-      <ShareButton meetCode={meetCode} />
+      <ShareButton meetCode={meetingCode} />
+      {isVideoEnabled && hasMultipleCameras && <MeetingTopActions />}
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant

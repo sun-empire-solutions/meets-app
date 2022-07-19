@@ -45,6 +45,10 @@
       row-gap: 0.5rem;
       margin-top: 4rem;
 
+      @media screen and (min-width: 768px) {
+        margin-top: 2rem;
+      }
+
       h3 {
         font-weight: lighter;
         color: hsl(0, 0%, 98%);

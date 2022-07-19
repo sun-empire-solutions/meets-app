@@ -23,7 +23,6 @@ const StartPage = () => {
   useEffect(() => {
     if (isModalOpen) {
       inputRef.current?.focus();
-      console.log("focus", inputRef.current);
     }
   }, [inputRef, isModalOpen]);
 
@@ -49,8 +48,14 @@ const StartPage = () => {
     setShowError(true);
   };
 
+  const joinMeetingEnterKey = (event) => {
+    if (event.code === "Enter") {
+      joinMeeting();
+    }
+  };
+
   return (
-    <div className="start-page">
+    <div className="start-page" onKeyDown={joinMeetingEnterKey}>
       <Modal
         isOpen={isModalOpen}
         title="Join with a code"

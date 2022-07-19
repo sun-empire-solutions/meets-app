@@ -13,6 +13,7 @@ import {
 
 import { useAuthUser } from "./useAuthUser";
 import { clearStorage } from "../services/storage";
+import { useToast } from "./useToast";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCkKVKdomv-qAWMGcJq07mW75HG_TTnY_g",
@@ -32,6 +33,7 @@ const useFirebaseAuth = () => {
     () => (firebaseApp ? getAuth(firebaseApp) : null),
     [firebaseApp]
   );
+  const { showToast } = useToast();
 
   const login = useCallback(
     (email, password) => {
@@ -41,8 +43,7 @@ const useFirebaseAuth = () => {
             saveUser(u.user);
           })
           .catch(function (error) {
-            alert("User or Password wrong");
-            //console.log(error);
+            showToast("error", "Wrong email or password");
           });
       }
     },
@@ -104,7 +105,7 @@ const useFirebaseAuth = () => {
           saveUser(u.user);
         })
         .catch(function (error) {
-          console.log(error);
+          showToast("error", error.message);
         });
     }
   };
@@ -117,7 +118,7 @@ const useFirebaseAuth = () => {
           saveUser(null); //Logged out
         })
         .catch(function (error) {
-          console.log(error);
+          showToast("error", error.message);
         });
     }
   };

@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-import { useFirebaseAuth } from "../../../hooks";
+import { useFirebaseAuth, useToast } from "../../../hooks";
 
 const LoginForm = ({ isSignInForm }: IProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { login, signup } = useFirebaseAuth();
+  const { showToast } = useToast();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -30,7 +31,7 @@ const LoginForm = ({ isSignInForm }: IProps) => {
   const handleSignUp = (e) => {
     e.preventDefault();
     if (password !== passwordConfirmation) {
-      alert("Password must match!");
+      showToast("error", "Passwords do not match");
       return;
     }
     signup(email, password);
