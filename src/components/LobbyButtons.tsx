@@ -5,7 +5,6 @@ import { Ring } from "@uiball/loaders";
 import { useAuthUser, useMeetingCode } from "../hooks";
 import { useTwilioContext } from "../context";
 
-import { TrackButtons } from "./TrackButtons";
 import { Button } from "./Button";
 
 const LobbyButtons = () => {
@@ -31,7 +30,6 @@ const LobbyButtons = () => {
 
   return (
     <div className="lobby-buttons">
-      <TrackButtons />
       <Button
         classNames="join-button"
         icon={

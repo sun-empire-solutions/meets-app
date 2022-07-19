@@ -1,1 +1,57 @@
+.lobby-page {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
+  .lobby-video-preview {
+    width: 50%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(60, 59, 59, 0.326);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+
+    video {
+      object-fit: cover;
+      transform: scaleX(-1);
+      height: 100%;
+
+      @media (max-width: 768px) {
+        position: relative;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .avatar {
+      height: 100px;
+    }
+
+    .lobby-track-buttons {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      bottom: 0;
+
+      .track-button.inactive {
+        svg {
+          color: #494949;
+        }
+
+        .button-background {
+          background: #c8c8c8db !important;
+        }
+      }
+    }
+  }
+}

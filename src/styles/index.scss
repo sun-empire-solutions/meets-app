@@ -3,26 +3,3 @@
 @import "./components/all";
 @import "./layouts/all";
 @import "./pages/all";
-
-.container {
-  width: 100vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  video {
-    object-fit: cover;
-    transform: scaleX(-1);
-    width: 60vw;
-    height: 100%;
-
-    @media (max-width: 768px) {
-      position: relative;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-  }
-}

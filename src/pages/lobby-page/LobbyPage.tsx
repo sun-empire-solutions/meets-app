@@ -1,13 +1,18 @@
 import { useEffect } from "react";
 
-import { LobbyButtons } from "../../components";
+import { LoadingIndicator, LobbyButtons, TrackButtons } from "../../components";
 import { useTwilioContext } from "../../context";
+import { useMeetingCode, useTracksSettings } from "../../hooks";
 
 import { LocalVideoPreview } from "./components/LocalVideoPreview";
 
 const LobbyPage = () => {
   const { getAudioAndVideoTracks, removeLocalAudioAndVideoTracks } =
     useTwilioContext();
+  const { isAcquiringLocalTracks } = useTwilioContext();
+  const { getVideoSettings } = useTracksSettings();
+  const isVideoEnabled = getVideoSettings();
+  const { meetingCode } = useMeetingCode();
 
   useEffect(() => {
     getAudioAndVideoTracks();
@@ -17,9 +22,20 @@ const LobbyPage = () => {
     };
   }, []);
 
+  if (isAcquiringLocalTracks && isVideoEnabled) {
+    return <LoadingIndicator />;
+  }
+
   return (
-    <div className="container">
-      <LocalVideoPreview />
+    <div className="lobby-page">
+      <div className="lobby-page_top">
+        <h1 className="title">{meetingCode}</h1>
+      </div>
+      <div className="lobby-video-preview">
+        <LocalVideoPreview />
+        <TrackButtons className="lobby-track-buttons" />
+      </div>
+
       <LobbyButtons />
     </div>
   );
