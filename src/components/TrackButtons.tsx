@@ -2,12 +2,12 @@ import { useLocalAudioToggle, useLocalVideoToggle } from "../hooks";
 
 import { TrackButton } from "./TrackButton";
 
-const TrackButtons = () => {
+const TrackButtons = ({ className }: IProps) => {
   const [isVideoEnabled, toggleVideoTrack] = useLocalVideoToggle();
   const [isAudioEnabled, toggleAudioTrack] = useLocalAudioToggle();
 
   return (
-    <div className="track-buttons">
+    <div className={`track-buttons ${className}`}>
       <TrackButton
         type="camera"
         isActive={isVideoEnabled}
@@ -20,6 +20,10 @@ const TrackButtons = () => {
       />
     </div>
   );
+};
+
+type IProps = {
+  className?: string;
 };
 
 export { TrackButtons };
