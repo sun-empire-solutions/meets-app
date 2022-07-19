@@ -1,13 +1,22 @@
+$button-size-mobile: 2.5rem;
+$button-size: 3rem;
+
+$svg-size-mobile: 16px;
+$svg-size: 18px;
+
 .track-buttons {
   display: flex;
   column-gap: 1rem;
 }
 
-$button-size: 3rem;
-
 .button-size {
-  height: $button-size;
-  width: $button-size;
+  height: $button-size-mobile;
+  width: $button-size-mobile;
+
+  @media (min-width: $mobile-breakpoint) {
+    height: $button-size;
+    width: $button-size;
+  }
 }
 
 .track-button {
@@ -29,6 +38,11 @@ $button-size: 3rem;
 
   svg {
     z-index: 2;
+    height: $svg-size-mobile;
+
+    @media (min-width: $mobile-breakpoint) {
+      height: $svg-size;
+    }
   }
 
   .button-background {
