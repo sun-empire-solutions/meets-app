@@ -21,7 +21,7 @@ const MeetingPage = () => {
   return (
     <div className="meeting-page">
       {isVideoEnabled && hasMultipleVideoInputs && <MeetingTopActions />}
-      <ShareButton meetCode={meetCode} classNames="share-code" />
+      <ShareButton meetCode={meetCode} />
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (
           <Participant

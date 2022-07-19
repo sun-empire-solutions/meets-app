@@ -3,14 +3,13 @@ import shareLogo from "../assets/images/share-logo.jpg"
 
 interface Props {
     meetCode: string;
-    classNames: string;
 }
 
-export function ShareButton({ meetCode, classNames }: Props) {
+export function ShareButton({ meetCode }: Props) {
     return (
         <Button icon={<img src={shareLogo} alt="Share Logo" />}
             text=""
-            classNames={classNames}
+            classNames={"share-button"}
             onClick={() => navigator.clipboard.writeText(meetCode)}
         />
     )
