@@ -1,7 +1,7 @@
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { LobbyButtons } from "./LobbyButtons";
+import { JoinButton } from "./JoinButton";
 import { MeetingButtons } from "./MeetingButtons";
 import { Menu } from "./Menu";
 import { Modal } from "./Modal";
@@ -19,7 +19,7 @@ export {
   Button,
   Input,
   LoadingIndicator,
-  LobbyButtons,
+  JoinButton,
   MeetingButtons,
   Menu,
   Modal,

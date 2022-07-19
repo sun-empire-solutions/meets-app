@@ -1,6 +1,6 @@
 const Button = ({ icon, text, classNames, onClick }: IProps) => {
   return (
-    <button className={`button ${classNames}`} onClick={onClick}>
+    <button className={`button ${classNames ?? ""}`} onClick={onClick}>
       {icon}
       {text && <span className="text">{text}</span>}
     </button>

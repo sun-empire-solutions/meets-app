@@ -42,6 +42,7 @@
     padding: 0.5rem;
     background-color: white;
     border-radius: 5px;
+    z-index: 3;
 
     @media screen and (max-width: $mobile-breakpoint) {
       max-width: 80vh;

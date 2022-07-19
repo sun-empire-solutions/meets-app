@@ -7,7 +7,7 @@ import { useTwilioContext } from "../context";
 
 import { Button } from "./Button";
 
-const LobbyButtons = () => {
+const JoinButton = () => {
   const navigate = useNavigate();
   const { user } = useAuthUser();
   const { meetingCode } = useMeetingCode();
@@ -29,19 +29,17 @@ const LobbyButtons = () => {
   };
 
   return (
-    <div className="lobby-buttons">
-      <Button
-        classNames="join-button"
-        icon={
-          isConnecting ? (
-            <Ring size={26} lineWeight={5} speed={2} color="white" />
-          ) : null
-        }
-        text={isConnecting ? "" : "Join"}
-        onClick={handleJoinClick}
-      />
-    </div>
+    <Button
+      classNames="join-button"
+      icon={
+        isConnecting ? (
+          <Ring size={26} lineWeight={5} speed={2} color="white" />
+        ) : null
+      }
+      text={isConnecting ? "" : "Join"}
+      onClick={handleJoinClick}
+    />
   );
 };
 
-export { LobbyButtons };
+export { JoinButton };
