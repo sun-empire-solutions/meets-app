@@ -29,7 +29,7 @@ const LobbyPage = () => {
   return (
     <div className="lobby-page">
       <div className="lobby-page_top">
-        <h1 className="title">{meetingCode}</h1>
+        <h3 className="title">{meetingCode}</h3>
       </div>
       <div className="lobby-video-preview">
         <LocalVideoPreview />

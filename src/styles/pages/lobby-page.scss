@@ -6,6 +6,18 @@
   align-items: center;
   justify-content: space-between;
 
+  .lobby-page_top {
+    height: 18vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .title {
+      color: #aaaeb2;
+    }
+  }
+
   .lobby-video-preview {
     width: 50%;
     height: 40%;
