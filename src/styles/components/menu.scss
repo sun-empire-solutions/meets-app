@@ -43,6 +43,7 @@
     background-color: white;
     border-radius: 5px;
     z-index: 3;
+    min-width: 13.5rem;
 
     @media screen and (max-width: $mobile-breakpoint) {
       max-width: 80vh;
