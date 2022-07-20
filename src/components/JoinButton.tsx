@@ -30,7 +30,7 @@ const JoinButton = () => {
 
   return (
     <Button
-      classNames="join-button"
+      classNames="lobby-mobile-join-button"
       icon={
         isConnecting ? (
           <Ring size={26} lineWeight={5} speed={2} color="white" />
