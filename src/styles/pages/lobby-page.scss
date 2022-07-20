@@ -35,6 +35,7 @@
       object-fit: cover;
       transform: scaleX(-1);
       height: 100%;
+      border-radius: 25px;
 
       @media (max-width: 768px) {
         position: relative;
