@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 import { useWindowWidth } from "@react-hook/window-size";
 
-import { LoadingIndicator, JoinButton, TrackButtons,ShareButton } from "../../components";
+import { LoadingIndicator, JoinButton, TrackButtons } from "../../components";
 import { useTwilioContext } from "../../context";
 import { useAuthUser, useMeetingCode, useTracksSettings } from "../../hooks";
 
