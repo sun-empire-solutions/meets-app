@@ -104,7 +104,24 @@
     padding: 1rem 2rem;
 
     .join-button {
-      margin-bottom: 1rem;
+      align-items: center;
+      background-color: rgb(12, 148, 238);
+      border-radius: 30px;
+      border: none;
+      box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 35%);
+      color: #fff;
+      display: flex;
+      font-size: 1rem;
+      height: 3rem;
+      justify-content: center;
+      margin-bottom: 10px;
+      opacity: 0.85;
+      outline: none;
+      width: 8rem;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .join-message {
