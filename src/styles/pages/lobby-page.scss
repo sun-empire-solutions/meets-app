@@ -33,16 +33,10 @@
 
     video {
       object-fit: cover;
-      transform: scaleX(-1);
-      height: 100%;
+      // Changed height and width to 110% as it breaks in some devices otherwise. Refer to issue #104
+      height: 110%; 
+      width: 110%;
       border-radius: 25px;
-
-      @media (max-width: 768px) {
-        position: relative;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
     }
 
     .avatar {
