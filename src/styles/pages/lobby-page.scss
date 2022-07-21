@@ -6,127 +6,203 @@
   align-items: center;
   justify-content: space-between;
 
-  .lobby-page_top {
-    height: 18vh;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
+  @media screen and (min-width: $mobile-breakpoint) {
+    flex-direction: row;
     justify-content: center;
-
-    .title {
-      color: #aaaeb2;
-    }
+    padding: 1rem 2rem;
   }
 
-  .lobby-video-preview {
-    width: 50%;
-    height: 40%;
+  .lobby-page_preview-section {
+    width: 100%;
+    height: 60%;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    background: rgba(60, 59, 59, 0.326);
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
-    video {
-      object-fit: cover;
-      // Changed height and width to 110% as it breaks in some devices otherwise. Refer to issue #104
-      height: 110%; 
-      width: 110%;
-      border-radius: 25px;
+    @media screen and (min-width: $mobile-breakpoint) {
+      justify-content: center;
+      width: 50vw;
+      height: 100%;
+      margin-right: 3rem;
+      margin-bottom: 0;
+      justify-content: center;
+      max-width: 1000px;
     }
 
-    .avatar {
-      height: 100px;
+    .meeting-code {
+      color: #aaaeb2;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
     }
 
-    .lobby-track-buttons {
-      position: absolute;
-      width: 100%;
+    .video-preview {
+      width: max(55%, 160px);
+      height: 65%;
       display: flex;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      bottom: 0;
+      align-items: center;
+      justify-content: center;
+      background: rgba(60, 59, 59, 0.326);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      margin-bottom: 1rem;
 
-      .track-button.inactive {
-        svg {
-          color: #494949;
+      @media screen and (min-width: $mobile-breakpoint) {
+        width: 90%;
+        height: 60%;
+      }
+
+      video {
+        object-fit: cover;
+        // Changed height and width to 110% as it breaks in some devices otherwise. Refer to issue #104
+        height: 110%;
+        width: 110%;
+        border-radius: 25px;
+      }
+
+      .avatar {
+        height: 100px;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+          width: 25%;
+          height: auto;
+        }
+      }
+
+      .lobby-track-buttons {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        bottom: 0;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+          justify-content: center;
+          margin-bottom: 3%;
         }
 
-        .button-background {
-          background: #c8c8c8db !important;
+        .track-button {
+          @media screen and (min-width: $mobile-breakpoint) {
+            // width: 10%;
+            // height: 10%;
+          }
+
+          &.inactive {
+            svg {
+              color: #494949;
+            }
+
+            .button-background {
+              background: #c8c8c8db !important;
+            }
+          }
         }
       }
     }
   }
 
   .lobby-page_share-section {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 2px solid rgb(52 52 52);
-    border-bottom: 2px solid rgb(43 43 43);
-    padding: 1rem;
-
-    .info-icon {
-      color: #aaaeb2;
-      margin-top: 0.25rem;
-      margin-right: 1.5rem;
-    }
-
-    .share-code {
-      flex: 1;
-      color: #f9f9f9;
-      font-weight: lighter;
-    }
-
-    .share-icon {
-      color: #aaaeb2;
-      cursor: pointer;
-    }
-  }
-
-  .lobby-page-bottom {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    flex: 1;
     width: 100%;
-    padding: 1rem 2rem;
 
-    .join-button {
-      align-items: center;
-      background-color: rgb(12, 148, 238);
-      border-radius: 30px;
-      border: none;
-      box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 35%);
-      color: #fff;
-      display: flex;
-      font-size: 1rem;
-      height: 3rem;
+    @media screen and (min-width: $mobile-breakpoint) {
+      max-width: 650px;
+      padding: 0 1rem;
+      padding-top: 4rem;
+    }
+
+    .share-message {
+      display: none;
       justify-content: center;
-      margin-bottom: 10px;
-      opacity: 0.85;
-      outline: none;
-      width: 8rem;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 4rem;
+      font-size: 2.75rem;
+      color: #fff;
 
-      &:hover {
+      @media screen and (min-width: $mobile-breakpoint) {
+        display: flex;
+      }
+    }
+
+    .meeting-share {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid rgb(52 52 52);
+      border-bottom: 2px solid rgb(43 43 43);
+      padding: 1rem;
+      margin-bottom: 2rem;
+
+      .info-icon {
+        color: #aaaeb2;
+        margin-top: 0.25rem;
+        margin-right: 1.5rem;
+      }
+
+      .share-code {
+        flex: 1;
+        color: #f9f9f9;
+        font-weight: lighter;
+      }
+
+      .share-icon {
+        color: #aaaeb2;
         cursor: pointer;
       }
     }
 
-    .join-message {
-      color: #aaaeb2;
-      margin-bottom: 0.5rem;
-    }
+    .meeting-join {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      padding: 1rem 2rem;
 
-    .user-info {
-      color: white;
-      font-weight: bold;
+      .join-button {
+        align-items: center;
+        background-color: rgb(12, 148, 238);
+        border-radius: 30px;
+        border: none;
+        box-shadow: 1px 1px 5px 1px rgb(0 0 0 / 35%);
+        color: #fff;
+        display: flex;
+        font-size: 1rem;
+        height: 3rem;
+        justify-content: center;
+        margin-bottom: 10px;
+        opacity: 0.85;
+        outline: none;
+        width: 8rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        @media screen and (min-width: $mobile-breakpoint) {
+          width: 60%;
+          margin-bottom: 4rem;
+        }
+      }
+
+      .join-message {
+        color: #aaaeb2;
+        margin-bottom: 0.5rem;
+      }
+
+      .user-info {
+        color: white;
+        font-weight: bold;
+      }
     }
   }
 }

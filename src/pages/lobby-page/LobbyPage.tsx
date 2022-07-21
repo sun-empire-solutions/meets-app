@@ -56,36 +56,39 @@ const LobbyPage = () => {
 
   return (
     <div className="lobby-page">
-      <div className="lobby-page_top">
-        <h3 className="title">{meetingCode}</h3>
-      </div>
-      <div className="lobby-video-preview">
-        <LocalVideoPreview />
-        <TrackButtons className="lobby-track-buttons" />
+      <div className="lobby-page_preview-section">
+        <h3 className="meeting-code">{meetingCode}</h3>
+        <div className="video-preview">
+          <LocalVideoPreview />
+          <TrackButtons className="lobby-track-buttons" />
+        </div>
       </div>
       <div className="lobby-page_share-section">
-        <div className="info-icon">
-          <MdOutlineInfo size={20} />
-        </div>
-        <div className="share-code">{meetingCode}</div>
-        {isMobile ? (
-          <div className="share-icon" role="button" onClick={handleShare}>
-            <MdOutlineIosShare size={24} />
+        <div className="share-message">All ready to join?</div>
+        <div className="meeting-share">
+          <div className="info-icon">
+            <MdOutlineInfo size={20} />
           </div>
-        ) : isCopied ? (
-          <BsCheckLg color="#44dd44" size={18} />
-        ) : (
-          <MdContentCopy
-            color="#aaaeb2"
-            size={24}
-            onClick={copyCodeToClipboard}
-          />
-        )}
-      </div>
-      <div className="lobby-page-bottom">
-        <JoinButton />
-        <span className="join-message">Joining as</span>
-        <div className="user-info">{user?.email ?? user?.displayName}</div>
+          <div className="share-code">{meetingCode}</div>
+          {isMobile ? (
+            <div className="share-icon" role="button" onClick={handleShare}>
+              <MdOutlineIosShare size={24} />
+            </div>
+          ) : isCopied ? (
+            <BsCheckLg color="#44dd44" size={18} />
+          ) : (
+            <MdContentCopy
+              color="#aaaeb2"
+              size={24}
+              onClick={copyCodeToClipboard}
+            />
+          )}
+        </div>
+        <div className="meeting-join">
+          <JoinButton />
+          <span className="join-message">Joining as</span>
+          <div className="user-info">{user?.email ?? user?.displayName}</div>
+        </div>
       </div>
     </div>
   );
