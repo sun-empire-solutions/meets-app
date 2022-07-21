@@ -31,12 +31,7 @@ const VideoTrack = ({ track, priority }: IProps) => {
   const isFrontFacing =
     mediaStreamTrack?.getSettings().facingMode !== "environment";
   const style = {
-    height: "100%",
     transform: isFrontFacing ? "scaleX(-1)" : "",
-    objectFit:
-      isPortrait || track.name.includes("screen")
-        ? ("contain" as const)
-        : ("cover" as const),
   };
 
   return <video ref={videoRef} style={style} />;
