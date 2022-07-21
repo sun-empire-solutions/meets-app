@@ -1,14 +1,12 @@
 import { useRef, useEffect } from "react";
 import { Track } from "twilio-video";
 
-import { useMediaStreamTrack, useVideoTrackDimensions } from "../../hooks";
+import { useMediaStreamTrack } from "../../hooks";
 import { IVideoTrack } from "../../types";
 
 const VideoTrack = ({ track, priority }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null!);
   const mediaStreamTrack = useMediaStreamTrack(track);
-  const dimensions = useVideoTrackDimensions(track);
-  const isPortrait = (dimensions?.height ?? 0) > (dimensions?.width ?? 0);
 
   useEffect(() => {
     const videoElement = videoRef.current;
