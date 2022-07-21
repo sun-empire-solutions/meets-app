@@ -33,7 +33,8 @@
 
     video {
       object-fit: cover;
-      height: 110%;
+      // Changed height and width to 110% as it breaks in some devices otherwise. Refer to issue #104
+      height: 110%; 
       width: 110%;
       border-radius: 25px;
     }
