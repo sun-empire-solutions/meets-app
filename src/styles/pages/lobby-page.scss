@@ -19,9 +19,10 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    justify-content: center;
+    margin-bottom: 2rem;
 
     @media screen and (min-width: $mobile-breakpoint) {
+      justify-content: center;
       width: 50vw;
       height: 100%;
       margin-right: 3rem;
