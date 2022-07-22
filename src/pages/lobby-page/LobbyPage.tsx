@@ -67,7 +67,7 @@ const LobbyPage = () => {
         <div className="share-message">All ready to join?</div>
         <div className="meeting-share">
           <div className="info-icon">
-            <MdOutlineInfo size={20} />
+            <FiLink size={20} />
           </div>
           <div className="share-code">{meetingCode}</div>
           {isMobile ? (
