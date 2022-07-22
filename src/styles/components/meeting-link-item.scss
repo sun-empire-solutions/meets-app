@@ -3,8 +3,12 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  margin-bottom: 1rem;
+  padding: 1rem;
   gap: 1rem;
+  transition: background-color 0.5s ease-in, border-radius 0.5s ease-in,
+    box-shadow 0.25s ease-out, margin 0.25s ease-out;
+  background-color: none;
+  border-radius: none;
 
   @media screen and (min-width: 768px) {
     border-bottom: 1px solid #525c5b;
@@ -61,5 +65,15 @@
         color: $primary-color;
       }
     }
+  }
+
+  &:hover {
+    transition: background-color 0.25s ease-out, box-shadow 0.125s ease-out,
+      margin 0.125s ease-out;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 3px 5px 5px black;
+    border-bottom: none;
+    margin: 0.5rem 0.1rem 1rem 0.1rem;
   }
 }
