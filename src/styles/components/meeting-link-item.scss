@@ -69,9 +69,8 @@
   &:hover {
     transition: background-color 0.25s ease-out, box-shadow 0.125s ease-out,
       margin 0.125s ease-out;
-    background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 3px 5px 5px black;
-    border-bottom: none;
-    margin: 0.5rem 0.1rem 1rem;
+    background-color: #a9a9a91a;
+    border-bottom: 1px solid transparent;
+    box-shadow: 2px 2px 5px 1px #1d1d1d;
   }
 }
