@@ -6,7 +6,6 @@
   height: 3rem;
   border-radius: 50%;
   margin-right: 1rem;
-  z-index: 5;
 
   &:hover {
     background-color: rgba(60, 64, 67, 0.08);
@@ -25,6 +24,7 @@
     border-radius: 50%;
     background-size: cover;
     color: white;
+    z-index: 5;
 
     &:hover {
       cursor: pointer;
