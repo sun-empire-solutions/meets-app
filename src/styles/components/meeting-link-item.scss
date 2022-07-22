@@ -3,8 +3,11 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  margin-bottom: 1rem;
+  padding: 1rem;
   gap: 1rem;
+  transition: background-color 0.5s ease-in, box-shadow 0.25s ease-out,
+    margin 0.25s ease-out;
+  background-color: none;
 
   @media screen and (min-width: 768px) {
     border-bottom: 1px solid #525c5b;
@@ -61,5 +64,13 @@
         color: $primary-color;
       }
     }
+  }
+
+  &:hover {
+    transition: background-color 0.25s ease-out, box-shadow 0.125s ease-out,
+      margin 0.125s ease-out;
+    background-color: #a9a9a91a;
+    border-bottom: 1px solid transparent;
+    box-shadow: 2px 2px 5px 1px #1d1d1d;
   }
 }
