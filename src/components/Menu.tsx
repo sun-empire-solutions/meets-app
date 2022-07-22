@@ -42,6 +42,7 @@ const Menu = () => {
     >
       <div
         className="menu-trigger"
+        role="button"
         style={
           userPhotoUrl
             ? { backgroundImage: `url(${userPhotoUrl})` }
