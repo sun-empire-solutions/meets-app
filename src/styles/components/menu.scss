@@ -22,12 +22,15 @@
     height: 2.4rem;
     width: 2.4rem;
     border-radius: 50%;
+    border: none;
+    outline: none;
     background-size: cover;
     color: white;
     z-index: 5;
 
-    &:hover {
+    &:hover, &:focus {
       cursor: pointer;
+      opacity: 0.75;
     }
   }
 

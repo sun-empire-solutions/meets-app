@@ -40,7 +40,7 @@ const Menu = () => {
       ref={menuRef}
       className={classNames("menu", { active: isMenuVisible })}
     >
-      <div
+      <button
         className="menu-trigger"
         role="button"
         style={
@@ -53,7 +53,7 @@ const Menu = () => {
         }}
       >
         {userPhotoUrl ? "" : userInitials?.toUpperCase()}
-      </div>
+      </button>
       {isMenuVisible && (
         <div className="menu-body">
           <div className="menu-body_user">
