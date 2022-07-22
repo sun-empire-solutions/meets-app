@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   MdContentCopy,
-  MdOutlineInfo,
+  FiLink,
   MdOutlineIosShare,
 } from "react-icons/md";
 import { useWindowWidth } from "@react-hook/window-size";
