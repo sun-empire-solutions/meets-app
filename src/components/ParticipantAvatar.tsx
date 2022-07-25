@@ -1,18 +1,18 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import randomColor from "randomcolor";
+
 import { useAuthUser } from "../hooks/useAuthUser";
 import { useClassNames } from "../hooks/useClassNames";
+import { getUserInitials } from "../lib";
 
 const ParticipantAvatar = ({ isLocal }: IProps) => {
   const { user } = useAuthUser();
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const userInitials = useMemo(() => {
+    return getUserInitials(user);
+  }, [user]);
   const clasNames = useClassNames();
-
-  const handleLoad = () => {
-    setImageLoaded(true);
-  };
 
   const avatarIcon = (
     <div className="avatar-icon">
@@ -26,15 +26,22 @@ const ParticipantAvatar = ({ isLocal }: IProps) => {
 
   return (
     <div className="avatar">
-      <img
-        className={clasNames("avatar-image", { hidden: !imageLoaded })}
-        src={userPhotoUrl}
-        alt="user photo"
-        onLoad={handleLoad}
-      />
-      <div className={clasNames("avatar-icon", { hidden: imageLoaded })}>
-        <FaUserCircle color={randomColor({ luminosity: "dark" })} />
-      </div>
+      {isLocal ? (
+        <div
+          className="avatar-image"
+          style={
+            userPhotoUrl
+              ? { backgroundImage: `url(${userPhotoUrl})` }
+              : { backgroundColor: "rgb(12, 148, 238)" }
+          }
+        >
+          {userPhotoUrl ? "" : userInitials?.toUpperCase()}
+        </div>
+      ) : (
+        <div className="avatar-icon">
+          <FaUserCircle color={randomColor({ luminosity: "dark" })} />
+        </div>
+      )}
     </div>
   );
 };
