@@ -3,7 +3,6 @@ import { FaUserCircle } from "react-icons/fa";
 import randomColor from "randomcolor";
 
 import { useAuthUser } from "../hooks/useAuthUser";
-import { useClassNames } from "../hooks/useClassNames";
 import { getUserInitials } from "../lib";
 
 const ParticipantAvatar = ({ isLocal }: IProps) => {
@@ -12,7 +11,6 @@ const ParticipantAvatar = ({ isLocal }: IProps) => {
   const userInitials = useMemo(() => {
     return getUserInitials(user);
   }, [user]);
-  const clasNames = useClassNames();
 
   const avatarIcon = (
     <div className="avatar-icon">
