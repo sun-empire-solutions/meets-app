@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useClassNames } from "../hooks/useClassNames";
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { getUserInitials } from "../lib";
 
 import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
 
@@ -8,18 +9,7 @@ const Menu = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const { user, logout } = useFirebaseAuth();
   const userInitials = useMemo(() => {
-    const displayName = user?.providerData?.[0]?.displayName;
-    if (displayName) {
-      const names = displayName.split(" ");
-      return names
-        .map((name) => name.charAt(0))
-        .join("")
-        .substring(0, names.length == 1 ? 1 : 2);
-    }
-    const emailInitial = user?.providerData?.[0].email
-      .substring(0, 2)
-      .toUpperCase();
-    return emailInitial;
+    return getUserInitials(user);
   }, [user]);
   const userPhotoUrl = useMemo(() => user?.providerData?.[0]?.photoURL, [user]);
   const menuRef = useRef();

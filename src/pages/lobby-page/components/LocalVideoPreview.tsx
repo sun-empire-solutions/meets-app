@@ -7,7 +7,7 @@ const LocalVideoPreview = () => {
   return videoTrack ? (
     <VideoTrack track={videoTrack} isLocal />
   ) : (
-    <ParticipantAvatar />
+    <ParticipantAvatar isLocal/>
   );
 };
 

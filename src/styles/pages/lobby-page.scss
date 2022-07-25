@@ -63,11 +63,11 @@
       }
 
       .avatar {
-        height: 100px;
+        // height: 100px;
 
         @media screen and (min-width: $mobile-breakpoint) {
-          width: 25%;
-          height: auto;
+          // width: 25%;
+          // height: auto;
         }
       }
 
