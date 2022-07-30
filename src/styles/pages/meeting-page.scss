@@ -42,6 +42,8 @@ $videos: (
 .grid--1 {
   grid-template-rows: var(--one-row);
   grid-template-areas: "A";
+  background: rgba(60, 59, 59, 0.326);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
   @media (orientation: portrait) {
     grid-template-areas: "A";
@@ -172,5 +174,3 @@ $videos: (
     justify-content: center;
   }
 }
-
-
