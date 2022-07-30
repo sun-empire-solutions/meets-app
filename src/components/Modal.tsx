@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { useClassNames } from "../hooks/useClassNames";
-import { useOutsideClick } from "../hooks/useOutsideClick";
+import { useClassNames, useOutsideClick } from "@/hooks";
 
 const Modal = ({ title, isOpen, body, footer, onClose }: IProps) => {
   const classNames = useClassNames();

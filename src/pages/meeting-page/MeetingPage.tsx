@@ -1,9 +1,8 @@
 import { useMemo } from "react";
-import { useMeetingCode, useParticipants, useTracksSettings } from "../../hooks";
-import { MeetingButtons, Participant } from "../../components";
+import { useMeetingCode, useParticipants, useTracksSettings } from "@/hooks";
+import { MeetingButtons, Participant, ShareButton } from "@/components";
 
 import { MeetingTopActions } from "./components";
-import { ShareButton } from "../../components";
 import { useHasMultipleCameras } from "./hooks";
 
 const MeetingPage = () => {
@@ -16,8 +15,7 @@ const MeetingPage = () => {
 
   return (
     <div className="meeting-page">
-     
-     <ShareButton meetCode={meetingCode} />
+      <ShareButton meetCode={meetingCode} />
       {isVideoEnabled && hasMultipleCameras && <MeetingTopActions />}
       <div className={`grid grid--${size}`}>
         {participants.map((participant, index) => (

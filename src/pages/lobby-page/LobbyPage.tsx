@@ -4,9 +4,9 @@ import { BsCheckLg } from "react-icons/bs";
 import { useWindowWidth } from "@react-hook/window-size";
 import { FiLink } from "react-icons/fi";
 
-import { LoadingIndicator, JoinButton, TrackButtons } from "../../components";
-import { useTwilioContext } from "../../context";
-import { useAuthUser, useMeetingCode, useTracksSettings } from "../../hooks";
+import { LoadingIndicator, JoinButton, TrackButtons } from "@/components";
+import { useTwilioContext } from "@/context";
+import { useAuthUser, useMeetingCode, useTracksSettings } from "@/hooks";
 
 import { LocalVideoPreview } from "./components/LocalVideoPreview";
 

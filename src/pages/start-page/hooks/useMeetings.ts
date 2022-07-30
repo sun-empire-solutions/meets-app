@@ -3,7 +3,7 @@ import randomString from "crypto-random-string";
 
 import { getFromStorage, saveToStorage } from "../../../services/storage";
 import { MEETING_AVAILABLE_MINUTES } from "../../../constants";
-import { IMeeting } from "../../../types";
+import { IMeeting } from "@/types";
 
 const MEETINGS_KEY = "MEETINGS";
 

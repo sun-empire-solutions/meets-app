@@ -1,9 +1,7 @@
 import { useMemo, useRef, useState } from "react";
-import { useClassNames } from "../hooks/useClassNames";
-import { useOutsideClick } from "../hooks/useOutsideClick";
-import { getUserInitials } from "../lib";
 
-import { useFirebaseAuth } from "./../hooks/useFirebaseAuth";
+import { useClassNames, useOutsideClick, useFirebaseAuth } from "@/hooks";
+import { getUserInitials } from "../lib";
 
 const Menu = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);

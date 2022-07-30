@@ -27,7 +27,9 @@ module.exports = (_, argv) => {
       alias: {
         "@/app": path.resolve(__dirname, "src"),
         "@/components": path.resolve(__dirname, "src", "components"),
+        "@/hooks": path.resolve(__dirname, "src", "hooks"),
         "@/context": path.resolve(__dirname, "src", "context"),
+        "@/pages": path.resolve(__dirname, "src", "pages"),
         "@/types": path.resolve(__dirname, "src", "types"),
       },
     },

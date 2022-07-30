@@ -1,3 +1,2 @@
-import { useTwilioContext } from "./hooks/useTwilioContext";
-
-export { useTwilioContext };
+export { useTwilioContext } from "./hooks/useTwilioContext";
+export { TwilioContext } from "./TwilioContext";

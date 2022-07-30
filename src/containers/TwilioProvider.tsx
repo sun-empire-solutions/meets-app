@@ -1,7 +1,7 @@
 import { Logger } from "twilio-video";
 
-import { useLocalTracks, useRoom } from "../hooks";
-import { TwilioContext } from "../context/TwilioContext";
+import { useLocalTracks, useRoom } from "@/hooks";
+import { TwilioContext } from "@/context";
 
 const logger = Logger.getLogger("twilio-video");
 

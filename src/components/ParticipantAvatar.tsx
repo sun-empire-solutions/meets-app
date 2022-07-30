@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import randomColor from "randomcolor";
 
-import { useAuthUser } from "../hooks/useAuthUser";
+import { useAuthUser } from "@/hooks";
 import { getUserInitials } from "../lib";
 
 const ParticipantAvatar = ({ isLocal }: IProps) => {

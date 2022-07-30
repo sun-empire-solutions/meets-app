@@ -21,9 +21,9 @@
       "@/components": ["./src/components/index.ts"],
       "@/context": ["./src/context/index.ts"],
       "@/hooks": ["./src/hooks/index.ts"],
+      "@/pages": ["./src/pages/index.ts"],
       "@/types": ["./src/types/index.ts"],
-
+    },
   },
-  },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
 }

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Room } from "twilio-video";
 
-import { ILocalTracksOptions } from "../types";
+import { ILocalTracksOptions } from "@/types";
 
 const TwilioContext = createContext<IContext>({
   room: null,

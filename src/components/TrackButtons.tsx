@@ -1,4 +1,4 @@
-import { useLocalAudioToggle, useLocalVideoToggle } from "../hooks";
+import { useLocalAudioToggle, useLocalVideoToggle } from "@/hooks";
 
 import { TrackButton } from "./TrackButton";
 

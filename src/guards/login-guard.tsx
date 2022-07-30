@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
+import { useFirebaseAuth } from "@/hooks";
 
 const withLoginGuard = (component: JSX.Element) => {
   const { user, isAuthReady } = useFirebaseAuth();

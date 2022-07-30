@@ -6,9 +6,9 @@ import {
   Track,
 } from "twilio-video";
 
-import { IVideoTrack } from "../../types";
-import { useTrack } from "../../hooks";
-import { VideoTrack, AudioTrack } from "../tracks";
+import { useTrack } from "@/hooks";
+import { VideoTrack, AudioTrack } from "@/components";
+import { IVideoTrack } from "@/types";
 
 const Publication = ({
   publication,
