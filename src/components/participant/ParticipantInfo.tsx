@@ -12,8 +12,8 @@ import {
   useParticipantIsReconnecting,
   usePublications,
   useTrack,
-} from "../../hooks";
-import { ParticipantAvatar } from "../ParticipantAvatar";
+} from "@/hooks";
+import { ParticipantAvatar } from "@/components";
 
 const ParticipantInfo = ({
   participant,

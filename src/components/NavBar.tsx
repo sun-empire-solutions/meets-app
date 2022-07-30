@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Menu } from "./../components/Menu";
+import { Menu } from "@/components";
+
 import { Button } from "./Button";
 
 const NavBar = () => {

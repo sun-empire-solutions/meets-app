@@ -1,5 +1,5 @@
-import { ParticipantAvatar, VideoTrack } from "../../../components";
-import { useTwilioContext } from "../../../context";
+import { ParticipantAvatar, VideoTrack } from "@/components";
+import { useTwilioContext } from "@/context";
 
 const LocalVideoPreview = () => {
   const { videoTrack } = useTwilioContext();
@@ -7,7 +7,7 @@ const LocalVideoPreview = () => {
   return videoTrack ? (
     <VideoTrack track={videoTrack} isLocal />
   ) : (
-    <ParticipantAvatar isLocal/>
+    <ParticipantAvatar isLocal />
   );
 };
 

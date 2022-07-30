@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { useWindowHeight } from "@react-hook/window-size";
 
+import { NavBar } from "@/components";
 import { TwilioProvider } from "../containers/TwilioProvider";
-import { NavBar } from "../components/NavBar";
 
 const AppLayout = () => {
   const height = useWindowHeight();

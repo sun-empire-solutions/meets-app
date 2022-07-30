@@ -8,8 +8,8 @@ import {
   MeetingPage,
   NotFoundPage,
   StartPage,
-} from "../pages";
-import { JoinPage } from "../pages/join-page/JoinPage";
+  JoinPage,
+} from "@/pages";
 
 const AppRoutes = () => (
   <BrowserRouter>

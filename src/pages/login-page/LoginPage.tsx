@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { LoginForm, LoginProviders } from "./components";
 
-
 import loginSvg from "./../../assets/svg/for_login.svg";
 
 const LoginPage = () => {

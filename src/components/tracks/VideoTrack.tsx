@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import { Track } from "twilio-video";
 
-import { useMediaStreamTrack } from "../../hooks";
-import { IVideoTrack } from "../../types";
+import { useMediaStreamTrack } from "@/hooks";
+import { IVideoTrack } from "@/types";
 
 const VideoTrack = ({ track, priority }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null!);

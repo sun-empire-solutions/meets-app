@@ -20,8 +20,8 @@ export type IMeeting = {
 export type IVideoTrack = LocalVideoTrack | RemoteVideoTrack;
 
 export type ILocalTracksOptions = {
-  videoTrack: LocalVideoTrack;
-  audioTrack: LocalAudioTrack;
+  videoTrack?: LocalVideoTrack;
+  audioTrack?: LocalAudioTrack;
   localTracks: (LocalVideoTrack | LocalAudioTrack)[];
   getLocalVideoTrack: () => Promise<LocalVideoTrack>;
   getLocalAudioTrack: (deviceId?: string) => Promise<LocalAudioTrack>;

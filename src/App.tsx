@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 
+import { ToastifyContainer } from "@/components";
 import { AppRoutes } from "./routes/AppRoutes";
-import { ToastifyContainer } from "./components";
 
 const App = () => {
   return (

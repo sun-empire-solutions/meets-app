@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useMeetingCode } from "../../hooks";
-import { Button, Input, Modal } from "../../components";
+import { useMeetingCode } from "@/hooks";
+import { Button, Input, Modal } from "@/components";
 
 import { useMeetings } from "./hooks";
 import { MeetingList, StartButtons } from "./components";

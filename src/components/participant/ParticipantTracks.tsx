@@ -1,7 +1,7 @@
 import { Participant, Track } from "twilio-video";
 
-import { usePublications } from "../../hooks";
-import { Publication } from "../publication";
+import { usePublications } from "@/hooks";
+import { Publication } from "@/components";
 
 const ParticipantTracks = ({
   participant,

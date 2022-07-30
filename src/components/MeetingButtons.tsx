@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { MdCallEnd } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import { useTwilioContext } from "../context";
-import { useMeetingCode } from "../hooks";
+import { useTwilioContext } from "@/context";
+import { useMeetingCode } from "@/hooks";
 
 import { Button } from "./Button";
 import { TrackButtons } from "./TrackButtons";

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ring } from "@uiball/loaders";
 
-import { useAuthUser, useMeetingCode } from "../hooks";
-import { useTwilioContext } from "../context";
+import { useAuthUser, useMeetingCode } from "@/hooks";
+import { useTwilioContext } from "@/context";
 
 import { Button } from "./Button";
 
