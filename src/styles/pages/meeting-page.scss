@@ -6,8 +6,12 @@
 }
 
 .meeting-page {
+  position: relative;
   height: 100%;
-  width: 100vw;
+  width: 53%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 
   .grid {
     height: 88%;
