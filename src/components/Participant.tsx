@@ -3,7 +3,7 @@ import { Participant as IParticipant } from "twilio-video";
 
 import { useTwilioContext } from "../context";
 
-import { ParticipantTracks, ParticipantInfo } from "./participant";
+import { ParticipantTracks, ParticipantInfo } from "./participant/";
 
 const Participant = ({ participant, index }: IProps) => {
   const { room } = useTwilioContext();
