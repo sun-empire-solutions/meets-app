@@ -1,3 +1,2 @@
-import { ParticipantTracks } from "./ParticipantTracks";
-
-export { ParticipantTracks };
+export { ParticipantTracks } from "./ParticipantTracks";
+export { ParticipantInfo } from "./ParticipantInfo";
