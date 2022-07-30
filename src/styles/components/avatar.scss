@@ -4,7 +4,6 @@
   justify-content: center;
   height: 100px;
   width: 100px;
-  background-size: cover;
 
   @media screen and (min-width: $mobile-breakpoint) {
     height: 125px;
@@ -20,6 +19,7 @@
     border-radius: 50%;
     font-size: 2.5rem;
     color: #fff;
+    background-size: cover;
   }
 
   .avatar-icon {
