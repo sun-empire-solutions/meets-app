@@ -6,11 +6,20 @@
 }
 
 .meeting-page {
+  position: relative;
   height: 100%;
-  width: 100vw;
+  width: 53%;
+  margin-top: 0.5rem;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-top: 0rem;
+  }
 
   .grid {
     height: 88%;
+    @media screen and (min-width: 768px) {
+      border-radius: 10px;
+    }
   }
 
   .meeting-buttons {
@@ -153,6 +162,9 @@ $videos: (
   overflow: hidden;
   width: 100%;
   position: relative;
+  @media screen and (min-width: 768px) {
+    border-radius: 10px;
+  }
 
   video {
     height: 100%;
