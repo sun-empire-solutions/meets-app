@@ -100,7 +100,7 @@ const LoginForm = ({ isSignInForm }: IProps) => {
             onChange={handlePasswordConfirmationChange}
             placeholder="Type your password"
           />
-          {errors.password && (
+          {errors.repeatPassword && (
             <p className="form-field">
               Password required, length must be at least 7 or more and must
               match password field.
