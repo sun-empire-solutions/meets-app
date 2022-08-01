@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useForm } from "react-hook-form";
 import { useFirebaseAuth, useToast } from "../../../hooks";
 
 const LoginForm = ({ isSignInForm }: IProps) => {
@@ -8,6 +8,11 @@ const LoginForm = ({ isSignInForm }: IProps) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const { login, signup } = useFirebaseAuth();
   const { showToast } = useToast();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -23,25 +28,37 @@ const LoginForm = ({ isSignInForm }: IProps) => {
     setPasswordConfirmation(event.target.value);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    login(email, password);
+  const onSubmit = () => {
+    if (isSignInForm) {
+      login(email, password);
+      showToast("success", "Successfully logged in");
+    } else if (!isSignInForm) {
+      if (password !== passwordConfirmation) {
+        showToast("error", "Passwords do not match");
+        return;
+      }
+      signup(email, password);
+    }
   };
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    if (password !== passwordConfirmation) {
-      showToast("error", "Passwords do not match");
-      return;
+  const onError = () => {
+    if (isSignInForm) {
+      login(email, password);
+    } else if (!isSignInForm) {
+      if (password !== passwordConfirmation) {
+        showToast("error", "Passwords do not match");
+        return;
+      }
+      signup(email, password);
     }
-    signup(email, password);
   };
 
   return (
-    <form className="login-form">
+    <form onSubmit={handleSubmit(onSubmit, onError)} className="login-form">
       <div className="form-field">
         <label htmlFor="email">Email</label>
         <input
+          {...register("email", { required: true })}
           id="email"
           type="email"
           name="email"
@@ -50,10 +67,12 @@ const LoginForm = ({ isSignInForm }: IProps) => {
           onChange={handleEmailChange}
           placeholder="Type your email"
         />
+        {errors.email && <p className="form-field">Email required.</p>}
       </div>
       <div className="form-field">
         <label htmlFor="password">Password</label>
         <input
+          {...register("password", { required: true, minLength: 7 })}
           id="password"
           type="password"
           name="password"
@@ -62,11 +81,17 @@ const LoginForm = ({ isSignInForm }: IProps) => {
           onChange={handlePasswordChange}
           placeholder="Type your password"
         />
+        {errors.password && (
+          <p className="form-field">
+            Password required and length must be at least 7 or more.
+          </p>
+        )}
       </div>
       {!isSignInForm && (
         <div className="form-field">
           <label htmlFor="repeatPassword">Confirm Password</label>
           <input
+            {...register("repeatPassword", { required: true, minLength: 7 })}
             id="repeatPassword"
             type="password"
             name="repeat-password"
@@ -75,13 +100,17 @@ const LoginForm = ({ isSignInForm }: IProps) => {
             onChange={handlePasswordConfirmationChange}
             placeholder="Type your password"
           />
+          {errors.password && (
+            <p className="form-field">
+              Password required, length must be at least 7 or more and must
+              match password field.
+            </p>
+          )}
         </div>
       )}
 
       <div className="form-buttons">
-        <button onClick={isSignInForm ? handleLogin : handleSignUp}>
-          {isSignInForm ? "Sign in" : "Sign up"}
-        </button>
+        <button type="submit">{isSignInForm ? "Sign in" : "Sign up"}</button>
       </div>
     </form>
   );
