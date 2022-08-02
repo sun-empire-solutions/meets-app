@@ -74,11 +74,13 @@ const LobbyPage = () => {
           ) : isCopied ? (
             <BsCheckLg color="#44dd44" size={18} />
           ) : (
-            <MdContentCopy
-              color="#aaaeb2"
-              size={24}
-              onClick={copyCodeToClipboard}
-            />
+            <div className="share-icon">
+              <MdContentCopy
+                color="#aaaeb2"
+                size={24}
+                onClick={copyCodeToClipboard}
+              />
+            </div>
           )}
         </div>
         <div className="meeting-join">

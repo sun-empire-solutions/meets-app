@@ -154,7 +154,9 @@
 
       .share-icon {
         color: #aaaeb2;
-        cursor: pointer;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
