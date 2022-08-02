@@ -28,6 +28,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@hookform/error-message": "^2.0.0",
     "@types/crypto-random-string": "^2.0.0",
     "@types/firebase": "^3.2.1",
     "@types/react": "^18.0.6",
