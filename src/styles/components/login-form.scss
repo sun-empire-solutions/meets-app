@@ -10,10 +10,13 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
 
-    p {
+    .error-message {
       font-size: 0.85rem;
-      color: red;
+      color: rgb(183, 1, 1);
+      position: absolute;
+      top: 5rem;
     }
 
     label {

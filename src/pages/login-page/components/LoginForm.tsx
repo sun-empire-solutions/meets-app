@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useFirebaseAuth, useToast } from "../../../hooks";
+import { ErrorMessage } from "@hookform/error-message";
+
+import { useFirebaseAuth, useToast } from "@/hooks";
 
 const LoginForm = ({ isSignInForm }: IProps) => {
   const [email, setEmail] = useState("");
@@ -11,20 +13,21 @@ const LoginForm = ({ isSignInForm }: IProps) => {
   const {
     register,
     handleSubmit,
+    clearErrors,
+    getValues,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { email, password, passwordConfirmation } });
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const handlePasswordConfirmationChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handlePasswordConfirmationChange = (event) => {
     setPasswordConfirmation(event.target.value);
   };
 
@@ -32,33 +35,33 @@ const LoginForm = ({ isSignInForm }: IProps) => {
     if (isSignInForm) {
       login(email, password);
       showToast("success", "Successfully logged in");
-    } else if (!isSignInForm) {
-      if (password !== passwordConfirmation) {
-        showToast("error", "Passwords do not match");
-        return;
-      }
-      signup(email, password);
+      return;
     }
+    if (password !== passwordConfirmation) {
+      showToast("error", "Passwords do not match");
+      return;
+    }
+    signup(email, password);
   };
 
-  const onError = () => {
-    if (isSignInForm) {
-      login(email, password);
-    } else if (!isSignInForm) {
-      if (password !== passwordConfirmation) {
-        showToast("error", "Passwords do not match");
-        return;
-      }
-      signup(email, password);
-    }
+  const onError = (error) => {
+    console.log(error);
+
+    setTimeout(() => {
+      clearErrors();
+    }, 3000);
   };
+
+  const renderErrorMessage = ({ message }) => (
+    <p className="error-message">{message}</p>
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="login-form">
       <div className="form-field">
         <label htmlFor="email">Email</label>
         <input
-          {...register("email", { required: true })}
+          {...register("email", { required: "This field is required" })}
           id="email"
           type="email"
           name="email"
@@ -67,12 +70,19 @@ const LoginForm = ({ isSignInForm }: IProps) => {
           onChange={handleEmailChange}
           placeholder="Type your email"
         />
-        {errors.email && <p className="form-field">Email required.</p>}
+        <ErrorMessage
+          errors={errors}
+          name="email"
+          render={renderErrorMessage}
+        />
       </div>
       <div className="form-field">
         <label htmlFor="password">Password</label>
         <input
-          {...register("password", { required: true, minLength: 7 })}
+          {...register("password", {
+            required: "This field is required",
+            minLength: 7,
+          })}
           id="password"
           type="password"
           name="password"
@@ -81,31 +91,33 @@ const LoginForm = ({ isSignInForm }: IProps) => {
           onChange={handlePasswordChange}
           placeholder="Type your password"
         />
-        {errors.password && (
-          <p className="form-field">
-            Password required and length must be at least 7 or more.
-          </p>
-        )}
+        <ErrorMessage
+          errors={errors}
+          name="password"
+          render={renderErrorMessage}
+        />
       </div>
       {!isSignInForm && (
         <div className="form-field">
           <label htmlFor="repeatPassword">Confirm Password</label>
           <input
-            {...register("repeatPassword", { required: true, minLength: 7 })}
+            {...register("passwordConfirmation", {
+              required: "This field is required",
+              minLength: 7,
+            })}
             id="repeatPassword"
             type="password"
-            name="repeat-password"
+            name="passwordConfirmation"
             className="password"
             value={passwordConfirmation}
             onChange={handlePasswordConfirmationChange}
             placeholder="Type your password"
           />
-          {errors.repeatPassword && (
-            <p className="form-field">
-              Password required, length must be at least 7 or more and must
-              match password field.
-            </p>
-          )}
+          <ErrorMessage
+            errors={errors}
+            name="passwordConfirmation"
+            render={renderErrorMessage}
+          />
         </div>
       )}
 
