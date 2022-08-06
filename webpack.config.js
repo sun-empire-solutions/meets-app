@@ -3,7 +3,8 @@ const path = require("path");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
 const { NetlifyPlugin } = require("netlify-webpack-plugin");
-var WebpackPwaManifest = require("webpack-pwa-manifest");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = (_, argv) => {
   let envKeys = {};
@@ -55,8 +56,16 @@ module.exports = (_, argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
+        title: "MeetsApp",
         template: "./public/index.html",
         favicon: "./public/favicon.png",
+      }),
+      new WorkboxPlugin.GenerateSW({
+        // these options encourage the ServiceWorkers to get in there fast
+        // and not allow any straggling "old" SWs to hang around
+        clientsClaim: true,
+        skipWaiting: true,
+        maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
       }),
       new webpack.ProvidePlugin({
         process: "process/browser",
