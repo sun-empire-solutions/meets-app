@@ -84,7 +84,6 @@ module.exports = (_, argv) => {
         name: "MeetsApp",
         short_name: "MeetsApp",
         description: "Video call app designed for meetups",
-        background_color: "#1f2028",
         icons: [
           {
             src: path.resolve("src/assets/icons/icon.png"),
