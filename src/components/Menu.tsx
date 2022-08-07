@@ -31,29 +31,33 @@ const Menu = () => {
       <button
         className="menu-trigger"
         role="button"
-        style={
-          userPhotoUrl
-            ? { backgroundImage: `url(${userPhotoUrl})` }
-            : { backgroundColor: "rgb(12, 148, 238)" }
-        }
+        style={userPhotoUrl && { backgroundColor: "rgb(12, 148, 238)" }}
         onClick={() => {
           setIsMenuVisible((visibleMenu) => !visibleMenu);
         }}
       >
-        {userPhotoUrl ? "" : userInitials?.toUpperCase()}
+        {userPhotoUrl ? (
+          <img src={userPhotoUrl} alt="user" referrerPolicy="no-referrer" />
+        ) : (
+          userInitials?.toUpperCase()
+        )}
       </button>
       {isMenuVisible && (
         <div className="menu-body">
           <div className="menu-body_user">
             <div
               className="menu-body_user-photo"
-              style={
-                userPhotoUrl
-                  ? { backgroundImage: `url(${userPhotoUrl})` }
-                  : { backgroundColor: "rgb(12, 148, 238)" }
-              }
+              style={userPhotoUrl && { backgroundColor: "rgb(12, 148, 238)" }}
             >
-              {userPhotoUrl ? "" : userInitials?.toUpperCase()}
+              {userPhotoUrl ? (
+                <img
+                  src={userPhotoUrl}
+                  alt="user"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                userInitials?.toUpperCase()
+              )}
             </div>
             <div className="menu-body_user-name">{user?.displayName}</div>
             <div className="menu-body_user-email">{user?.email}</div>
