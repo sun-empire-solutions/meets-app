@@ -1,6 +1,6 @@
 import { Logger } from "twilio-video";
 
-import { useLocalTracks, useRoom } from "@/hooks";
+import { useHandleRoomDisconnection, useLocalTracks, useRoom } from "@/hooks";
 import { TwilioContext } from "@/context";
 
 const logger = Logger.getLogger("twilio-video");
@@ -20,6 +20,13 @@ logger.setLevel("info");
 const TwilioProvider = ({ children }: IProps) => {
   const localTracks = useLocalTracks();
   const { room, connect } = useRoom(localTracks.localTracks);
+  const { removeLocalAudioTrack, removeLocalVideoTrack } = localTracks;
+
+  useHandleRoomDisconnection(
+    room,
+    removeLocalAudioTrack,
+    removeLocalVideoTrack
+  );
 
   return (
     <TwilioContext.Provider

@@ -11,9 +11,11 @@ import { useAuthUser, useMeetingCode, useTracksSettings } from "@/hooks";
 import { LocalVideoPreview } from "./components/LocalVideoPreview";
 
 const LobbyPage = () => {
-  const { getAudioAndVideoTracks, removeLocalAudioAndVideoTracks } =
-    useTwilioContext();
-  const { isAcquiringLocalTracks } = useTwilioContext();
+  const {
+    getAudioAndVideoTracks,
+    removeLocalAudioAndVideoTracks,
+    isAcquiringLocalTracks,
+  } = useTwilioContext();
   const { getVideoSettings } = useTracksSettings();
   const isVideoEnabled = getVideoSettings();
   const { meetingCode } = useMeetingCode();
@@ -21,6 +23,7 @@ const LobbyPage = () => {
   const width = useWindowWidth();
   const isMobile = useMemo(() => width < 768, [width]);
   const [isCopied, setIsCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const copyCodeToClipboard = () => {
     navigator.clipboard.writeText(meetingCode);
@@ -40,14 +43,16 @@ const LobbyPage = () => {
   }, [isCopied]);
 
   useEffect(() => {
-    getAudioAndVideoTracks();
+    getAudioAndVideoTracks().then(() => {
+      setIsLoading(false);
+    });
 
     return () => {
       removeLocalAudioAndVideoTracks();
     };
   }, []);
 
-  if (isAcquiringLocalTracks && isVideoEnabled) {
+  if (isLoading || (isAcquiringLocalTracks && isVideoEnabled)) {
     return <LoadingIndicator />;
   }
 

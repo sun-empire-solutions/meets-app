@@ -3,6 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Menu } from "@/components";
+import { useTwilioContext } from "@/context";
 
 import { Button } from "./Button";
 
@@ -19,9 +20,12 @@ const NavBar = () => {
     () => !(isSignInView || isMeetingView),
     [isSignInView, isMeetingView]
   );
+  const { removeLocalAudioTrack, removeLocalVideoTrack } = useTwilioContext();
 
   const goBack = () => {
-    navigate(-1);
+    removeLocalAudioTrack();
+    removeLocalVideoTrack();
+    navigate("/start");
   };
 
   if (!isNavbarVisible) {
