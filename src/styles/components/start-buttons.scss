@@ -16,6 +16,7 @@
     color: black;
 
     &:active,
+    &:focus,
     &:hover {
       background-color: lighten($primary-color, 10%);
       box-shadow: 1px 1px 3px 1px $primary-color;
@@ -37,6 +38,7 @@
     color: $secondary-color;
 
     &:active,
+    &:focus,
     &:hover {
       background-color: lighten($secondary-color, 10%);
       box-shadow: 1px 1px 3px 1px $secondary-color;
