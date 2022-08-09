@@ -17,3 +17,4 @@ export { useTrack } from "./useTrack";
 export { useIsTrackSwitchedOff } from "./useIsTrackSwitchedOff";
 export { useParticipantIsReconnecting } from "./useParticipantReconnecting";
 export { useToast } from "./useToast";
+export { useHandleRoomDisconnection } from "./useHandleRoomDisconnection";
