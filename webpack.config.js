@@ -103,7 +103,7 @@ module.exports = (_, argv) => {
         background_color: "#1f2028",
         display: "standalone",
         scope: "/",
-        theme_color: "#00bad6",
+        theme_color: "#383843",
       }),
     ],
     devServer: {
