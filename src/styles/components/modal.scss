@@ -29,7 +29,7 @@
 
   .modal-content {
     width: 80%;
-    min-height: 190px;
+    min-height: 220px;
     max-width: 300px;
     padding: 2rem;
     background-color: #343434ed;
@@ -37,7 +37,10 @@
     z-index: 2;
     color: #fff;
     animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    border-radius: 1rem;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     &.out {
       animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;

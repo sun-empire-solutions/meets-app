@@ -142,6 +142,11 @@
 }
 
 .start-page__modal-body {
+  .code-input {
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+  }
+
   .error-message {
     position: absolute;
     color: rgb(237, 76, 76);
