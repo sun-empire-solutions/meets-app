@@ -62,6 +62,7 @@ const StartPage = () => {
         body={
           <div className="start-page__modal-body">
             <Input
+              classNames="code-input"
               ref={inputRef}
               placeholder="Ej: abc-mnop-xyz"
               value={meetingName}
