@@ -64,8 +64,9 @@ const StartPage = () => {
             <Input
               classNames="code-input"
               ref={inputRef}
-              placeholder="Ej: abc-mnop-xyz"
+              placeholder="Ej: abc-mno-xyz"
               value={meetingName}
+              mask="aaa-aaa-aaa"
               onChange={(evt) => {
                 const meetingCode = evt.target.value;
                 setMeetingName(meetingCode);
