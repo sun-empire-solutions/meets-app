@@ -16,7 +16,7 @@
     align-items: center;
     height: 100%;
     padding: 0;
-    width: min(1000px, 100vw);
+    width: min(1200px, 100vw);
   }
 
   .left {
@@ -145,6 +145,7 @@
   .code-input {
     font-size: 1.25rem;
     padding-bottom: 0.5rem;
+    text-transform: uppercase;
   }
 
   .error-message {
