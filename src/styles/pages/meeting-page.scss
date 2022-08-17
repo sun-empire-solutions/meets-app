@@ -8,11 +8,9 @@
 .meeting-page {
   position: relative;
   height: 100%;
-  margin-top: 0.5rem;
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    margin-top: 0rem;
   }
 
   .grid {
