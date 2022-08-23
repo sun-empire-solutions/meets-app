@@ -2,10 +2,9 @@
 
 ⭐ Star us on GitHub — it motivates us a lot!
 
-This is a video chat app developed with react and twilio (**work in progress**)
+This is a video chat app developed with react and twilio.
 
 ![image](https://user-images.githubusercontent.com/26444448/179030561-1d58a877-758f-48fa-bdbb-3479034a60d4.png)
-
 
 ## Stars
 
