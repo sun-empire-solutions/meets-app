@@ -3,6 +3,7 @@
   --two-rows: repeat(2, 1fr);
   --three-rows: repeat(3, 1fr);
   --four-rows: repeat(4, 1fr);
+  --one-column: 100%;
   --two-columns: repeat(2, 1fr);
   --three-columns: repeat(3, 1fr);
   --four-columns: repeat(4, 1fr);
@@ -19,7 +20,11 @@
   .grid {
     height: 88%;
     width: min(100vw, 1556px);
-    padding: 4rem 4rem 0;
+    padding: 3rem 1rem 0;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      padding: 4rem 4rem 0;
+    }
   }
 
   .meeting-buttons {
@@ -42,7 +47,11 @@ $videos: (
   .participant-#{$num} {
     grid-area: unquote($letter);
     margin: auto;
-    padding: 1rem;
+    padding: 0.25rem;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      padding: 1rem;
+    }
 
     &:nth-child(2n + 1):last-child:not(:first-child) {
       width: 50%;
@@ -50,7 +59,7 @@ $videos: (
 
     @media (orientation: portrait) {
       &:nth-child(2n + 1):last-child {
-        width: 100%;
+        width: 100% !important;
       }
     }
   }
@@ -71,6 +80,7 @@ $videos: (
 
 .grid--2 {
   grid-template-rows: var(--one-row);
+  grid-template-columns: var(--two-columns);
   grid-template-areas: "A B";
 
   @media (orientation: portrait) {
@@ -90,6 +100,7 @@ $videos: (
 
   @media (orientation: portrait) {
     grid-template-rows: var(--three-rows);
+    grid-template-columns: var(--one-column);
     grid-template-areas:
       "A"
       "B"
