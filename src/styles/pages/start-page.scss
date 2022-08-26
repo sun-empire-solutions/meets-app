@@ -54,6 +54,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    overflow: scroll;
+    padding-bottom: 2rem;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      overflow: hidden;
+      padding-bottom: 0;
+    }
   }
 
   .meetings {
