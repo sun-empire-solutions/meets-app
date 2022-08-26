@@ -50,8 +50,7 @@ const ParticipantInfo = ({
       data-cy-participant={participant.identity}
     >
       <div className="participant-identity">
-        {participant.identity}
-        {isLocalParticipant && " (You)"}
+        {isLocalParticipant ? "You" : participant.identity}
       </div>
       {isMuted && (
         <div className="muted-indicator">

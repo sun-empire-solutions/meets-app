@@ -5,6 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #3c4043;
+  overflow: hidden;
+  border-radius: 10px;
 
   .participant-identity {
     position: absolute;
@@ -12,7 +15,6 @@
     color: #fff;
     bottom: 0.7rem;
     left: 0.7rem;
-    background-color: rgba(70, 70, 70, 0.695);
     padding: 0.5rem;
     border-radius: 10px;
   }
@@ -27,6 +29,7 @@
 
   .participant-content {
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

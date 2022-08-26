@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
 
-  @media screen and (min-width: $mobile-breakpoint) {
+  @media screen and (min-width: 768px) {
     flex-direction: row;
     justify-content: center;
     padding: 1rem 2rem;
