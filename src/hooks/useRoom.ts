@@ -9,6 +9,8 @@ const useRoom = (localTracks: LocalTrack[]) => {
   const connect = async (username: string, roomname: string) => {
     const accessToken = await getAccessToken(username, roomname);
 
+    console.log("accessToken: " + accessToken);
+
     const room = await twilioConnect(accessToken, {
       tracks: localTracks,
     });

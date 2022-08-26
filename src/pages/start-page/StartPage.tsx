@@ -66,7 +66,7 @@ const StartPage = () => {
               ref={inputRef}
               placeholder="Ej: abc-mno-xyz"
               value={meetingName}
-              mask="aaa-aaa-aaa"
+              mask="***-***-***"
               onChange={(evt) => {
                 const meetingCode = evt.target.value;
                 setMeetingName(meetingCode);

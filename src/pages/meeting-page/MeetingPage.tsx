@@ -22,7 +22,7 @@ const MeetingPage = () => {
           <Participant
             key={participant.sid ?? index}
             participant={participant}
-            index={index}
+            index={index + 1}
           />
         ))}
       </div>

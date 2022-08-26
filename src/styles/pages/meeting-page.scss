@@ -1,8 +1,12 @@
 :root {
   --one-row: 100%;
-  --two-rows: repeat(2, calc(100% / 2));
-  --three-rows: repeat(3, calc(100% / 3));
-  --four-rows: repeat(4, calc(100% / 4));
+  --two-rows: repeat(2, 1fr);
+  --three-rows: repeat(3, 1fr);
+  --four-rows: repeat(4, 1fr);
+  --one-column: 100%;
+  --two-columns: repeat(2, 1fr);
+  --three-columns: repeat(3, 1fr);
+  --four-columns: repeat(4, 1fr);
 }
 
 .meeting-page {
@@ -15,8 +19,11 @@
 
   .grid {
     height: 88%;
-    @media screen and (min-width: 768px) {
-      border-radius: 10px;
+    width: min(100vw, 1556px);
+    padding: 3rem 1rem 0;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      padding: 4rem 4rem 0;
     }
   }
 
@@ -39,6 +46,22 @@ $videos: (
 @each $num, $letter in $videos {
   .participant-#{$num} {
     grid-area: unquote($letter);
+    margin: auto;
+    padding: 0.25rem;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      padding: 1rem;
+    }
+
+    &:nth-child(2n + 1):last-child:not(:first-child) {
+      width: 50%;
+    }
+
+    @media (orientation: portrait) {
+      &:nth-child(2n + 1):last-child {
+        width: 100% !important;
+      }
+    }
   }
 }
 
@@ -49,8 +72,6 @@ $videos: (
 .grid--1 {
   grid-template-rows: var(--one-row);
   grid-template-areas: "A";
-  background: rgba(60, 59, 59, 0.326);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
   @media (orientation: portrait) {
     grid-template-areas: "A";
@@ -59,6 +80,7 @@ $videos: (
 
 .grid--2 {
   grid-template-rows: var(--one-row);
+  grid-template-columns: var(--two-columns);
   grid-template-areas: "A B";
 
   @media (orientation: portrait) {
@@ -71,12 +93,14 @@ $videos: (
 
 .grid--3 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--two-columns);
   grid-template-areas:
     "A B"
     "C C";
 
   @media (orientation: portrait) {
     grid-template-rows: var(--three-rows);
+    grid-template-columns: var(--one-column);
     grid-template-areas:
       "A"
       "B"
@@ -86,6 +110,7 @@ $videos: (
 
 .grid--4 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--two-columns);
   grid-template-areas:
     "A B"
     "C D";
@@ -93,12 +118,14 @@ $videos: (
 
 .grid--5 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--three-columns);
   grid-template-areas:
     "A A B B C C"
     "D D D E E E";
 
   @media (orientation: portrait) {
     grid-template-rows: var(--three-rows);
+    grid-template-columns: var(--two-columns);
     grid-template-areas:
       "A A B B"
       "C C D D"
@@ -108,12 +135,14 @@ $videos: (
 
 .grid--6 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--three-columns);
   grid-template-areas:
     "A B C"
     "D E F";
 
   @media (orientation: portrait) {
     grid-template-rows: var(--three-rows);
+    grid-template-columns: var(--two-columns);
     grid-template-areas:
       "A B"
       "C D"
@@ -123,12 +152,14 @@ $videos: (
 
 .grid--7 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--four-columns);
   grid-template-areas:
     "A A A B B B C C C D D D"
     "E E E E F F F F G G G G";
 
   @media (orientation: portrait) {
     grid-template-rows: var(--three-rows);
+    grid-template-columns: var(--three-columns);
     grid-template-areas:
       "A A A B B B"
       "C C C D D D"
@@ -138,12 +169,14 @@ $videos: (
 
 .grid--8 {
   grid-template-rows: var(--two-rows);
+  grid-template-columns: var(--four-columns);
   grid-template-areas:
     "A B C D"
     "E F G H";
 
   @media (orientation: portrait) {
     grid-template-rows: var(--four-rows);
+    grid-template-columns: var(--two-columns);
     grid-template-areas:
       "A B"
       "C D"
@@ -173,12 +206,12 @@ $videos: (
 
   .muted-indicator {
     position: absolute;
-    bottom: 1rem;
+    top: 1rem;
     right: 1rem;
-    background-color: rgba(151, 151, 151, 0.521);
-    width: 1.5rem;
+    background-color: rgba(32, 33, 36, 0.302);
+    width: 2rem;
     height: 2rem;
-    border-radius: 15px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
