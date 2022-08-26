@@ -6,5 +6,9 @@
 	"AC8068969a0804952e89ade3aa78968cd3": {
 		"serviceSid": "ZS5dc40e38a746acf8dcc3106762f29700",
 		"latestBuild": "ZB3337533bd69a5ea55af7d3edaec61ae4"
+	},
+	"ACfaab780c86f34a5ba8cab1818a5ac7a8": {
+		"serviceSid": "ZSea84b0097f1737a37172b47537f674da",
+		"latestBuild": "ZBa0c1d2a2746520b66fe91da856990c14"
 	}
 }
