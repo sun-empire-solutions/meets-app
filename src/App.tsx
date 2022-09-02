@@ -11,4 +11,5 @@ const App = () => {
     </StrictMode>
   );
 };
+
 export { App };

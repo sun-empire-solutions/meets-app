@@ -47,6 +47,12 @@
         display: block;
       }
     }
+
+    @media screen and (min-width: 1200px) {
+      .welcome {
+        font-size: 5rem;
+      }
+    }
   }
 
   .right {
