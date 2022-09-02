@@ -31,7 +31,7 @@ const Menu = () => {
       <button
         className="menu-trigger"
         role="button"
-        style={!userPhotoUrl && { backgroundColor: "rgb(12, 148, 238)" }}
+        style={userPhotoUrl ? {} : { backgroundColor: "rgb(12, 148, 238)" }}
         onClick={() => {
           setIsMenuVisible((visibleMenu) => !visibleMenu);
         }}
@@ -47,7 +47,9 @@ const Menu = () => {
           <div className="menu-body_user">
             <div
               className="menu-body_user-photo"
-              style={!userPhotoUrl && { backgroundColor: "rgb(12, 148, 238)" }}
+              style={
+                userPhotoUrl ? {} : { backgroundColor: "rgb(12, 148, 238)" }
+              }
             >
               {userPhotoUrl ? (
                 <img
