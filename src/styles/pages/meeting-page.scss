@@ -82,9 +82,10 @@ $videos: (
   grid-template-rows: var(--one-row);
   grid-template-columns: var(--two-columns);
   grid-template-areas: "A B";
-
+  
   @media (orientation: portrait) {
     grid-template-rows: var(--two-rows);
+    grid-template-columns: var(--one-column);
     grid-template-areas:
       "A"
       "B";
